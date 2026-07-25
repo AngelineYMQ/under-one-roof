@@ -1496,3 +1496,15 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
+
+-- v32 safety migration: soft deletion and change history.
+-- Existing databases can run these statements individually if a column already exists.
+CREATE TABLE IF NOT EXISTS audit_log (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  entity_type TEXT NOT NULL,
+  entity_id TEXT NOT NULL DEFAULT '',
+  action TEXT NOT NULL,
+  details TEXT NOT NULL DEFAULT '',
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_audit_log_created_at ON audit_log(created_at DESC);

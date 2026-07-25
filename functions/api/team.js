@@ -1,49 +1,26 @@
-const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}});
+import { json, ensureColumn, logAudit, requireId } from '../_lib/db.js';
 
-const DEFAULT_MEMBERS = [
-  {
-    name:'James',
-    role_zh:'房东／房地产从业者／演员',
-    role_en:'Landlord / Property Professional / Actor',
-    responsibilities_zh:'负责房东与房产相关角色、场地协调、房产题材，以及新加坡本地生活信息核实。',
-    responsibilities_en:'Plays the landlord and property-related role, coordinates the main location, develops property storylines, and checks Singapore local-life details.',
-    contact:'', member_type:'permanent', status:'active', is_core:1, permissions:'admin', sort_order:1, joined_at:''
-  },
-  {
-    name:'Angeline',
-    role_zh:'演员／项目策划',
-    role_en:'Actor / Project Lead',
-    responsibilities_zh:'饰演刚到新加坡的中国富二代留学生，负责项目方向、剧情框架、市场定位与中国观众视角。',
-    responsibilities_en:'Plays a newly arrived wealthy Chinese international student and leads project direction, story structure, market positioning, and the China-audience perspective.',
-    contact:'', member_type:'permanent', status:'active', is_core:1, permissions:'admin', sort_order:2, joined_at:''
-  },
-  {
-    name:'Joseph',
-    role_zh:'租客／社交媒体营销／演员',
-    role_en:'Tenant / Social Media Marketer / Actor',
-    responsibilities_zh:'负责社交媒体、内容创作、广告投放题材，以及项目后续内容传播与营销视角。',
-    responsibilities_en:'Covers social media, content creation, paid advertising storylines, and the project’s ongoing distribution and marketing perspective.',
-    contact:'', member_type:'permanent', status:'active', is_core:1, permissions:'admin', sort_order:3, joined_at:''
-  }
+const DEFAULT_MEMBERS=[
+{name:'James',role_zh:'房东／房地产从业者／演员',role_en:'Landlord / Property Professional / Actor',responsibilities_zh:'负责房东与房产相关角色、场地协调、房产题材，以及新加坡本地生活信息核实。',responsibilities_en:'Plays the landlord and property-related role, coordinates the main location, develops property storylines, and checks Singapore local-life details.',contact:'',member_type:'permanent',status:'active',is_core:1,permissions:'admin',sort_order:1,joined_at:''},
+{name:'Angeline',role_zh:'演员／项目策划',role_en:'Actor / Project Lead',responsibilities_zh:'饰演刚到新加坡的中国富二代留学生，负责项目方向、剧情框架、市场定位与中国观众视角。',responsibilities_en:'Plays a newly arrived wealthy Chinese international student and leads project direction, story structure, market positioning, and the China-audience perspective.',contact:'',member_type:'permanent',status:'active',is_core:1,permissions:'admin',sort_order:2,joined_at:''},
+{name:'Joseph',role_zh:'租客／社交媒体营销／演员',role_en:'Tenant / Social Media Marketer / Actor',responsibilities_zh:'负责社交媒体、内容创作、广告投放题材，以及项目后续内容传播与营销视角。',responsibilities_en:'Covers social media, content creation, paid advertising storylines, and the project’s ongoing distribution and marketing perspective.',contact:'',member_type:'permanent',status:'active',is_core:1,permissions:'admin',sort_order:3,joined_at:''}
 ];
 
-async function seedDefaults(env){
-  const statements = DEFAULT_MEMBERS.map(m => env.DB.prepare(`INSERT INTO team_members (name,role_zh,role_en,responsibilities_zh,responsibilities_en,contact,member_type,status,is_core,permissions,sort_order,joined_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`).bind(
-    m.name,m.role_zh,m.role_en,m.responsibilities_zh,m.responsibilities_en,m.contact,m.member_type,m.status,m.is_core,m.permissions,m.sort_order,m.joined_at
-  ));
-  await env.DB.batch(statements);
+async function ensure(db){
+  await db.prepare(`CREATE TABLE IF NOT EXISTS team_members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,role_zh TEXT NOT NULL DEFAULT '',role_en TEXT NOT NULL DEFAULT '',responsibilities_zh TEXT NOT NULL DEFAULT '',responsibilities_en TEXT NOT NULL DEFAULT '',contact TEXT NOT NULL DEFAULT '',member_type TEXT NOT NULL DEFAULT 'permanent',status TEXT NOT NULL DEFAULT 'active',is_core INTEGER NOT NULL DEFAULT 0,permissions TEXT NOT NULL DEFAULT 'view',sort_order INTEGER NOT NULL DEFAULT 0,joined_at TEXT NOT NULL DEFAULT '',updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,deleted_at TEXT
+  )`).run();
+  await ensureColumn(db,'team_members','deleted_at','TEXT');
+  await db.prepare('CREATE INDEX IF NOT EXISTS idx_team_members_order ON team_members(is_core DESC,sort_order ASC)').run();
 }
-
-export async function onRequestGet({env}){
-  try{
-    let {results}=await env.DB.prepare('SELECT * FROM team_members ORDER BY is_core DESC, sort_order ASC, id ASC').all();
-    if(!results || results.length===0){
-      await seedDefaults(env);
-      ({results}=await env.DB.prepare('SELECT * FROM team_members ORDER BY is_core DESC, sort_order ASC, id ASC').all());
-    }
-    return json({members:results||[]});
-  }catch(e){return json({error:e.message},500)}
+async function seedDefaults(db){
+  const count=await db.prepare('SELECT COUNT(*) AS c FROM team_members WHERE deleted_at IS NULL').first();
+  if(Number(count?.c||0)>0)return;
+  const stmt=db.prepare(`INSERT INTO team_members(name,role_zh,role_en,responsibilities_zh,responsibilities_en,contact,member_type,status,is_core,permissions,sort_order,joined_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`);
+  for(const m of DEFAULT_MEMBERS)await stmt.bind(m.name,m.role_zh,m.role_en,m.responsibilities_zh,m.responsibilities_en,m.contact,m.member_type,m.status,m.is_core,m.permissions,m.sort_order,m.joined_at).run();
 }
-export async function onRequestPost({request,env}){try{const b=await request.json();const r=await env.DB.prepare(`INSERT INTO team_members (name,role_zh,role_en,responsibilities_zh,responsibilities_en,contact,member_type,status,is_core,permissions,sort_order,joined_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING *`).bind(b.name||'',b.role_zh||'',b.role_en||'',b.responsibilities_zh||'',b.responsibilities_en||'',b.contact||'',b.member_type||'permanent',b.status||'active',b.is_core?1:0,b.permissions||'view',Number(b.sort_order||0),b.joined_at||'').first();return json({member:r},201);}catch(e){return json({error:e.message},500)}}
-export async function onRequestPut({request,env}){try{const b=await request.json();if(!b.id)return json({error:'id required'},400);const r=await env.DB.prepare(`UPDATE team_members SET name=?,role_zh=?,role_en=?,responsibilities_zh=?,responsibilities_en=?,contact=?,member_type=?,status=?,is_core=?,permissions=?,sort_order=?,joined_at=?,updated_at=CURRENT_TIMESTAMP WHERE id=? RETURNING *`).bind(b.name||'',b.role_zh||'',b.role_en||'',b.responsibilities_zh||'',b.responsibilities_en||'',b.contact||'',b.member_type||'permanent',b.status||'active',b.is_core?1:0,b.permissions||'view',Number(b.sort_order||0),b.joined_at||'',b.id).first();return json({member:r});}catch(e){return json({error:e.message},500)}}
-export async function onRequestDelete({request,env}){try{const u=new URL(request.url);const id=Number(u.searchParams.get('id'));if(!id)return json({error:'id required'},400);await env.DB.prepare('DELETE FROM team_members WHERE id=?').bind(id).run();return json({ok:true});}catch(e){return json({error:e.message},500)}}
+const mapRow=r=>({id:r.id,name:r.name,role_zh:r.role_zh,role_en:r.role_en,responsibilities_zh:r.responsibilities_zh,responsibilities_en:r.responsibilities_en,contact:r.contact,member_type:r.member_type,status:r.status,is_core:r.is_core,permissions:r.permissions,sort_order:r.sort_order,joined_at:r.joined_at,updated_at:r.updated_at});
+export async function onRequestGet({env}){try{if(!env.DB)return json({error:'DB unavailable'},503);await ensure(env.DB);await seedDefaults(env.DB);const {results}=await env.DB.prepare('SELECT * FROM team_members WHERE deleted_at IS NULL ORDER BY is_core DESC,sort_order ASC,id ASC').all();return json({members:(results||[]).map(mapRow)});}catch(e){return json({error:e.message},500)}}
+export async function onRequestPost({request,env}){try{if(!env.DB)return json({error:'DB unavailable'},503);await ensure(env.DB);const b=await request.json();if(!String(b.name||'').trim())return json({error:'name required'},400);const r=await env.DB.prepare(`INSERT INTO team_members(name,role_zh,role_en,responsibilities_zh,responsibilities_en,contact,member_type,status,is_core,permissions,sort_order,joined_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?) RETURNING *`).bind(String(b.name).trim(),b.role_zh||'',b.role_en||'',b.responsibilities_zh||'',b.responsibilities_en||'',b.contact||'',b.member_type||'permanent',b.status||'active',b.is_core?1:0,b.permissions||'view',Number(b.sort_order||0),b.joined_at||'').first();await logAudit(env.DB,'team_member',r.id,'create',{name:r.name});return json({member:mapRow(r)},201);}catch(e){return json({error:e.message},500)}}
+export async function onRequestPut({request,env}){try{if(!env.DB)return json({error:'DB unavailable'},503);await ensure(env.DB);const b=await request.json(),id=Number(b.id);if(!id)return json({error:'id required'},400);const r=await env.DB.prepare(`UPDATE team_members SET name=?,role_zh=?,role_en=?,responsibilities_zh=?,responsibilities_en=?,contact=?,member_type=?,status=?,is_core=?,permissions=?,sort_order=?,joined_at=?,updated_at=CURRENT_TIMESTAMP WHERE id=? AND deleted_at IS NULL RETURNING *`).bind(b.name||'',b.role_zh||'',b.role_en||'',b.responsibilities_zh||'',b.responsibilities_en||'',b.contact||'',b.member_type||'permanent',b.status||'active',b.is_core?1:0,b.permissions||'view',Number(b.sort_order||0),b.joined_at||'',id).first();if(!r)return json({error:'member not found'},404);await logAudit(env.DB,'team_member',id,'update',{name:r.name});return json({member:mapRow(r)});}catch(e){return json({error:e.message},500)}}
+export async function onRequestDelete({request,env}){try{if(!env.DB)return json({error:'DB unavailable'},503);await ensure(env.DB);const id=requireId(request);if(!id)return json({error:'id required'},400);await env.DB.prepare('UPDATE team_members SET deleted_at=CURRENT_TIMESTAMP,updated_at=CURRENT_TIMESTAMP WHERE id=? AND deleted_at IS NULL').bind(id).run();await logAudit(env.DB,'team_member',id,'soft_delete');return json({ok:true,id});}catch(e){return json({error:e.message},500)}}

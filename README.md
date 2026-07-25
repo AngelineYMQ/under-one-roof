@@ -1,73 +1,35 @@
-# Under One Roof HQ / 同一个屋檐下制作总部
+# Under One Roof HQ — v32 batch consistency release
 
-A bilingual internal short-drama production website for James, Angeline and Joseph.
+A static bilingual production HQ for Cloudflare Pages with D1-backed Pages Functions.
 
-## Included in v4
+## What this release changes
 
-- Complete Chinese and English system interface
-- Language switcher with remembered preference
-- Smaller typography and denser desktop/mobile layout
-- One unified idea dataset for both languages
-- Cloudflare Pages Function API
-- Cloudflare D1 database schema for cross-device/team sharing
-- Browser fallback when the database has not yet been connected
+- Keeps the current 30-episode plan and shared structure templates.
+- Labels generic screenplay content as **结构模板 / Structure template** so the team does not mistake it for completed dialogue.
+- Keeps Season 1, Script Center, Production Progress and Publishing Analytics on the shared `episodes` dataset.
+- Disables bulk deletion of the idea library.
+- Changes record deletion for ideas, legacy scripts, shoot schedules and team members to soft deletion.
+- Adds an `audit_log` table and records create, update and delete actions.
+- Adds automated release validation for bilingual routes, unified episode views, preserved EP01–EP30 data, API safety and schema consistency.
+- Does not add Cloudflare Access or login restrictions.
 
-## Deploy the website
+## Deploy
 
-Upload every file and folder in this directory to the root of the GitHub repository. Connect the repository to Cloudflare Pages.
+Upload all files at the repository root and push to `main`. Cloudflare Pages will redeploy automatically.
 
-Build settings:
+The D1 binding remains:
 
-- Framework preset: None
-- Build command: leave empty
-- Build output directory: `.`
+- Variable name: `DB`
+- Database: `under-one-roof-hq`
 
-## Enable shared team data
+The API performs migration-safe column checks at runtime, so this release does not require manually rerunning SQL for an existing database. `schema.sql` remains the complete reference for a new database.
 
-A normal static website stores data only in one browser. To let James, Joseph and Angeline see the same entries, connect the included Cloudflare D1 database.
+## Validation
 
-### 1. Create D1
+GitHub Actions runs automatically. Locally:
 
-In Cloudflare Dashboard:
+```bash
+node tools/validate-release.mjs
+```
 
-1. Open **Storage & Databases → D1 SQL Database**.
-2. Create a database named `under-one-roof-hq`.
-3. Open its **Console**.
-4. Copy and run all SQL from `schema.sql`.
-
-### 2. Bind D1 to the Pages project
-
-In the Cloudflare Pages project:
-
-1. Open **Settings → Bindings**.
-2. Add a **D1 database binding**.
-3. Variable name: `DB`
-4. Select the `under-one-roof-hq` database.
-5. Save and redeploy the latest deployment.
-
-After redeployment, entries added through **新增灵感 / Add Idea** are saved in D1 and visible to all team members on any device.
-
-## Important distinction
-
-- The Chinese and English pages use the same records.
-- System labels and interface text change with the selected language.
-- User-entered titles and descriptions remain exactly as entered; they are not automatically translated.
-- This version shares structured idea entries. It does not yet include binary file upload for images, videos or documents. That requires Cloudflare R2 or another file-storage service.
-
-
-## v6 Character update
-
-Angeline is now written as a newly arrived wealthy Chinese international student. Her room-size logic is fixed across the story bible: she rejected a family-arranged apartment to prove independence, trusted wide-angle listing photos, signed a one-year lease, and stays because she refuses to lose the deposit or admit the mistake to her parents.
-
-## v10 update: shared editable Script Center
-Run the updated `schema.sql` once in Cloudflare D1 to create the new `scripts` table. The Script Center then supports adding, editing, changing status, owner, version, and deleting scripts. With the `DB` binding active, changes are shared across Angeline, James, and Joseph.
-
-## v18 note
-The Team Members API now automatically creates the three core members (James, Angeline and Joseph) when the shared team table is empty. Existing team records are never overwritten.
-
-
-## v26 Data Preservation
-The 30 Season 1 episodes and all production metadata from v24 are embedded as a safe fallback and are also automatically seeded into D1. Empty database/API errors will no longer blank the Script Center or Production Progress pages.
-
-## v31
-Episode cards now open a readable scene-by-scene screenplay view first. The full record remains editable through “编辑全部资料 / Edit all details”. EP01 includes a complete sample screenplay and is upgraded automatically when the previous generic outline is detected.
+See `RELEASE_CHECKLIST.md` for the release standard.

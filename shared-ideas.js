@@ -66,7 +66,7 @@ const SharedIdeas = (() => {
   }
 
   async function reset() {
-    try { await fetch('/api/ideas', { method: 'DELETE' }); } catch {}
+    // Local demo reset only. Shared database bulk deletion is intentionally disabled.
     localStorage.removeItem(KEY);
     oldKeys.forEach(key => localStorage.removeItem(key));
   }
