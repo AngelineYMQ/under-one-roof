@@ -1,35 +1,55 @@
-# Under One Roof — Short Drama HQ
+# Under One Roof HQ / 同一个屋檐下制作总部
 
-A bilingual internal creative and production website for the **Under One Roof** short-drama project.
+A bilingual internal short-drama production website for James, Angeline and Joseph.
 
-## Languages
+## Included in v4
 
-- Chinese
-- English
+- Complete Chinese and English system interface
+- Language switcher with remembered preference
+- Smaller typography and denser desktop/mobile layout
+- One unified idea dataset for both languages
+- Cloudflare Pages Function API
+- Cloudflare D1 database schema for cross-device/team sharing
+- Browser fallback when the database has not yet been connected
 
-Use the language selector in the upper-right corner. The selected language is saved in the browser.
+## Deploy the website
 
-## Deployment
+Upload every file and folder in this directory to the root of the GitHub repository. Connect the repository to Cloudflare Pages.
 
-This is a static website. No framework, package installation, or build command is required.
+Build settings:
 
-### Cloudflare Pages
+- Framework preset: None
+- Build command: leave empty
+- Build output directory: `.`
 
-- Framework preset: `None`
-- Build command: leave blank
-- Build output directory: `/`
+## Enable shared team data
 
-### GitHub Pages
+A normal static website stores data only in one browser. To let James, Joseph and Angeline see the same entries, connect the included Cloudflare D1 database.
 
-Upload all files to the repository root and publish from the `main` branch root directory.
+### 1. Create D1
 
-## Files
+In Cloudflare Dashboard:
 
-- `index.html` — shared site shell and language selector
-- `styles.css` — complete responsive styles
-- `app-zh.js` — complete Chinese content
-- `app-en.js` — complete English content
+1. Open **Storage & Databases → D1 SQL Database**.
+2. Create a database named `under-one-roof-hq`.
+3. Open its **Console**.
+4. Copy and run all SQL from `schema.sql`.
 
-## Browser storage
+### 2. Bind D1 to the Pages project
 
-Ideas added through the idea form are saved locally in the current browser. Chinese and English idea data are stored separately.
+In the Cloudflare Pages project:
+
+1. Open **Settings → Bindings**.
+2. Add a **D1 database binding**.
+3. Variable name: `DB`
+4. Select the `under-one-roof-hq` database.
+5. Save and redeploy the latest deployment.
+
+After redeployment, entries added through **新增灵感 / Add Idea** are saved in D1 and visible to all team members on any device.
+
+## Important distinction
+
+- The Chinese and English pages use the same records.
+- System labels and interface text change with the selected language.
+- User-entered titles and descriptions remain exactly as entered; they are not automatically translated.
+- This version shares structured idea entries. It does not yet include binary file upload for images, videos or documents. That requires Cloudflare R2 or another file-storage service.

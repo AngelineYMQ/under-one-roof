@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS ideas (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  category TEXT NOT NULL DEFAULT '',
+  summary TEXT NOT NULL,
+  lead TEXT NOT NULL DEFAULT '',
+  scene TEXT NOT NULL DEFAULT '',
+  status_code TEXT NOT NULL DEFAULT 'idea',
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_ideas_created_at ON ideas(created_at DESC);

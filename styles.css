@@ -136,3 +136,56 @@ tr:last-child td { border-bottom: 0; }
 .language-btn.active{background:var(--navy);color:#fff}
 @media(max-width:900px){.top-actions{gap:6px}.language-btn{padding:6px 8px}.top-actions>.ghost-btn{display:none}}
 @media(max-width:620px){.language-switch{order:-1}.top-actions{flex-wrap:wrap;justify-content:flex-end}.language-btn{font-size:12px}}
+
+/* v4 compact density: internal work system, not a marketing landing page */
+body { font-size: 13px; }
+.app-shell { grid-template-columns: 250px 1fr; }
+.sidebar { padding: 18px 14px; }
+.brand { padding: 0 6px 18px; }
+.brand-mark { width: 38px; height: 38px; border-radius: 11px; font-size: 18px; }
+.brand h1 { font-size: 15px; }
+.brand p { font-size: 9px; }
+nav { margin-top: 12px; gap: 3px; }
+.nav-btn { padding: 8px 10px; border-radius: 9px; font-size: 13px; }
+.nav-icon { width: 19px; }
+.sidebar-footer { padding: 12px 8px 0; font-size: 11px; }
+.topbar { min-height: 60px; padding: 10px 22px; }
+.topbar h2 { font-size: 17px; }
+.eyebrow { font-size: 10px; }
+.primary-btn, .ghost-btn, .icon-btn { padding: 8px 11px; border-radius: 8px; font-size: 12px; }
+.language-btn { padding: 6px 9px; font-size: 11px; }
+.content { padding: 20px 22px 44px; }
+.hero { padding: 26px 30px; border-radius: 18px; }
+.hero h3 { font-size: clamp(24px, 3vw, 34px); line-height: 1.18; max-width: 900px; }
+.hero > p:not(.eyebrow) { font-size: 14px; line-height: 1.65; max-width: 920px; }
+.section { margin-top: 24px; }
+.section-header { margin-bottom: 10px; }
+.section-header h3 { font-size: 17px; }
+.section-header p { font-size: 12px; }
+.grid { gap: 12px; }
+.card { padding: 15px; border-radius: 14px; }
+.card h4 { font-size: 14px; }
+.card p, .list, table { font-size: 12px; }
+.stat-number { font-size: 24px; }
+.stat-label { font-size: 11px; }
+.badge { font-size: 10px; padding: 4px 7px; }
+.callout { padding: 12px; font-size: 12px; }
+.character-avatar { width: 38px; height: 38px; font-size: 15px; }
+.character-card h4[style] { font-size: 17px !important; }
+.episode { padding: 12px; }
+.episode h4 { font-size: 13px; }
+.episode p, .episode-num { font-size: 10px; }
+th, td { padding: 9px 10px; }
+.kanban-col { padding: 10px; }
+.kanban-col h4 { font-size: 12px; }
+.kanban-item { padding: 9px; font-size: 11px; }
+.modal-card { max-width: 620px; }
+.modal-header h3 { font-size: 17px; }
+label { font-size: 11px; }
+input, textarea, select { padding: 9px 10px; font-size: 12px; }
+@media (max-width: 900px) {
+  .content { padding: 15px; }
+  .hero { padding: 20px; }
+  .hero h3 { font-size: 24px; }
+  .topbar { padding: 9px 14px; }
+}
