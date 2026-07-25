@@ -169,10 +169,10 @@ window.addEventListener('hashchange',()=>{ state.page=location.hash.replace('#',
 document.getElementById('menuBtn').onclick=()=>sidebar.classList.toggle('open');
 const modal=document.getElementById('ideaModal');
 window.openIdeaModal=()=>{ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); };
-document.getElementById('addIdeaBtn').onclick=openIdeaModal;
+document.getElementById('addIdeaBtn')?.addEventListener('click',openIdeaModal);
 document.querySelectorAll('[data-close-modal]').forEach(x=>x.onclick=()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
 document.getElementById('ideaForm').onsubmit=async(e)=>{ e.preventDefault(); const d=Object.fromEntries(new FormData(e.target)); const saved=await SharedIdeas.add({...d,statusCode:'idea'}); state.ideas.unshift(saved); e.target.reset(); modal.classList.remove('open'); if(state.page==='ideas') render(); };
-document.getElementById('resetBtn').onclick=async()=>{ await SharedIdeas.reset(); state.ideas=JSON.parse(JSON.stringify(defaultIdeas)); SharedIdeas.setLocal(state.ideas); render(); };
+
 SharedIdeas.load(defaultIdeas).then(ideas=>{ state.ideas=ideas; render(); });
 
 const productionStagesZh = [
