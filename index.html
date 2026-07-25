@@ -64,6 +64,19 @@
     </div>
   </div>
 
+  <div class="modal episode-modal" id="episodeModal" aria-hidden="true">
+    <div class="modal-card episode-modal-card">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow" id="episodeModalEyebrow">Episode Workspace</p>
+          <h3 id="episodeModalTitle">Episode</h3>
+        </div>
+        <button class="icon-btn" data-close-episode-modal>×</button>
+      </div>
+      <div id="episodeModalBody"></div>
+    </div>
+  </div>
+
   <script src="shared-ideas.js"></script>
   <script>
     const params = new URLSearchParams(location.search);

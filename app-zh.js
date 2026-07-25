@@ -70,24 +70,85 @@ relations(){ return `${section('人物关系','固定关系决定每一集的冲
  ${section('关系发展原则','第一季不是只有单集笑点，还要让关系慢慢升级',`<div class="timeline"><div class="timeline-item"><h4>陌生与试探</h4><p>入住初期，大家用规则和小心思保护自己。</p></div><div class="timeline-item"><h4>摩擦与依赖</h4><p>生活习惯不断冲突，但开始互相帮忙。</p></div><div class="timeline-item"><h4>真正成为一家人</h4><p>发生生病、搬走、新租客等事件后，三人才意识到彼此的重要性。</p></div></div>`)}`; },
 season(){ const phases=['入住篇','生活习惯篇','新加坡文化篇','关系升级篇']; return `${section('第一季：新租客来了','30集作为第一季，围绕搬进来、适应生活、建立关系',`<div class="tabs">${phases.map((p,i)=>`<button class="tab-btn ${i===0?'active':''}" onclick="filterEpisodes('${p}',this)">${p}</button>`).join('')}<button class="tab-btn" onclick="filterEpisodes('全部',this)">全部</button></div><div id="episodeGrid" class="episode-grid">${renderEpisodes('入住篇')}</div>`)}`; },
 ideas(){ return `${section('剧情题材库','长期题材分类，不只服务第一季',`<div class="grid grid-3">${Object.entries(topicGroups).map(([k,v])=>card(k,`<div class="filters">${v.map(x=>badge(x)).join('')}</div>`)).join('')}</div>`)}${section('团队灵感箱','内容统一保存；连接 Cloudflare D1 后，三位成员在不同设备上都能实时看到',`<div id="ideasTable">${ideasTable()}</div>`)}`; },
-episode(){ return `${section('单集资料页模板','每一集都应使用同一套字段',`<div class="table-wrap"><table><thead><tr><th>栏目</th><th>内容示例</th></tr></thead><tbody>${[['集数','EP01'],['标题','富二代租了最小的房间'],['系列','入住篇'],['核心文化点','新加坡租房'],['主角','James、Angeline、Joseph'],['配角','无'],['场景','客厅'],['时长','2–4分钟'],['剧情状态','灵感／大纲／剧本／已拍／已剪／已发布'],['编剧','姓名'],['导演','姓名'],['拍摄日期','日期'],['发布日期','日期'],['发布平台','抖音／小红书／视频号／YouTube'],['道具','合同、行李箱、钥匙'],['备注','明确“广角照片、已签一年租约、押金与面子”三项设定']].map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td></tr>`).join('')}</tbody></table></div>`)}${section('每集内容结构','所有正式剧本必须包括',`<div class="grid grid-3">${['开场钩子：前3秒发生什么','剧情冲突：谁想做什么，谁阻止','反转：最后发生什么意外','文化信息：观众真正学到什么','完整台词：按角色区分','镜头表：全景、特写、反应镜头','发布文案：各平台标题和简介'].map((x,i)=>card(`0${i+1}`,`<p>${x}</p>`)).join('')}</div>`)}`; },
+episode(){ return `${section('单集资料页模板','每一集都应使用同一套字段',`<div class="table-wrap"><table><thead><tr><th>栏目</th><th>内容示例</th></tr></thead><tbody>${[['集数','EP01'],['标题','富二代租了最小的房间'],['系列','入住篇'],['核心文化点','新加坡租房'],['主角','James、Angeline、Joseph'],['配角','无'],['场景','客厅'],['时长','2–4分钟'],['剧情状态','灵感／大纲／剧本／已拍／已剪／已发布'],['编剧','姓名'],['导演','姓名'],['拍摄日期','日期'],['发布日期','日期'],['发布平台','抖音／小红书／视频号／YouTube'],['道具','合同、行李箱、钥匙'],['备注','明确“广角照片、已签一年租约、押金与面子”三项设定']].map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td></tr>`).join('')}</tbody></table></div>`)}${section('每集内容结构','所有正式剧本必须包括',`<div class="grid grid-3">${['标题与封面句：观众一眼看懂冲突','前3秒钩子：必须让人停下来','前5秒留存点：立即交代反常信息或核心矛盾','剧情目标：谁想做什么','阻力与升级：谁阻止，事情如何越来越严重','中段反转：让观众继续看下去','高潮与最终反转：兑现标题承诺','结尾钩子／互动问题：促进评论或下一集追看','完整台词：按角色和动作拆分','镜头与剪辑：景别、反应镜头、字幕、音效','发布文案：各平台标题、简介和标签','数据复盘：3秒停留率、5秒留存率、平均观看时长、完播率'].map((x,i)=>card(`0${i+1}`,`<p>${x}</p>`)).join('')}</div>`)}`; },
 scripts(){ return `${section('剧本中心','统一版本，避免拍摄时使用错误稿件',kanban([['灵感箱',['空调遥控器失踪了','新加坡为什么到处排队']],['待讨论',['纸巾不是垃圾','谁睡最大间']],['编写中',['富二代租了最小的房间']],['最终版',[]]]))}${section('版本管理规则','每份剧本必须可追溯',`<div class="grid grid-3">${card('必要字段','<ul class="list"><li>版本号</li><li>最后修改人</li><li>修改日期</li><li>修改记录</li><li>批准人</li></ul>')}${card('状态流程','<p>灵感箱 → 待讨论 → 已通过 → 编写中 → 待修改 → 最终版 → 已拍摄 → 已发布</p>')}${card('核心原则','<p>拍摄现场只使用“最终版”。任何临时改词都要在拍摄后补录到最新版本。</p>')}</div>`)}`; },
 production(){ return `${section('制作进度','从选题到发布的完整制作看板',kanban([['前期',['选题','大纲','剧本','场景','演员','道具','服装']],['拍摄',['待拍','已排期','拍摄中','需要补拍','已完成']],['后期',['粗剪','精剪','字幕','音效','封面','审核']],['发布',['待发布','已发布','数据复盘']]]))}`; },
 schedule(){ return `${section('拍摄日程','建议一次集中拍摄 4–8 集，不要一集拍一次',`<div class="table-wrap"><table><thead><tr><th>日期</th><th>时间</th><th>地点</th><th>拍摄集数</th><th>出席</th><th>服装与道具</th><th>状态</th></tr></thead><tbody><tr><td>待定</td><td>待定</td><td>James 家客厅</td><td>EP01–EP04</td><td>James / Angeline / Joseph</td><td>钥匙、行李箱、租房合同</td><td>${badge('待排期','yellow')}</td></tr></tbody></table></div>`)}${section('每次拍摄必须记录','避免遗漏',`<div class="grid grid-3">${['日期','时间','地点','拍摄集数','出席演员','工作人员','所需服装','所需道具','预计完成时间','是否需要外景','是否需要补拍'].map(x=>card(x,'<p>由制片或现场负责人更新。</p>')).join('')}</div>`)}`; },
 team(){ return `${section('核心团队','当前固定成员',`<div class="grid grid-3">${teamCard('James','房东／房地产从业者／演员','负责房东与房产角色、场地协调、房地产题材和新加坡生活信息把关')}${teamCard('Angeline','演员／项目策划','剧中饰演刚到新加坡的中国富二代留学生；团队中负责项目方向、剧情推动、市场定位及中国观众视角')}${teamCard('Joseph','租客／社交媒体营销人／演员','负责社交媒体、内容制作、广告投放题材，以及项目后续内容传播与营销视角')}</div>`)}${section('未来团队职位','新成员加入后可建立成员档案与权限',`<div class="grid grid-4">${['演员','编剧','导演','摄影','收音','剪辑','字幕','运营','商务','道具','服装','制片'].map(x=>card(x,'<p>可设为固定成员或项目制成员。</p>')).join('')}</div>`)}${section('成员档案字段','统一记录',`<div class="callout">姓名、照片、职位、联系方式、加入日期、是否固定成员、职责、查看权限、编辑权限、管理员权限。</div>`)}`; },
 supporting(){ return `${section('配角与客串角色','配角应可重复出现，逐步建立完整宇宙',`<div class="grid grid-3">${['隔壁邻居','James 的房产客户','买家与租客','合作房产中介','Angeline 的同学','学校老师','中国留学生家长','Joseph 的广告客户','内容创作者','平台客户经理','新租客','快递员','清洁阿姨','ICA 工作人员','小贩中心老板'].map(x=>card(x,'<p>记录人设、与主角关系、首次出现集数、可重复剧情和演员资料。</p>')).join('')}</div>`)}`; },
 singapore(){ const cats=['租房','交通','饮食','工作','教育','法律与罚款','节日','语言','社交习惯','政府服务','医疗','银行','手机与网络']; return `${section('新加坡资料库','所有文化与政策信息必须准确并注明来源',`<div class="grid grid-4">${cats.map(x=>card(x,'<p>保存主题说明、官方来源、最后核实日期、可对应剧集、是否已使用。</p>')).join('')}</div>`)}${section('资料条目标准','防止短剧传播错误信息',`<div class="table-wrap"><table><thead><tr><th>字段</th><th>要求</th></tr></thead><tbody><tr><td>主题</td><td>明确到一个可拍摄的问题</td></tr><tr><td>简单说明</td><td>用观众听得懂的话解释</td></tr><tr><td>官方来源</td><td>优先政府、法定机构或官方运营方</td></tr><tr><td>最后核实日期</td><td>政策与费用类内容必须更新</td></tr><tr><td>对应剧集</td><td>标记可以融入哪一集</td></tr><tr><td>是否已使用</td><td>避免重复或方便制作续集</td></tr></tbody></table></div>`)}`; },
-analytics(){ return `${section('发布与数据','每集发布后统一记录，找出真正有效的内容模式',`<div class="grid grid-4">${['播放量','点赞','评论','分享','收藏','新增粉丝','完播率','最受欢迎评论'].map((x,i)=>statCard(x,'—','0%')).join('')}</div>`)}${section('复盘问题','数据不是为了汇报，而是为了决定下一集拍什么',`<div class="grid grid-2">${card('内容表现','<ul class="list"><li>哪种新加坡文化最受欢迎？</li><li>哪种冲突最好笑？</li><li>哪些题材值得拍续集？</li></ul>')}${card('人物表现','<ul class="list"><li>哪个角色最受欢迎？</li><li>观众最喜欢哪组人物关系？</li><li>哪个平台效果最好？</li></ul>')}</div>`)}`; },
+analytics(){ return `${section('发布与数据','每集发布后统一记录，找出真正有效的内容模式',`<div class="grid grid-4">${['播放量','3秒停留率','5秒留存率','平均观看时长','完播率','点赞评论分享率','新增粉丝','最受欢迎评论'].map((x,i)=>statCard(x,'—','0%')).join('')}</div>`)}${section('复盘问题','数据不是为了汇报，而是为了决定下一集拍什么',`<div class="grid grid-2">${card('内容表现','<ul class="list"><li>哪种新加坡文化最受欢迎？</li><li>哪种冲突最好笑？</li><li>哪些题材值得拍续集？</li></ul>')}${card('人物表现','<ul class="list"><li>哪个角色最受欢迎？</li><li>观众最喜欢哪组人物关系？</li><li>哪个平台效果最好？</li></ul>')}</div>`)}`; },
 brand(){ return `${section('品牌与视觉规范','以后团队扩大后，任何人制作内容都应保持一致',`<div class="grid grid-3">${['Logo','中文名称','英文名称','字体','标准颜色','片头','片尾','字幕样式','封面模板','角色名字显示方式','背景音乐规范','Logo使用规则'].map(x=>card(x,'<p>待品牌确认后上传或填写最终标准。</p>')).join('')}</div>`)}${section('当前临时规范','第一版网站使用的视觉方向',`<div class="grid grid-3">${card('主色','<p>深蓝代表稳定世界观；暖橙代表生活冲突与喜剧节奏。</p>')}${card('视觉气质','<p>生活化、现代、清晰，不做低质夸张综艺感。</p>')}${card('字幕原则','<p>中文为主，重点词可保留 Singlish 或英文，并给出自然解释。</p>')}</div>`)}`; },
 public(){ return `${section('网站分区','前期先做内部版，未来再开放对外版',`<div class="grid grid-2">${card('内部版','<ul class="list"><li>剧本</li><li>拍摄日程</li><li>联系方式</li><li>未发布内容</li><li>制作预算</li><li>内部讨论</li><li>数据表现</li></ul>')}${card('对外版','<ul class="list"><li>项目介绍</li><li>人物介绍</li><li>已发布剧集</li><li>幕后花絮</li><li>合作方式</li><li>演员招募</li><li>品牌合作</li><li>联系方式</li></ul>')}</div>`)}${section('第一版完成标准','任何新加入的人，在30分钟内必须看懂',`<div class="callout">这是什么项目、自己演谁或负责什么、目前拍到哪里、下一步要做什么。</div>`)}`; }
 };
+
+const episodeHooksZh = [
+'“这是我的房间？我家衣帽间都比这个大。”','Angeline拿出手机：“照片里的房间呢？”','第八个行李箱推进来时，James沉默了。','客人一句话问住她：“你这么有钱，为什么住这里？”','James拿出一张长到拖地的房屋规则。','James说押金不退，Angeline立刻改口。',
+'James发现空调开着、窗户也开着。','Angeline盯着洗衣机：“哪个按钮是叫阿姨？”','James把本月电费账单放在桌上。','Joseph误吃了Angeline空运来的食材。','Angeline宣布：“以后家务全部外包。”','James闻到榴梿味后冲进客厅。','镜头一开，Angeline戴着手套站在厕所门口。','James回家发现客厅坐满陌生同学。','Angeline把设计图摊开：“客厅需要升级。”',
+'Angeline把占座纸巾当垃圾丢了。','Angeline端着餐盘站着不动：“没人送过来吗？”','Angeline认真问：“Can can是不是更可以？”','巴士开走后，她才发现自己坐过站。','她刚要喝水，James和Joseph同时喊停。','她提着垃圾站在楼道：“到底丢哪里？”','James列出三件“有钱也不能做”的事。','暴雨突然落下，只有Angeline冲回家拿伞。',
+'Joseph把摄像头对准她：“第一次做家务，开始。”','她要用一间小房的钱改造一间小房。','James带客户进门，Angeline正嫌弃这间房。','家里不接电话后，她第一次必须自己处理问题。','视频爆了，但所有评论都在问她会不会洗厕所。','父母的视频电话突然打来：“给我们看看你住哪里。”','Angeline收拾行李要走，却发现自己舍不得。'
+];
+function episodeDetailZh(ep){
+ const [num,title,phase]=ep;
+ const hook=episodeHooksZh[num-1];
+ const isFirst=num===1;
+ return {
+  status:isFirst?'脚本初稿':'剧情大纲', duration:'60–120秒', scene:num<=15?'James 家客厅／房间门口':'客厅＋必要外景', cast:'James、Angeline、Joseph',
+  hook,
+  five:`在第5秒前明确本集核心矛盾：“${title}”，并让James或Joseph立即给出与Angeline完全相反的反应。`,
+  goal:`Angeline想用自己的方式解决“${title}”的问题，同时维护她有钱、独立、绝不承认选错的形象。`,
+  obstacle:`James坚持新加坡规则、租约或房屋管理逻辑；Joseph则把冲突当成内容机会，使问题进一步扩大。`,
+  mid:`观众以为花钱或解释就能解决，随后发现真正障碍不是钱，而是规则、面子或三人的关系。`,
+  climax:`三个人的方案同时碰撞，出现一个能兑现标题的视觉笑点或对白反转。`,
+  ending:`用一句短反转结束，并留下可评论的问题：这件事到底谁更合理？`,
+  culture:`围绕“${title}”只讲一个真实的新加坡生活点；政策、费用或规则类信息发布前必须核实。`,
+  script:isFirst?[
+   '【镜头1／门口全景】Angeline拖着多个行李箱进门，环顾四周。',
+   'Angeline：我的房间在哪里？',
+   'James指向旁边的小门：这里。',
+   'Angeline：我是问房间，不是储物间。',
+   'James：这就是你的房间。',
+   '【镜头2／手机特写】Angeline打开租房照片反复对比。',
+   'Angeline：照片里面明明很大。',
+   'James：照片没有骗人，是广角镜头。',
+   'Joseph举起手机：你这个反应很好，再说一次，我刚才没录到。',
+   'Angeline：我要退租。',
+   'James：提前退租，押金不退。',
+   '【停顿＋三人反应镜头】',
+   'Angeline：其实小一点……比较有安全感。'
+  ]:[
+   `【开场】${hook}`,
+   `【冲突】Angeline提出自己的解决方式，James立即否定。`,
+   `【升级】Joseph为了拍摄或流量加入，令事情更复杂。`,
+   `【中段反转】问题被证明不是单纯花钱就能解决。`,
+   `【高潮】围绕“${title}”完成一次动作或对白反转。`,
+   `【结尾】留下一个短笑点和观众互动问题。`
+  ]
+ };
+}
+window.openEpisodeDetail=(number)=>{
+ const ep=episodes.find(e=>e[0]===number); if(!ep)return; const d=episodeDetailZh(ep);
+ document.getElementById('episodeModalTitle').textContent=`EP${String(ep[0]).padStart(2,'0')} · ${ep[1]}`;
+ document.getElementById('episodeModalEyebrow').textContent='单集创作工作区';
+ document.getElementById('episodeModalBody').innerHTML=`
+ <div class="episode-summary-grid">${[['阶段',ep[2]],['状态',d.status],['建议时长',d.duration],['主要场景',d.scene]].map(x=>`<div class="episode-summary-item"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join('')}</div>
+ <div class="metric-strip"><div class="metric-box"><strong>前3秒停留率</strong><span>画面或对白必须立即制造反常与冲突。</span></div><div class="metric-box"><strong>前5秒留存率</strong><span>5秒内说清楚观众为什么要继续看。</span></div><div class="metric-box"><strong>平均观看时长</strong><span>每8–12秒安排一次升级、信息或反应。</span></div><div class="metric-box"><strong>完播率</strong><span>结尾必须兑现标题，并用反转收住。</span></div></div>
+ <div class="script-grid">
+ ${[['标题／封面句',ep[1]],['前3秒钩子',d.hook],['前5秒留存点',d.five],['人物目标',d.goal],['阻力与冲突升级',d.obstacle],['中段反转',d.mid],['高潮／最终反转',d.climax],['结尾钩子',d.ending],['新加坡文化点',d.culture]].map((x,i)=>`<div class="script-block ${i===8?'full':''}"><h4>${x[0]}</h4><p>${x[1]}</p></div>`).join('')}
+ <div class="script-block full"><h4>完整脚本／分场台词</h4><ol class="script-lines">${d.script.map(x=>`<li>${x}</li>`).join('')}</ol></div>
+ <div class="script-block full"><h4>拍摄后数据记录</h4><p>平台、发布日期、视频长度、3秒停留率、5秒留存率、平均观看时长、完播率、点赞率、评论率、分享率、收藏率、新增粉丝、最佳评论、下一集优化。</p></div>
+ </div>`;
+ const m=document.getElementById('episodeModal');m.classList.add('open');m.setAttribute('aria-hidden','false');
+};
+const episodeModal=document.getElementById('episodeModal');
+document.querySelectorAll('[data-close-episode-modal]').forEach(x=>x.onclick=()=>{episodeModal.classList.remove('open');episodeModal.setAttribute('aria-hidden','true');});
 
 function statCard(label,num,percent){ return `<article class="card"><div class="stat"><div><div class="stat-label">${label}</div><div class="stat-number">${num}</div></div>${badge(percent)}</div><div class="progress"><span style="width:${percent}"></span></div></article>`; }
 function quick(title,desc,page){ return `<article class="card"><h4>${title}</h4><p>${desc}</p><button class="ghost-btn" onclick="location.hash='${page}'">进入</button></article>`; }
 function introPage(title,subtitle,items,extra=''){ return `${section(title,subtitle,`<div class="grid grid-2">${items.map(x=>card(x[0],`<p>${x[1]}</p>`)).join('')}</div>`)}${extra}`; }
 function rules(){ const r=['必须有剧情，不可以只是讲知识','必须有冲突，不可以三个人一直聊天','每集只讲一个核心问题','新加坡信息必须准确','不过度丑化任何国家或群体','笑点来自人物性格，而不是单纯扮丑','商业植入不能破坏剧情']; return section('内容原则','创作时必须遵守',`<div class="grid grid-3">${r.map((x,i)=>card(`原则 ${i+1}`,`<p>${x}</p>`)).join('')}</div>`); }
 function character(name,role,letter,avatar,traits,func,limits){ return `<article class="card character-card"><div class="character-avatar ${avatar}">${letter}</div><span class="badge">${role}</span><h4 style="font-size:22px;margin-top:10px">${name}</h4><p><strong>核心性格</strong></p><div class="filters">${traits.map(x=>badge(x)).join('')}</div><p><strong>戏剧功能</strong></p><p>${func}</p><p><strong>不能出现的问题</strong></p><ul class="list">${limits.map(x=>`<li>${x}</li>`).join('')}</ul></article>`; }
-function renderEpisodes(filter){ return episodes.filter(e=>filter==='全部'||e[2]===filter).map(e=>`<article class="episode"><div class="episode-num">EP${String(e[0]).padStart(2,'0')}</div><h4>${e[1]}</h4><p>${e[2]}</p></article>`).join(''); }
+function renderEpisodes(filter){ return episodes.filter(e=>filter==='全部'||e[2]===filter).map(e=>`<article class="episode" role="button" tabindex="0" onclick="openEpisodeDetail(${e[0]})" onkeydown="if(event.key==='Enter')openEpisodeDetail(${e[0]})"><div class="episode-num">EP${String(e[0]).padStart(2,'0')}</div><h4>${e[1]}</h4><p>${e[2]} · 点击查看脚本结构</p></article>`).join(''); }
 window.filterEpisodes=(filter,btn)=>{ document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); document.getElementById('episodeGrid').innerHTML=renderEpisodes(filter); };
 function ideasTable(){ if(!state.ideas.length) return '<div class="empty">暂无灵感</div>'; return `<div class="table-wrap"><table><thead><tr><th>标题</th><th>分类</th><th>一句话剧情</th><th>角色</th><th>场景</th><th>状态</th></tr></thead><tbody>${state.ideas.map(i=>`<tr><td><strong>${i.title}</strong></td><td>${i.category}</td><td>${i.summary}</td><td>${i.lead}</td><td>${i.scene}</td><td>${badge(SharedIdeas.statusLabel(i.statusCode || i.status, 'zh'), (i.statusCode || i.status)==='discussion' || i.status==='待讨论' ? 'yellow' : '')}</td></tr>`).join('')}</tbody></table></div>`; }
 function kanban(cols){ return `<div class="kanban">${cols.map(([name,items])=>`<div class="kanban-col"><h4>${name}<span>${items.length}</span></h4>${items.map(i=>`<div class="kanban-item"><strong>${i}</strong><br><small>待负责人更新</small></div>`).join('')}</div>`).join('')}</div>`; }
