@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="《同一个屋檐下》短剧内部创作与制作总部" />
+  <title>同一个屋檐下｜短剧创作与制作总部</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">屋</div>
+        <div>
+          <h1>同一个屋檐下</h1>
+          <p>Short Drama HQ</p>
+        </div>
+      </div>
+      <nav id="nav"></nav>
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span>第一季筹备中</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn" aria-label="打开菜单">☰</button>
+        <div>
+          <p class="eyebrow">内部创作与制作平台</p>
+          <h2 id="pageTitle">首页</h2>
+        </div>
+        <div class="top-actions">
+          <button class="ghost-btn" id="resetBtn">重置示例数据</button>
+          <button class="primary-btn" id="addIdeaBtn">＋ 新增灵感</button>
+        </div>
+      </header>
+      <section id="content" class="content"></section>
+    </main>
+  </div>
+
+  <div class="modal" id="ideaModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">灵感箱</p>
+          <h3>新增剧情灵感</h3>
+        </div>
+        <button class="icon-btn" data-close-modal>×</button>
+      </div>
+      <form id="ideaForm" class="form-grid">
+        <label>标题<input name="title" required placeholder="例如：房东发现租客偷偷开空调" /></label>
+        <label>分类<select name="category"><option>合租生活</option><option>新加坡文化</option><option>中国人初到新加坡</option><option>三人关系</option><option>节日和热点</option></select></label>
+        <label class="full">一句话剧情<textarea name="summary" required placeholder="谁想做什么，谁阻止，最后如何反转"></textarea></label>
+        <label>主要角色<select name="lead"><option>James</option><option>Angeline</option><option>Joseph</option><option>三人</option></select></label>
+        <label>场景<select name="scene"><option>客厅</option><option>厨房</option><option>门口</option><option>楼下</option><option>外景</option></select></label>
+        <div class="modal-actions full"><button type="button" class="ghost-btn" data-close-modal>取消</button><button class="primary-btn" type="submit">保存灵感</button></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
