@@ -64,3 +64,7 @@ Run the updated `schema.sql` once in Cloudflare D1 to create the new `scripts` t
 
 ## v18 note
 The Team Members API now automatically creates the three core members (James, Angeline and Joseph) when the shared team table is empty. Existing team records are never overwritten.
+
+
+## v26 Data Preservation
+The 30 Season 1 episodes and all production metadata from v24 are embedded as a safe fallback and are also automatically seeded into D1. Empty database/API errors will no longer blank the Script Center or Production Progress pages.
