@@ -230,7 +230,45 @@ function productionBoard(){const t=text[lang],data=filteredEpisodes();return `<d
 function productionList(){const t=text[lang],data=filteredEpisodes();return `<div class="table-wrap prod-table"><table><thead><tr><th>EP</th><th>${lang==='en'?'Title':'标题'}</th><th>${lang==='en'?'Stage':'阶段'}</th><th>${lang==='en'?'Owner':'负责人'}</th><th>${lang==='en'?'Priority':'优先级'}</th><th>${lang==='en'?'Shoot date':'拍摄日期'}</th><th>${lang==='en'?'Progress':'完成度'}</th><th>${lang==='en'?'Open items':'待处理事项'}</th></tr></thead><tbody>${data.map(x=>`<tr onclick="SharedEpisodes.open(${x.id})"><td>EP${String(x.episodeNo).padStart(2,'0')}</td><td><strong>${esc(title(x))}</strong></td><td><span class="stage-pill stage-${x.productionStage}">${t.stages[x.productionStage]}</span></td><td>${esc(x.owner||'—')}</td><td>${t.priority[x.priority]}</td><td>${esc(x.shootDate||'—')}</td><td>${x.progress||0}%</td><td>${esc(x.openIssues||'—')}</td></tr>`).join('')}</tbody></table></div>`;}
 function productionCalendar(){const by={};filteredEpisodes().filter(x=>x.shootDate).forEach(x=>(by[x.shootDate]??=[]).push(x));return `<div class="shoot-calendar unified-shoot-calendar">${Object.keys(by).sort().map(d=>`<article><header><strong>${d}</strong><span>${by[d].length} ${lang==='en'?'episodes':'集'}</span></header><div>${by[d].map(x=>`<button onclick="SharedEpisodes.open(${x.id})"><b>EP${String(x.episodeNo).padStart(2,'0')}</b><span>${esc(title(x))}</span><em>${esc(x.owner||'—')}</em></button>`).join('')}</div></article>`).join('')||`<div class="empty">${lang==='en'?'No shoot dates yet':'尚未安排拍摄日期'}</div>`}</div>`;}
 function renderProduction(){const issueCount=items.filter(x=>x.openIssues).length;return `<div class="prod-stats">${[[lang==='en'?'Episodes':'总集数',items.length],[lang==='en'?'Script Locked':'剧本已锁定',items.filter(x=>x.productionStage==='locked').length],[lang==='en'?'Ready to Shoot':'待拍摄',items.filter(x=>x.productionStage==='shoot').length],[lang==='en'?'Post-production':'后期制作',items.filter(x=>x.productionStage==='post').length],[lang==='en'?'Open Issues':'待处理事项',issueCount]].map((a,i)=>`<div class="prod-stat s${i}"><span>${a[0]}</span><strong>${a[1]}</strong></div>`).join('')}</div>${productionToolbar()}<div id="productionUnifiedView">${productionView==='board'?productionBoard():productionView==='list'?productionList():productionCalendar()}</div>`;}
-function renderCurrent(){const m=document.getElementById('unifiedEpisodeMount');if(!m)return;const t=text[lang];if(view==='season'){m.innerHTML=renderSeason();return;}if(view==='scripts'){m.innerHTML=`<div class="script-kanban unified-kanban">${scriptOrder.map(k=>{const g=items.filter(x=>x.scriptStatus===k);return `<section class="script-column status-${k}"><div class="script-column-head"><h4>${t.statuses[k]}</h4><span>${g.length}</span></div><div class="script-card-list">${g.map(x=>`<button class="script-card" onclick="SharedEpisodes.open(${x.id})"><strong>EP${String(x.episodeNo).padStart(2,'0')} · ${esc(title(x))}</strong><p>${esc(summary(x))}</p><div class="script-meta"><span>${x.version}</span><span>${esc(x.owner||'—')}</span>${templateBadge(x)}</div></button>`).join('')||'<div class="script-empty">—</div>'}</div></section>`}).join('')}</div>`;return;}if(view==='production'){m.innerHTML=renderProduction();return;}const totalViews=items.reduce((a,x)=>a+(+x.views||0),0),avg=k=>items.length?(items.reduce((a,x)=>a+(+x[k]||0),0)/items.length).toFixed(1):0;m.innerHTML=`<div class="grid grid-4">${[['Views',totalViews],['30s Retention',avg('retention30')+'%'],['Completion',avg('completionRate')+'%'],['Followers',items.reduce((a,x)=>a+(+x.followersGained||0),0)]].map(x=>`<div class="stat-card"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join('')}</div><div class="table-wrap"><table><thead><tr><th>EP</th><th>${lang==='en'?'Title':'标题'}</th><th>Views</th><th>30s</th><th>Completion</th><th>${lang==='en'?'Edit':'编辑'}</th></tr></thead><tbody>${items.map(x=>`<tr><td>${x.episodeNo}</td><td>${esc(title(x))}</td><td>${x.views||0}</td><td>${x.retention30||0}%</td><td>${x.completionRate||0}%</td><td><button class="mini-btn" onclick="SharedEpisodes.open(${x.id})">${lang==='en'?'Open':'打开'}</button></td></tr>`).join('')}</tbody></table></div>`;}
+
+function renderAnalytics(){
+  const totalViews=items.reduce((a,x)=>a+(+x.views||0),0);
+  const totalFollowers=items.reduce((a,x)=>a+(+x.followersGained||0),0);
+  const published=items.filter(x=>x.publishDate||x.productionStage==='publish'||(+x.views||0)>0);
+  const metricBase=published.length?published:items;
+  const avg=k=>metricBase.length?(metricBase.reduce((a,x)=>a+(+x[k]||0),0)/metricBase.length).toFixed(1):'0.0';
+  const kpis=lang==='en'?
+    [
+      ['Total Views',totalViews.toLocaleString(),'Across all episodes','views'],
+      ['Avg. 30s Retention',avg('retention30')+'%','Average of recorded episodes','retention'],
+      ['Avg. Watch Time',avg('avgWatchSeconds')+'s','Average viewing duration','watch'],
+      ['Avg. Completion',avg('completionRate')+'%','Episodes watched to the end','completion'],
+      ['Followers Gained',totalFollowers.toLocaleString(),'Attributed to this series','followers'],
+      ['Episodes with Data',published.length,'Published or recorded','episodes']
+    ]:
+    [
+      ['总播放量',totalViews.toLocaleString(),'全部集数累计','views'],
+      ['平均30秒留存',avg('retention30')+'%','已记录集数的平均值','retention'],
+      ['平均观看时长',avg('avgWatchSeconds')+'秒','观众平均观看时间','watch'],
+      ['平均完播率',avg('completionRate')+'%','观看至结尾的比例','completion'],
+      ['新增粉丝',totalFollowers.toLocaleString(),'由本系列带来的粉丝','followers'],
+      ['已有数据集数',published.length,'已发布或已录入数据','episodes']
+    ];
+  const rows=items.map(x=>`<tr onclick="SharedEpisodes.open(${x.id})">
+    <td><span class="analytics-ep">EP${String(x.episodeNo).padStart(2,'0')}</span></td>
+    <td><strong>${esc(title(x))}</strong><small>${esc(x.publishDate|| (lang==='en'?'Not published':'尚未发布'))}</small></td>
+    <td class="num">${(+x.views||0).toLocaleString()}</td>
+    <td class="num">${+x.retention30||0}%</td>
+    <td class="num">${+x.avgWatchSeconds||0}${lang==='en'?'s':'秒'}</td>
+    <td class="num">${+x.completionRate||0}%</td>
+    <td class="num">${+x.followersGained||0}</td>
+    <td><button class="analytics-open-btn" onclick="event.stopPropagation();SharedEpisodes.open(${x.id})">${lang==='en'?'View':'查看'} <span>→</span></button></td>
+  </tr>`).join('');
+  return `<div class="analytics-kpi-grid">${kpis.map(k=>`<article class="analytics-kpi kpi-${k[3]}"><div><span>${k[0]}</span><strong>${k[1]}</strong><small>${k[2]}</small></div><i></i></article>`).join('')}</div>
+  <div class="analytics-section-head"><div><h4>${lang==='en'?'Episode Performance':'单集数据表现'}</h4><p>${lang==='en'?'Click an episode to enter or update its publishing data.':'点击任意集数，可录入或修改该集的发布数据。'}</p></div><span>${items.length} ${lang==='en'?'episodes':'集'}</span></div>
+  <div class="table-wrap analytics-table-wrap"><table class="analytics-table"><thead><tr><th>EP</th><th>${lang==='en'?'Episode':'集数标题'}</th><th>${lang==='en'?'Views':'播放量'}</th><th>${lang==='en'?'30s Ret.':'30秒留存'}</th><th>${lang==='en'?'Avg. Watch':'平均时长'}</th><th>${lang==='en'?'Completion':'完播率'}</th><th>${lang==='en'?'Followers':'新增粉丝'}</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+function renderCurrent(){const m=document.getElementById('unifiedEpisodeMount');if(!m)return;const t=text[lang];if(view==='season'){m.innerHTML=renderSeason();return;}if(view==='scripts'){m.innerHTML=`<div class="script-kanban unified-kanban">${scriptOrder.map(k=>{const g=items.filter(x=>x.scriptStatus===k);return `<section class="script-column status-${k}"><div class="script-column-head"><h4>${t.statuses[k]}</h4><span>${g.length}</span></div><div class="script-card-list">${g.map(x=>`<button class="script-card" onclick="SharedEpisodes.open(${x.id})"><strong>EP${String(x.episodeNo).padStart(2,'0')} · ${esc(title(x))}</strong><p>${esc(summary(x))}</p><div class="script-meta"><span>${x.version}</span><span>${esc(x.owner||'—')}</span>${templateBadge(x)}</div></button>`).join('')||'<div class="script-empty">—</div>'}</div></section>`}).join('')}</div>`;return;}if(view==='production'){m.innerHTML=renderProduction();return;}m.innerHTML=renderAnalytics();}
 function filterSeason(q,stage){const query=(q??document.getElementById('seasonSearch')?.value??'').toLowerCase(),st=stage??document.getElementById('seasonStage')?.value??'';document.querySelectorAll('#seasonGrid .episode-library-card').forEach((card,i)=>{const x=items[i];card.style.display=((!query||(`${x.episodeNo} ${title(x)}`).toLowerCase().includes(query))&&(!st||x.productionStage===st))?'':'none';});}
 function setProductionView(v,btn){productionView=v;document.querySelectorAll('.production-tabs button').forEach(b=>b.classList.remove('active'));btn?.classList.add('active');const el=document.getElementById('productionUnifiedView');if(el)el.innerHTML=v==='board'?productionBoard():v==='list'?productionList():productionCalendar();}
 function setProductionFilter(type,value){if(type==='query')productionQuery=value.toLowerCase();if(type==='owner')productionOwner=value;if(type==='priority')productionPriority=value;setProductionView(productionView);}
