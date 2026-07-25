@@ -1,41 +1,35 @@
-# 《同一个屋檐下》短剧创作与制作总部
+# Under One Roof — Short Drama HQ
 
-这是一个纯静态网站，可直接部署到 GitHub Pages 或 Cloudflare Pages。
+A bilingual internal creative and production website for the **Under One Roof** short-drama project.
 
-## 文件
+## Languages
 
-- `index.html`：网站结构
-- `styles.css`：视觉样式与响应式布局
-- `app.js`：页面内容、导航、第一季30集、灵感箱与交互
+- Chinese
+- English
 
-## 本地预览
+Use the language selector in the upper-right corner. The selected language is saved in the browser.
 
-直接打开 `index.html`，或在文件夹内运行：
+## Deployment
 
-```bash
-python3 -m http.server 8080
-```
+This is a static website. No framework, package installation, or build command is required.
 
-然后访问 `http://localhost:8080`。
+### Cloudflare Pages
 
-## GitHub Pages
+- Framework preset: `None`
+- Build command: leave blank
+- Build output directory: `/`
 
-1. 新建 GitHub repository。
-2. 上传全部文件到 repository 根目录。
-3. 进入 Settings → Pages。
-4. Source 选择 Deploy from a branch。
-5. Branch 选择 `main`，目录选择 `/root`。
+### GitHub Pages
 
-## Cloudflare Pages
+Upload all files to the repository root and publish from the `main` branch root directory.
 
-1. 登录 Cloudflare Dashboard。
-2. Workers & Pages → Create → Pages → Connect to Git。
-3. 选择对应 GitHub repository。
-4. Framework preset 选择 `None`。
-5. Build command 留空。
-6. Build output directory 填 `/`。
-7. 部署。
+## Files
 
-## 数据说明
+- `index.html` — shared site shell and language selector
+- `styles.css` — complete responsive styles
+- `app-zh.js` — complete Chinese content
+- `app-en.js` — complete English content
 
-“新增剧情灵感”会保存在当前浏览器的 localStorage 中，不会自动同步到其他成员设备。后续如需多人实时协作，可接入 Supabase、Firebase、Notion 或 Airtable。
+## Browser storage
+
+Ideas added through the idea form are saved locally in the current browser. Chinese and English idea data are stored separately.

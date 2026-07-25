@@ -129,3 +129,10 @@ tr:last-child td { border-bottom: 0; }
   .form-grid { grid-template-columns: 1fr; }
   .full { grid-column: auto; }
 }
+
+.language-switch{display:flex;align-items:center;padding:3px;border:1px solid var(--border);border-radius:10px;background:#fff;gap:2px}
+.language-btn{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:700;padding:7px 10px;border-radius:7px;cursor:pointer;white-space:nowrap}
+.language-btn:hover{background:var(--soft)}
+.language-btn.active{background:var(--navy);color:#fff}
+@media(max-width:900px){.top-actions{gap:6px}.language-btn{padding:6px 8px}.top-actions>.ghost-btn{display:none}}
+@media(max-width:620px){.language-switch{order:-1}.top-actions{flex-wrap:wrap;justify-content:flex-end}.language-btn{font-size:12px}}

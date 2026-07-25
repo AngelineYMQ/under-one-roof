@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="《同一个屋檐下》短剧内部创作与制作总部" />
-  <title>同一个屋檐下｜短剧创作与制作总部</title>
+  <meta id="metaDescription" name="description" content="《同一个屋檐下》短剧内部创作与制作总部" />
+  <title id="documentTitle">同一个屋檐下｜短剧创作与制作总部</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,14 +13,14 @@
       <div class="brand">
         <div class="brand-mark">屋</div>
         <div>
-          <h1>同一个屋檐下</h1>
+          <h1 id="brandName">同一个屋檐下</h1>
           <p>Short Drama HQ</p>
         </div>
       </div>
       <nav id="nav"></nav>
       <div class="sidebar-footer">
         <span class="status-dot"></span>
-        <span>第一季筹备中</span>
+        <span id="sidebarStatus">第一季筹备中</span>
       </div>
     </aside>
 
@@ -28,10 +28,14 @@
       <header class="topbar">
         <button class="menu-btn" id="menuBtn" aria-label="打开菜单">☰</button>
         <div>
-          <p class="eyebrow">内部创作与制作平台</p>
+          <p class="eyebrow" id="platformLabel">内部创作与制作平台</p>
           <h2 id="pageTitle">首页</h2>
         </div>
         <div class="top-actions">
+          <div class="language-switch" role="group" aria-label="Language selector">
+            <button class="language-btn" id="langZh" type="button">中文</button>
+            <button class="language-btn" id="langEn" type="button">English</button>
+          </div>
           <button class="ghost-btn" id="resetBtn">重置示例数据</button>
           <button class="primary-btn" id="addIdeaBtn">＋ 新增灵感</button>
         </div>
@@ -44,22 +48,82 @@
     <div class="modal-card">
       <div class="modal-header">
         <div>
-          <p class="eyebrow">灵感箱</p>
-          <h3>新增剧情灵感</h3>
+          <p class="eyebrow" id="modalEyebrow">灵感箱</p>
+          <h3 id="modalTitle">新增剧情灵感</h3>
         </div>
         <button class="icon-btn" data-close-modal>×</button>
       </div>
       <form id="ideaForm" class="form-grid">
-        <label>标题<input name="title" required placeholder="例如：房东发现租客偷偷开空调" /></label>
-        <label>分类<select name="category"><option>合租生活</option><option>新加坡文化</option><option>中国人初到新加坡</option><option>三人关系</option><option>节日和热点</option></select></label>
-        <label class="full">一句话剧情<textarea name="summary" required placeholder="谁想做什么，谁阻止，最后如何反转"></textarea></label>
-        <label>主要角色<select name="lead"><option>James</option><option>Angeline</option><option>Joseph</option><option>三人</option></select></label>
-        <label>场景<select name="scene"><option>客厅</option><option>厨房</option><option>门口</option><option>楼下</option><option>外景</option></select></label>
-        <div class="modal-actions full"><button type="button" class="ghost-btn" data-close-modal>取消</button><button class="primary-btn" type="submit">保存灵感</button></div>
+        <label><span id="labelTitle">标题</span><input name="title" required id="ideaTitle" placeholder="例如：房东发现租客偷偷开空调" /></label>
+        <label><span id="labelCategory">分类</span><select name="category" id="categorySelect"></select></label>
+        <label class="full"><span id="labelSummary">一句话剧情</span><textarea name="summary" required id="ideaSummary" placeholder="谁想做什么，谁阻止，最后如何反转"></textarea></label>
+        <label><span id="labelLead">主要角色</span><select name="lead" id="leadSelect"></select></label>
+        <label><span id="labelScene">场景</span><select name="scene" id="sceneSelect"></select></label>
+        <div class="modal-actions full"><button type="button" class="ghost-btn" data-close-modal id="cancelBtn">取消</button><button class="primary-btn" type="submit" id="saveIdeaBtn">保存灵感</button></div>
       </form>
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const savedLanguage = localStorage.getItem('roofLanguage');
+    const currentLanguage = params.get('lang') || savedLanguage || 'zh';
+    const isEnglish = currentLanguage === 'en';
+    document.documentElement.lang = isEnglish ? 'en' : 'zh-CN';
+
+    const shellText = isEnglish ? {
+      title: 'Under One Roof | Short Drama Creative & Production HQ',
+      description: 'Internal creative and production headquarters for the Under One Roof short-drama series.',
+      brand: 'Under One Roof', status: 'Season 1 in Pre-production', platform: 'Internal Creative & Production Platform',
+      reset: 'Reset Demo Data', add: '+ Add Idea', modalEyebrow: 'Idea Box', modalTitle: 'Add Story Idea',
+      labelTitle: 'Title', titlePlaceholder: 'Example: The landlord catches a tenant secretly using the air-conditioner',
+      labelCategory: 'Category', labelSummary: 'One-line Story', summaryPlaceholder: 'Who wants what, who stops them, and what is the final twist',
+      labelLead: 'Lead Character', labelScene: 'Scene', cancel: 'Cancel', save: 'Save Idea', menu: 'Open Menu',
+      categories: ['Shared Living','Singapore Culture','Newcomers from China','The Trio’s Relationships','Festivals & Trends'],
+      leads: ['James','Angeline','Joseph','All Three'], scenes: ['Living Room','Kitchen','Entrance','Downstairs','Outdoor Location']
+    } : {
+      title: '同一个屋檐下｜短剧创作与制作总部', description: '《同一个屋檐下》短剧内部创作与制作总部',
+      brand: '同一个屋檐下', status: '第一季筹备中', platform: '内部创作与制作平台', reset: '重置示例数据', add: '＋ 新增灵感',
+      modalEyebrow: '灵感箱', modalTitle: '新增剧情灵感', labelTitle: '标题', titlePlaceholder: '例如：房东发现租客偷偷开空调',
+      labelCategory: '分类', labelSummary: '一句话剧情', summaryPlaceholder: '谁想做什么，谁阻止，最后如何反转', labelLead: '主要角色', labelScene: '场景',
+      cancel: '取消', save: '保存灵感', menu: '打开菜单', categories: ['合租生活','新加坡文化','中国人初到新加坡','三人关系','节日和热点'],
+      leads: ['James','Angeline','Joseph','三人'], scenes: ['客厅','厨房','门口','楼下','外景']
+    };
+
+    document.title = shellText.title;
+    document.getElementById('metaDescription').content = shellText.description;
+    document.getElementById('brandName').textContent = shellText.brand;
+    document.getElementById('sidebarStatus').textContent = shellText.status;
+    document.getElementById('platformLabel').textContent = shellText.platform;
+    document.getElementById('resetBtn').textContent = shellText.reset;
+    document.getElementById('addIdeaBtn').textContent = shellText.add;
+    document.getElementById('modalEyebrow').textContent = shellText.modalEyebrow;
+    document.getElementById('modalTitle').textContent = shellText.modalTitle;
+    document.getElementById('labelTitle').textContent = shellText.labelTitle;
+    document.getElementById('ideaTitle').placeholder = shellText.titlePlaceholder;
+    document.getElementById('labelCategory').textContent = shellText.labelCategory;
+    document.getElementById('labelSummary').textContent = shellText.labelSummary;
+    document.getElementById('ideaSummary').placeholder = shellText.summaryPlaceholder;
+    document.getElementById('labelLead').textContent = shellText.labelLead;
+    document.getElementById('labelScene').textContent = shellText.labelScene;
+    document.getElementById('cancelBtn').textContent = shellText.cancel;
+    document.getElementById('saveIdeaBtn').textContent = shellText.save;
+    document.getElementById('menuBtn').setAttribute('aria-label', shellText.menu);
+    document.getElementById('categorySelect').innerHTML = shellText.categories.map(v => `<option>${v}</option>`).join('');
+    document.getElementById('leadSelect').innerHTML = shellText.leads.map(v => `<option>${v}</option>`).join('');
+    document.getElementById('sceneSelect').innerHTML = shellText.scenes.map(v => `<option>${v}</option>`).join('');
+    document.getElementById(isEnglish ? 'langEn' : 'langZh').classList.add('active');
+    function switchLanguage(lang){
+      localStorage.setItem('roofLanguage', lang);
+      const url = new URL(location.href);
+      url.searchParams.set('lang', lang);
+      location.href = url.toString();
+    }
+    document.getElementById('langZh').onclick = () => switchLanguage('zh');
+    document.getElementById('langEn').onclick = () => switchLanguage('en');
+    const appScript = document.createElement('script');
+    appScript.src = isEnglish ? 'app-en.js' : 'app-zh.js';
+    document.body.appendChild(appScript);
+  </script>
 </body>
 </html>
