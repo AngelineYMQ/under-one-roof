@@ -8,10 +8,194 @@ const text={zh:{season:'第一季：新租客来了',seasonSub:'30集共用同�
 const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 const title=x=>lang==='en'?(x.titleEn||x.titleZh):(x.titleZh||x.titleEn);
 const summary=x=>lang==='en'?(x.summaryEn||x.summaryZh):(x.summaryZh||x.summaryEn);
-async function load(){let remote=[];try{const r=await fetch('/api/episodes',{cache:'no-store'});if(r.ok){const d=await r.json();remote=d.episodes||[];}}catch(e){}const local=JSON.parse(localStorage.getItem('uorEpisodes')||'[]');items=remote.length?remote:(local.length?local:DEFAULT_EPISODES.map(x=>({...x})));loaded=true;setLocal();renderCurrent();if(!remote.length){try{await fetch('/api/episodes',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({episodes:items})});}catch(e){}}}
+const EP01_DETAILED_ZH=`EP01《富二代租了最小的房间》
+
+目标时长：5–6分钟
+主要场景：James家客厅、房间门口
+主要人物：James、Angeline、Joseph
+道具：八个行李箱、手机、钥匙、租约、卷尺
+
+【场景1｜客厅／白天｜0:00–0:35】
+门铃连续响。James开门，先看到一个行李箱，再看到第二个、第三个。镜头慢慢拉开，门外排着八个行李箱。
+
+ANGELINE（站在行李后面）：你好，我来入住。
+JAMES：你是搬家，还是把中国的家搬过来？
+JOSEPH（拿手机开始拍）：不要动，这个开场很好。
+ANGELINE：你在拍什么？
+JOSEPH：记录富二代第一次独立生活。
+ANGELINE：谁告诉你我是富二代？
+JOSEPH：正常留学生不会带八个箱子。
+
+【场景2｜房间门口｜0:35–1:25】
+James把钥匙交给Angeline，指向一扇小门。Angeline打开门，停住。
+
+ANGELINE：我的房间在哪里？
+JAMES：就在你面前。
+ANGELINE：我问的是房间，不是储物间。
+JAMES：这是新加坡正常的普通房。
+ANGELINE（拿出手机）：照片里明明很大，还有一张桌子、一张床、一个衣柜。
+JAMES：都有。
+ANGELINE：它们怎么可能同时放进去？
+JAMES：摄影角度。
+JOSEPH：他做房地产的，角度是专业能力。
+
+【场景3｜客厅｜1:25–2:25】
+Angeline把手机里的房源照片放大，与现实房间反复对比。
+
+ANGELINE：这个窗户在照片里有这么宽。
+JAMES：广角镜头。
+ANGELINE：这个走道看起来能放一张沙发。
+JAMES：广角镜头。
+ANGELINE：连天花板都高很多。
+JAMES：拍摄的人比较矮。
+JOSEPH（笑）：这个解释可以剪进广告教学。
+ANGELINE：我要退租。
+JAMES：可以。按照租约，提前退租，押金不退，还需要承担找到新租客前的租金。
+ANGELINE：多少钱？
+JAMES：两个月押金，加上可能的空置期。
+ANGELINE（沉默两秒）：其实小房间比较有安全感。
+
+【场景4｜客厅｜2:25–3:35】
+Joseph问她为什么家里有钱还要租房间。
+
+JOSEPH：认真问，你这么有钱，为什么不直接租整套？
+ANGELINE：我要证明我可以独立生活。
+JAMES：所以你独立签了一份没有现场看房的一年租约。
+ANGELINE：我做决定很快。
+JAMES：这不是快，这是跳过检查。
+ANGELINE：我至少没有靠家里。
+此时Angeline手机响，来电显示“妈妈”。她立刻把手机扣在桌上。
+JOSEPH：不接？
+ANGELINE：她会问房子怎么样。
+JAMES：你可以说很温馨。
+JOSEPH：或者说步行三步可以到达房间任何位置。
+
+【场景5｜房间门口／客厅｜3:35–4:50】
+三个人尝试把八个行李箱塞进房间。第一只进去后，门已经无法完全打开。
+
+JAMES：最多放两个。
+ANGELINE：剩下六个放客厅。
+JAMES：客厅是公共区域。
+JOSEPH：可以把箱子叠起来做背景墙，我拍视频用。
+JAMES：不可以。
+ANGELINE：那我付客厅租金。
+JAMES：这不是钱的问题。
+ANGELINE：在我以前的经验里，大部分问题最后都是钱的问题。
+JAMES：欢迎来到新加坡。有些问题是规则问题。
+
+【场景6｜客厅｜4:50–5:45】
+Angeline最终决定只打开两个行李箱，其余寄存。Joseph仍在拍。
+
+ANGELINE：好，我住。但我要改造房间。
+JAMES：不能钉墙，不能换锁，不能拆家具。
+ANGELINE：那我能做什么？
+JAMES：住。
+JOSEPH：这句话适合当片尾。
+ANGELINE看向镜头：把刚才那段删掉。
+JOSEPH：已经自动上传云端了。
+ANGELINE追过去，James站在原地看着满客厅行李箱。
+JAMES（对自己）：我应该把押金收三个月。
+
+【片尾钩子】
+James拿出一张“房屋规则”清单。
+JAMES：入住前，还有二十条规则要讲。
+ANGELINE：二十条？
+切黑，出现：下一集《房东的二十条规则》。`;
+const EP01_DETAILED_EN=`EP01 “The Wealthy Student Rents the Smallest Room”
+
+Target duration: 5–6 minutes
+Main locations: James’s living room and bedroom doorway
+Characters: James, Angeline, Joseph
+Props: eight suitcases, phone, keys, tenancy agreement, measuring tape
+
+[SCENE 1 — LIVING ROOM / DAY — 0:00–0:35]
+The doorbell rings repeatedly. James opens the door and sees one suitcase, then another, then six more.
+
+ANGELINE: Hi. I’m here to move in.
+JAMES: Are you moving in, or moving your entire home from China?
+JOSEPH (already filming): Don’t move. This opening is excellent.
+ANGELINE: Why are you filming me?
+JOSEPH: Documenting a wealthy student’s first independent life.
+ANGELINE: Who said I’m wealthy?
+JOSEPH: Normal students do not arrive with eight suitcases.
+
+[SCENE 2 — BEDROOM DOORWAY — 0:35–1:25]
+James hands her the key and points to a small door. Angeline opens it and freezes.
+
+ANGELINE: Where is my room?
+JAMES: Right in front of you.
+ANGELINE: I asked for the room, not the storeroom.
+JAMES: This is a normal common room in Singapore.
+ANGELINE (showing her phone): It looked huge in the photos.
+JAMES: Camera angle.
+JOSEPH: He works in property. Angles are a professional skill.
+
+[SCENE 3 — LIVING ROOM — 1:25–2:25]
+Angeline compares every listing photo with the real room.
+
+ANGELINE: This window looked twice as wide.
+JAMES: Wide-angle lens.
+ANGELINE: The walkway looked large enough for a sofa.
+JAMES: Wide-angle lens.
+ANGELINE: Even the ceiling looked higher.
+JAMES: The photographer was shorter.
+ANGELINE: I want to cancel.
+JAMES: You can. You lose the deposit and remain liable until a replacement tenant is found.
+ANGELINE: How much?
+JAMES: Two months’ deposit, possibly more.
+ANGELINE (after a pause): Small rooms feel safer anyway.
+
+[SCENE 4 — LIVING ROOM — 2:25–3:35]
+Joseph asks the obvious question.
+
+JOSEPH: If your family has money, why not rent the whole unit?
+ANGELINE: I came here to prove I can live independently.
+JAMES: So you independently signed a one-year lease without viewing the room.
+ANGELINE: I make decisions quickly.
+JAMES: That is not speed. That is skipping checks.
+Her phone rings. Caller ID: “Mum.” She turns it face-down.
+JOSEPH: Not answering?
+ANGELINE: She will ask how the apartment is.
+JAMES: Tell her it is cosy.
+JOSEPH: Tell her every part of the room is within three steps.
+
+[SCENE 5 — BEDROOM DOORWAY / LIVING ROOM — 3:35–4:50]
+They try to fit the luggage into the room. After one suitcase goes in, the door barely opens.
+
+JAMES: Two suitcases maximum.
+ANGELINE: The other six can stay in the living room.
+JAMES: The living room is a shared area.
+JOSEPH: We can stack them as a content backdrop.
+JAMES: No.
+ANGELINE: I can pay extra for the living room.
+JAMES: This is not a money issue.
+ANGELINE: In my experience, most problems eventually become money issues.
+JAMES: Welcome to Singapore. Some problems are rule issues.
+
+[SCENE 6 — LIVING ROOM — 4:50–5:45]
+Angeline agrees to keep only two suitcases and store the rest elsewhere.
+
+ANGELINE: Fine. I will stay, but I am redesigning the room.
+JAMES: No drilling, no changing locks, no removing furniture.
+ANGELINE: Then what am I allowed to do?
+JAMES: Live in it.
+JOSEPH: That is the ending line.
+ANGELINE: Delete everything you filmed.
+JOSEPH: It has already synced to the cloud.
+Angeline chases him. James looks at the luggage filling his living room.
+JAMES (to himself): I should have charged three months’ deposit.
+
+[END TAG]
+James holds up a printed list.
+JAMES: Before you settle in, there are twenty house rules.
+ANGELINE: Twenty?
+CUT TO BLACK: Next episode — “The Landlord’s Twenty Rules.”`;
+async function load(){let remote=[];try{const r=await fetch('/api/episodes',{cache:'no-store'});if(r.ok){const d=await r.json();remote=d.episodes||[];}}catch(e){}const local=JSON.parse(localStorage.getItem('uorEpisodes')||'[]');items=remote.length?remote:(local.length?local:DEFAULT_EPISODES.map(x=>({...x})));const ep1=items.find(x=>x.episodeNo===1);if(ep1&&(!ep1.scriptZh||ep1.scriptZh.includes('以人物正在做的事情直接建立异常状况'))){ep1.scriptZh=EP01_DETAILED_ZH;ep1.scriptEn=EP01_DETAILED_EN;ep1.version='v0.2';try{fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(ep1)});}catch(e){}}loaded=true;setLocal();renderCurrent();if(!remote.length){try{await fetch('/api/episodes',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({episodes:items})});}catch(e){}}}
 function setLocal(){localStorage.setItem('uorEpisodes',JSON.stringify(items));}
 async function saveEpisode(e){e.preventDefault();const f=new FormData(e.target),id=+f.get('id'),old=items.find(x=>x.id===id)||{};const payload={...old,id,titleZh:f.get('titleZh'),titleEn:f.get('titleEn'),categoryZh:f.get('categoryZh'),categoryEn:f.get('categoryEn'),summaryZh:f.get('summaryZh'),summaryEn:f.get('summaryEn'),scriptStatus:f.get('scriptStatus'),productionStage:f.get('productionStage'),owner:f.get('owner'),priority:f.get('priority'),shootDate:f.get('shootDate'),publishDate:f.get('publishDate'),progress:+f.get('progress')||0,openIssues:f.get('openIssues'),version:f.get('version'),scriptZh:f.get('scriptZh'),scriptEn:f.get('scriptEn'),culturePointZh:f.get('culturePointZh'),culturePointEn:f.get('culturePointEn'),views:+f.get('views')||0,retention30:+f.get('retention30')||0,retention60:+f.get('retention60')||0,avgWatchSeconds:+f.get('avgWatchSeconds')||0,completionRate:+f.get('completionRate')||0,nextEpisodeRate:+f.get('nextEpisodeRate')||0,followersGained:+f.get('followersGained')||0,topComment:f.get('topComment')};try{const r=await fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw 0;const d=await r.json();Object.assign(old,d.episode)}catch{Object.assign(old,payload)}setLocal();close();renderCurrent();}
-function open(id){const x=items.find(y=>y.id===id);if(!x)return;const t=text[lang];const modal=document.getElementById('episodeModal');document.getElementById('episodeModalEyebrow').textContent=`EP${String(x.episodeNo).padStart(2,'0')} · ${t.stages[x.productionStage]}`;document.getElementById('episodeModalTitle').textContent=t.edit;document.getElementById('episodeModalBody').innerHTML=`<form id="unifiedEpisodeForm" class="unified-episode-form"><input type="hidden" name="id" value="${x.id}"><div class="ue-tabs"><span>${t.scripts}</span><span>${t.production}</span><span>${t.analytics}</span></div><div class="form-grid"><label><span>中文标题</span><input name="titleZh" value="${esc(x.titleZh)}"></label><label><span>English Title</span><input name="titleEn" value="${esc(x.titleEn)}"></label><label><span>中文分类</span><input name="categoryZh" value="${esc(x.categoryZh)}"></label><label><span>English Category</span><input name="categoryEn" value="${esc(x.categoryEn)}"></label><label class="full"><span>中文简介</span><textarea name="summaryZh">${esc(x.summaryZh)}</textarea></label><label class="full"><span>English Summary</span><textarea name="summaryEn">${esc(x.summaryEn)}</textarea></label><label><span>${lang==='en'?'Script Status':'剧本状态'}</span><select name="scriptStatus">${scriptOrder.map(k=>`<option value="${k}" ${x.scriptStatus===k?'selected':''}>${t.statuses[k]}</option>`).join('')}</select></label><label><span>${lang==='en'?'Production Stage':'制作阶段'}</span><select name="productionStage">${stageOrder.map(k=>`<option value="${k}" ${x.productionStage===k?'selected':''}>${t.stages[k]}</option>`).join('')}</select></label><label><span>${lang==='en'?'Owner':'负责人'}</span><input name="owner" value="${esc(x.owner)}"></label><label><span>${lang==='en'?'Priority':'优先级'}</span><select name="priority">${['high','medium','low'].map(k=>`<option value="${k}" ${x.priority===k?'selected':''}>${t.priority[k]}</option>`).join('')}</select></label><label><span>${lang==='en'?'Shoot Date':'拍摄日期'}</span><input type="date" name="shootDate" value="${esc(x.shootDate)}"></label><label><span>${lang==='en'?'Publish Date':'发布日期'}</span><input type="date" name="publishDate" value="${esc(x.publishDate)}"></label><label><span>${lang==='en'?'Progress %':'完成度 %'}</span><input type="number" min="0" max="100" name="progress" value="${x.progress||0}"></label><label><span>${lang==='en'?'Version':'版本'}</span><input name="version" value="${esc(x.version)}"></label><label class="full"><span>${lang==='en'?'Open Issues':'待处理事项'}</span><textarea name="openIssues">${esc(x.openIssues)}</textarea></label><label class="full"><span>中文完整脚本</span><textarea rows="10" name="scriptZh">${esc(x.scriptZh)}</textarea></label><label class="full"><span>English Full Script</span><textarea rows="10" name="scriptEn">${esc(x.scriptEn)}</textarea></label><label class="full"><span>中文文化点</span><textarea name="culturePointZh">${esc(x.culturePointZh)}</textarea></label><label class="full"><span>English Cultural Point</span><textarea name="culturePointEn">${esc(x.culturePointEn)}</textarea></label><label><span>Views</span><input type="number" name="views" value="${x.views||0}"></label><label><span>30s Retention %</span><input type="number" step="0.1" name="retention30" value="${x.retention30||0}"></label><label><span>60s Retention %</span><input type="number" step="0.1" name="retention60" value="${x.retention60||0}"></label><label><span>Avg Watch (sec)</span><input type="number" step="0.1" name="avgWatchSeconds" value="${x.avgWatchSeconds||0}"></label><label><span>Completion %</span><input type="number" step="0.1" name="completionRate" value="${x.completionRate||0}"></label><label><span>Next Episode %</span><input type="number" step="0.1" name="nextEpisodeRate" value="${x.nextEpisodeRate||0}"></label><label><span>Followers Gained</span><input type="number" name="followersGained" value="${x.followersGained||0}"></label><label class="full"><span>Top Comment</span><textarea name="topComment">${esc(x.topComment)}</textarea></label></div><div class="modal-actions"><button type="button" class="ghost-btn" onclick="SharedEpisodes.close()">${t.cancel}</button><button class="primary-btn">${t.save}</button></div></form>`;document.getElementById('unifiedEpisodeForm').onsubmit=saveEpisode;modal.classList.add('open');modal.setAttribute('aria-hidden','false');}
+function scriptHtml(value){return `<div class="screenplay-view">${esc(value||'').split(/\n/).map(line=>{const t=line.trim();if(!t)return '<div class="script-spacer"></div>';if(/^【.*】$/.test(t)||/^\[.*\]$/.test(t))return `<h5>${esc(t)}</h5>`;if(/^(ANGELINE|JAMES|JOSEPH|旁白|画外音)[（(:]/i.test(t)||/^(ANGELINE|JAMES|JOSEPH):/i.test(t))return `<p class="dialogue-line">${esc(line)}</p>`;return `<p>${esc(line)}</p>`;}).join('')}</div>`;}
+function open(id){const x=items.find(y=>y.id===id);if(!x)return;const t=text[lang],modal=document.getElementById('episodeModal');document.getElementById('episodeModalEyebrow').textContent=`EP${String(x.episodeNo).padStart(2,'0')} · ${t.stages[x.productionStage]}`;document.getElementById('episodeModalTitle').textContent=title(x);const currentScript=lang==='en'?(x.scriptEn||x.scriptZh):(x.scriptZh||x.scriptEn);document.getElementById('episodeModalBody').innerHTML=`<div class="episode-detail-view"><div class="episode-detail-actions"><div class="episode-status-line"><span class="stage-pill stage-${x.productionStage}">${t.stages[x.productionStage]}</span><span>${t.statuses[x.scriptStatus]}</span><span>${esc(x.version)}</span></div><button class="primary-btn" onclick="SharedEpisodes.edit(${x.id})">${lang==='en'?'Edit all details':'编辑全部资料'}</button></div><div class="episode-detail-grid"><section><small>${lang==='en'?'Story Summary':'剧情简介'}</small><p>${esc(summary(x))}</p></section><section><small>${lang==='en'?'Production':'制作资料'}</small><p>${lang==='en'?'Owner':'负责人'}：${esc(x.owner||'—')}<br>${lang==='en'?'Shoot date':'拍摄日期'}：${esc(x.shootDate||'—')}<br>${lang==='en'?'Progress':'完成度'}：${x.progress||0}%</p></section><section><small>${lang==='en'?'Cultural Point':'新加坡文化点'}</small><p>${esc(lang==='en'?(x.culturePointEn||x.culturePointZh):(x.culturePointZh||x.culturePointEn))}</p></section></div><div class="script-section-head"><div><h4>${lang==='en'?'Full Scene-by-Scene Script':'完整分场剧本'}</h4><p>${lang==='en'?'Scene headings, action, dialogue and ending tag.':'包括场次、动作、对白、高潮与片尾钩子。'}</p></div><button class="ghost-btn" onclick="SharedEpisodes.edit(${x.id},'script')">${lang==='en'?'Edit Script':'编辑剧本'}</button></div>${scriptHtml(currentScript)}</div>`;modal.classList.add('open');modal.setAttribute('aria-hidden','false');}
+function edit(id,focus){const x=items.find(y=>y.id===id);if(!x)return;const t=text[lang];const modal=document.getElementById('episodeModal');document.getElementById('episodeModalEyebrow').textContent=`EP${String(x.episodeNo).padStart(2,'0')} · ${t.stages[x.productionStage]}`;document.getElementById('episodeModalTitle').textContent=t.edit;document.getElementById('episodeModalBody').innerHTML=`<form id="unifiedEpisodeForm" class="unified-episode-form"><input type="hidden" name="id" value="${x.id}"><div class="ue-tabs"><span>${t.scripts}</span><span>${t.production}</span><span>${t.analytics}</span></div><div class="form-grid"><label><span>中文标题</span><input name="titleZh" value="${esc(x.titleZh)}"></label><label><span>English Title</span><input name="titleEn" value="${esc(x.titleEn)}"></label><label><span>中文分类</span><input name="categoryZh" value="${esc(x.categoryZh)}"></label><label><span>English Category</span><input name="categoryEn" value="${esc(x.categoryEn)}"></label><label class="full"><span>中文简介</span><textarea name="summaryZh">${esc(x.summaryZh)}</textarea></label><label class="full"><span>English Summary</span><textarea name="summaryEn">${esc(x.summaryEn)}</textarea></label><label><span>${lang==='en'?'Script Status':'剧本状态'}</span><select name="scriptStatus">${scriptOrder.map(k=>`<option value="${k}" ${x.scriptStatus===k?'selected':''}>${t.statuses[k]}</option>`).join('')}</select></label><label><span>${lang==='en'?'Production Stage':'制作阶段'}</span><select name="productionStage">${stageOrder.map(k=>`<option value="${k}" ${x.productionStage===k?'selected':''}>${t.stages[k]}</option>`).join('')}</select></label><label><span>${lang==='en'?'Owner':'负责人'}</span><input name="owner" value="${esc(x.owner)}"></label><label><span>${lang==='en'?'Priority':'优先级'}</span><select name="priority">${['high','medium','low'].map(k=>`<option value="${k}" ${x.priority===k?'selected':''}>${t.priority[k]}</option>`).join('')}</select></label><label><span>${lang==='en'?'Shoot Date':'拍摄日期'}</span><input type="date" name="shootDate" value="${esc(x.shootDate)}"></label><label><span>${lang==='en'?'Publish Date':'发布日期'}</span><input type="date" name="publishDate" value="${esc(x.publishDate)}"></label><label><span>${lang==='en'?'Progress %':'完成度 %'}</span><input type="number" min="0" max="100" name="progress" value="${x.progress||0}"></label><label><span>${lang==='en'?'Version':'版本'}</span><input name="version" value="${esc(x.version)}"></label><label class="full"><span>${lang==='en'?'Open Issues':'待处理事项'}</span><textarea name="openIssues">${esc(x.openIssues)}</textarea></label><label class="full script-editor-field"><span>中文完整分场剧本</span><textarea rows="24" name="scriptZh">${esc(x.scriptZh)}</textarea></label><label class="full script-editor-field"><span>English Full Scene-by-Scene Script</span><textarea rows="24" name="scriptEn">${esc(x.scriptEn)}</textarea></label><label class="full"><span>中文文化点</span><textarea name="culturePointZh">${esc(x.culturePointZh)}</textarea></label><label class="full"><span>English Cultural Point</span><textarea name="culturePointEn">${esc(x.culturePointEn)}</textarea></label><label><span>Views</span><input type="number" name="views" value="${x.views||0}"></label><label><span>30s Retention %</span><input type="number" step="0.1" name="retention30" value="${x.retention30||0}"></label><label><span>60s Retention %</span><input type="number" step="0.1" name="retention60" value="${x.retention60||0}"></label><label><span>Avg Watch (sec)</span><input type="number" step="0.1" name="avgWatchSeconds" value="${x.avgWatchSeconds||0}"></label><label><span>Completion %</span><input type="number" step="0.1" name="completionRate" value="${x.completionRate||0}"></label><label><span>Next Episode %</span><input type="number" step="0.1" name="nextEpisodeRate" value="${x.nextEpisodeRate||0}"></label><label><span>Followers Gained</span><input type="number" name="followersGained" value="${x.followersGained||0}"></label><label class="full"><span>Top Comment</span><textarea name="topComment">${esc(x.topComment)}</textarea></label></div><div class="modal-actions"><button type="button" class="ghost-btn" onclick="SharedEpisodes.open(${x.id})">${lang==='en'?'Back to script':'返回剧本'}</button><button class="primary-btn">${t.save}</button></div></form>`;document.getElementById('unifiedEpisodeForm').onsubmit=saveEpisode;modal.classList.add('open');modal.setAttribute('aria-hidden','false');if(focus)setTimeout(()=>document.querySelector('[name="scriptZh"]')?.scrollIntoView({behavior:'smooth',block:'center'}),60);}
 function close(){const m=document.getElementById('episodeModal');m.classList.remove('open');m.setAttribute('aria-hidden','true');}
 function episodeCard(x){
  const t=text[lang];
@@ -41,4 +225,4 @@ function renderCurrent(){const m=document.getElementById('unifiedEpisodeMount');
 function filterSeason(q,stage){const query=(q??document.getElementById('seasonSearch')?.value??'').toLowerCase(),st=stage??document.getElementById('seasonStage')?.value??'';document.querySelectorAll('#seasonGrid .episode-library-card').forEach((card,i)=>{const x=items[i];card.style.display=((!query||(`${x.episodeNo} ${title(x)}`).toLowerCase().includes(query))&&(!st||x.productionStage===st))?'':'none';});}
 function setProductionView(v,btn){productionView=v;document.querySelectorAll('.production-tabs button').forEach(b=>b.classList.remove('active'));btn?.classList.add('active');const el=document.getElementById('productionUnifiedView');if(el)el.innerHTML=v==='board'?productionBoard():v==='list'?productionList():productionCalendar();}
 function setProductionFilter(type,value){if(type==='query')productionQuery=value.toLowerCase();if(type==='owner')productionOwner=value;if(type==='priority')productionPriority=value;setProductionView(productionView);}
-return{seasonPage,scriptsPage,productionPage,analyticsPage,open,close,filterSeason,setProductionView,setProductionFilter};})();
+return{seasonPage,scriptsPage,productionPage,analyticsPage,open,edit,close,filterSeason,setProductionView,setProductionFilter};})();

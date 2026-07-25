@@ -68,3 +68,6 @@ The Team Members API now automatically creates the three core members (James, An
 
 ## v26 Data Preservation
 The 30 Season 1 episodes and all production metadata from v24 are embedded as a safe fallback and are also automatically seeded into D1. Empty database/API errors will no longer blank the Script Center or Production Progress pages.
+
+## v31
+Episode cards now open a readable scene-by-scene screenplay view first. The full record remains editable through “编辑全部资料 / Edit all details”. EP01 includes a complete sample screenplay and is upgraded automatically when the previous generic outline is detected.
