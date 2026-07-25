@@ -28,3 +28,21 @@ CREATE TABLE IF NOT EXISTS schedules (
  id INTEGER PRIMARY KEY AUTOINCREMENT,date TEXT NOT NULL DEFAULT '',call_time TEXT NOT NULL DEFAULT '',start_time TEXT NOT NULL DEFAULT '',end_time TEXT NOT NULL DEFAULT '',location TEXT NOT NULL DEFAULT '',episodes TEXT NOT NULL DEFAULT '',cast TEXT NOT NULL DEFAULT '',crew TEXT NOT NULL DEFAULT '',owner TEXT NOT NULL DEFAULT '',status TEXT NOT NULL DEFAULT 'planning',issues TEXT NOT NULL DEFAULT '',timeline TEXT NOT NULL DEFAULT '',wardrobe_props TEXT NOT NULL DEFAULT '',notes TEXT NOT NULL DEFAULT ''
 );
 CREATE INDEX IF NOT EXISTS idx_schedules_date ON schedules(date);
+
+CREATE TABLE IF NOT EXISTS team_members (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  role_zh TEXT NOT NULL DEFAULT '',
+  role_en TEXT NOT NULL DEFAULT '',
+  responsibilities_zh TEXT NOT NULL DEFAULT '',
+  responsibilities_en TEXT NOT NULL DEFAULT '',
+  contact TEXT NOT NULL DEFAULT '',
+  member_type TEXT NOT NULL DEFAULT 'permanent',
+  status TEXT NOT NULL DEFAULT 'active',
+  is_core INTEGER NOT NULL DEFAULT 0,
+  permissions TEXT NOT NULL DEFAULT 'view',
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  joined_at TEXT NOT NULL DEFAULT '',
+  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_team_members_order ON team_members(is_core DESC, sort_order ASC);
