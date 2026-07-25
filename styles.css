@@ -588,3 +588,4 @@ input, textarea, select { padding: 9px 10px; font-size: 12px; }
     font-size:10px;
   }
 }
+.unified-episode-form{display:block}.ue-tabs{display:flex;gap:8px;margin-bottom:14px}.ue-tabs span{padding:6px 10px;border-radius:999px;background:#eef2f7;font-size:12px;font-weight:700}.unified-kanban{grid-template-columns:repeat(5,minmax(220px,1fr));overflow-x:auto}.unified-prod{overflow-x:auto}.unified-card{cursor:pointer}.unified-card:hover,.prod-card:hover,.script-card:hover{transform:translateY(-2px)}.stage-outline{border-top-color:#8b5cf6}.stage-writing{border-top-color:#3b82f6}.stage-locked{border-top-color:#06b6d4}.stage-shoot{border-top-color:#eab308}.stage-filmed{border-top-color:#f97316}.stage-post{border-top-color:#d946ef}.stage-publish{border-top-color:#22c55e}@media(max-width:760px){.unified-kanban{display:flex}.unified-kanban .script-column{min-width:82vw}.unified-episode-form .form-grid{grid-template-columns:1fr}}

@@ -46,3 +46,40 @@ CREATE TABLE IF NOT EXISTS team_members (
   updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_team_members_order ON team_members(is_core DESC, sort_order ASC);
+
+
+CREATE TABLE IF NOT EXISTS episodes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  episode_no INTEGER NOT NULL UNIQUE,
+  title_zh TEXT NOT NULL DEFAULT '',
+  title_en TEXT NOT NULL DEFAULT '',
+  category_zh TEXT NOT NULL DEFAULT '',
+  category_en TEXT NOT NULL DEFAULT '',
+  summary_zh TEXT NOT NULL DEFAULT '',
+  summary_en TEXT NOT NULL DEFAULT '',
+  script_status TEXT NOT NULL DEFAULT 'idea',
+  production_stage TEXT NOT NULL DEFAULT 'outline',
+  owner TEXT NOT NULL DEFAULT '',
+  priority TEXT NOT NULL DEFAULT 'medium',
+  shoot_date TEXT NOT NULL DEFAULT '',
+  publish_date TEXT NOT NULL DEFAULT '',
+  progress INTEGER NOT NULL DEFAULT 0,
+  open_issues TEXT NOT NULL DEFAULT '',
+  version TEXT NOT NULL DEFAULT 'v0.1',
+  script_zh TEXT NOT NULL DEFAULT '',
+  script_en TEXT NOT NULL DEFAULT '',
+  culture_point_zh TEXT NOT NULL DEFAULT '',
+  culture_point_en TEXT NOT NULL DEFAULT '',
+  views INTEGER NOT NULL DEFAULT 0,
+  retention_30 REAL NOT NULL DEFAULT 0,
+  retention_60 REAL NOT NULL DEFAULT 0,
+  avg_watch_seconds REAL NOT NULL DEFAULT 0,
+  completion_rate REAL NOT NULL DEFAULT 0,
+  next_episode_rate REAL NOT NULL DEFAULT 0,
+  followers_gained INTEGER NOT NULL DEFAULT 0,
+  top_comment TEXT NOT NULL DEFAULT '',
+  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_episodes_stage ON episodes(production_stage);
+CREATE INDEX IF NOT EXISTS idx_episodes_script_status ON episodes(script_status);
+CREATE INDEX IF NOT EXISTS idx_episodes_shoot_date ON episodes(shoot_date);
