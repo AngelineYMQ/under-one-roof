@@ -163,7 +163,7 @@ function ideasTable(){ if(!state.ideas.length) return '<div class="empty">暂无
 function kanban(cols){ return `<div class="kanban">${cols.map(([name,items])=>`<div class="kanban-col"><h4>${name}<span>${items.length}</span></h4>${items.map(i=>`<div class="kanban-item"><strong>${i}</strong><br><small>待负责人更新</small></div>`).join('')}</div>`).join('')}</div>`; }
 function teamCard(name,title,desc){ return `<article class="card"><div class="character-avatar ${name==='James'?'avatar-james':name==='Angeline'?'avatar-angeline':'avatar-joseph'}">${name[0]}</div><h4>${name}</h4><span class="badge">${title}</span><p>${desc}</p></article>`; }
 
-function render(){ if(!pages[state.page]) state.page='home'; renderNav(); pageTitle.textContent=navItems.find(x=>x[0]===state.page)?.[1]||'首页'; content.innerHTML=pages[state.page](); }
+function render(){ if(!pages[state.page]) state.page='home'; renderNav(); pageTitle.textContent=navItems.find(x=>x[0]===state.page)?.[1]||'首页'; content.dataset.page=state.page; content.innerHTML=pages[state.page](); }
 window.addEventListener('hashchange',()=>{ state.page=location.hash.replace('#','')||'home'; render(); window.scrollTo(0,0); });
 
 document.getElementById('menuBtn').onclick=()=>sidebar.classList.toggle('open');

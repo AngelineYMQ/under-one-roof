@@ -428,3 +428,121 @@ input, textarea, select { padding: 9px 10px; font-size: 12px; }
 
 /* v22: keep recommended role icon and title on one line */
 .recommended-role-heading{display:flex;align-items:center;gap:10px;margin-bottom:9px;min-width:0}.recommended-role-heading .recommended-icon{flex:0 0 38px;margin:0}.recommended-role-heading h4{margin:0;font-size:13px;line-height:1.25;min-width:0}.recommended-copy p{margin-top:0}
+
+/* v23 — page-aware colour hierarchy
+   Neutral surfaces remain dominant; colour is used for grouping, hierarchy and meaning. */
+.content[data-page] .section { position: relative; }
+.content[data-page] .section-header h3 { display: inline-flex; align-items: center; gap: 8px; }
+.content[data-page] .section-header h3::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--page-accent, var(--accent)); box-shadow: 0 0 0 5px color-mix(in srgb, var(--page-accent, var(--accent)) 13%, transparent); }
+.content[data-page] .card { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.content[data-page] .card:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(23,35,58,.08); border-color: color-mix(in srgb, var(--page-accent, var(--accent)) 28%, var(--line)); }
+
+/* Accent identity by section */
+.content[data-page="positioning"] { --page-accent:#6c63ff; }
+.content[data-page="world"] { --page-accent:#0f9f7a; }
+.content[data-page="relations"] { --page-accent:#e06b3c; }
+.content[data-page="season"] { --page-accent:#2f7de1; }
+.content[data-page="ideas"] { --page-accent:#e07b39; }
+.content[data-page="supporting"] { --page-accent:#8a5bd9; }
+.content[data-page="singapore"] { --page-accent:#0c9f8f; }
+.content[data-page="analytics"] { --page-accent:#4263eb; }
+.content[data-page="brand"] { --page-accent:#c0567a; }
+.content[data-page="public"] { --page-accent:#3f7f69; }
+
+/* Positioning: four strategic pillars */
+.content[data-page="positioning"] .section:first-child .grid .card:nth-child(1) { background:#f3f1ff; border-top:3px solid #7568ff; }
+.content[data-page="positioning"] .section:first-child .grid .card:nth-child(2) { background:#eef7ff; border-top:3px solid #3488e8; }
+.content[data-page="positioning"] .section:first-child .grid .card:nth-child(3) { background:#eefaf5; border-top:3px solid #1aa477; }
+.content[data-page="positioning"] .section:first-child .grid .card:nth-child(4) { background:#fff6ec; border-top:3px solid #ea8b2c; }
+.content[data-page="positioning"] .section:nth-child(2) .card { background:linear-gradient(135deg,#fff 70%,#fff4ed); border-left:3px solid #e06b3c; }
+
+/* World / relationships: warmer narrative surfaces */
+.content[data-page="world"] .grid .card:nth-child(1) { background:#eefaf5; border-top:3px solid #1aa477; }
+.content[data-page="world"] .grid .card:nth-child(2) { background:#eef6ff; border-top:3px solid #3c82e6; }
+.content[data-page="world"] .grid .card:nth-child(3) { background:#fff7ec; border-top:3px solid #e59a2f; }
+.content[data-page="world"] .grid .card:nth-child(4) { background:#f8f1ff; border-top:3px solid #9664da; }
+.content[data-page="relations"] .grid .card:nth-child(1) { background:#fff4ed; border-left:4px solid #e06b3c; }
+.content[data-page="relations"] .grid .card:nth-child(2) { background:#eef6ff; border-left:4px solid #367fde; }
+.content[data-page="relations"] .grid .card:nth-child(3) { background:#f6f0ff; border-left:4px solid #8a5bd9; }
+.content[data-page="relations"] .grid .card:nth-child(4) { background:#eefaf5; border-left:4px solid #16966d; }
+.content[data-page="relations"] .timeline-item:nth-child(1) { --timeline-color:#6c63ff; }
+.content[data-page="relations"] .timeline-item:nth-child(2) { --timeline-color:#e7902c; }
+.content[data-page="relations"] .timeline-item:nth-child(3) { --timeline-color:#16966d; }
+.content[data-page="relations"] .timeline-item::before { background:var(--timeline-color,var(--accent)); }
+
+/* Episodes: clearer phase colours without painting the entire page */
+.content[data-page="season"] .tab-btn:nth-child(1) { --tab:#2f7de1; }
+.content[data-page="season"] .tab-btn:nth-child(2) { --tab:#e88a2f; }
+.content[data-page="season"] .tab-btn:nth-child(3) { --tab:#149b83; }
+.content[data-page="season"] .tab-btn:nth-child(4) { --tab:#8a5bd9; }
+.content[data-page="season"] .tab-btn:not(.active) { border-color:color-mix(in srgb,var(--tab,#8b95a7) 28%,#dfe4ec); }
+.content[data-page="season"] .tab-btn.active { background:var(--tab,#17253f); color:#fff; border-color:var(--tab,#17253f); }
+.content[data-page="season"] .episode { border-left:4px solid #2f7de1; background:linear-gradient(110deg,#fff 72%,#f1f7ff); }
+.content[data-page="season"] .episode:nth-child(3n+2) { border-left-color:#e88a2f; background:linear-gradient(110deg,#fff 72%,#fff6ec); }
+.content[data-page="season"] .episode:nth-child(3n) { border-left-color:#149b83; background:linear-gradient(110deg,#fff 72%,#eefaf7); }
+
+/* Idea library: category cards get unique, restrained accents */
+.content[data-page="ideas"] .section:first-child .card:nth-child(1) { --cat:#e06b3c; background:#fff5ef; }
+.content[data-page="ideas"] .section:first-child .card:nth-child(2) { --cat:#149b83; background:#eefaf7; }
+.content[data-page="ideas"] .section:first-child .card:nth-child(3) { --cat:#2f7de1; background:#eef6ff; }
+.content[data-page="ideas"] .section:first-child .card:nth-child(4) { --cat:#8a5bd9; background:#f7f1ff; }
+.content[data-page="ideas"] .section:first-child .card:nth-child(5) { --cat:#d09a21; background:#fff9e9; }
+.content[data-page="ideas"] .section:first-child .card:nth-child(6) { --cat:#c0567a; background:#fff1f6; }
+.content[data-page="ideas"] .section:first-child .card { border-top:3px solid var(--cat); }
+.content[data-page="ideas"] .section:first-child .card .badge { background:color-mix(in srgb,var(--cat) 12%,#fff); color:color-mix(in srgb,var(--cat) 82%,#111); border:1px solid color-mix(in srgb,var(--cat) 20%,transparent); }
+
+/* Supporting characters: visual grouping by recurring-role type */
+.content[data-page="supporting"] .card { position:relative; overflow:hidden; padding-top:20px; }
+.content[data-page="supporting"] .card::before { content:""; position:absolute; inset:0 0 auto 0; height:4px; background:var(--role-color); }
+.content[data-page="supporting"] .card:nth-child(5n+1) { --role-color:#6c63ff; background:#f7f5ff; }
+.content[data-page="supporting"] .card:nth-child(5n+2) { --role-color:#2f7de1; background:#f2f7ff; }
+.content[data-page="supporting"] .card:nth-child(5n+3) { --role-color:#149b83; background:#f0faf7; }
+.content[data-page="supporting"] .card:nth-child(5n+4) { --role-color:#e88a2f; background:#fff7ee; }
+.content[data-page="supporting"] .card:nth-child(5n) { --role-color:#c0567a; background:#fff3f7; }
+
+/* Singapore reference: colour families improve scan speed */
+.content[data-page="singapore"] .section:first-child .card { position:relative; padding-left:20px; }
+.content[data-page="singapore"] .section:first-child .card::before { content:""; position:absolute; left:0; top:14px; bottom:14px; width:4px; border-radius:0 6px 6px 0; background:var(--sg-color); }
+.content[data-page="singapore"] .section:first-child .card:nth-child(4n+1) { --sg-color:#2f7de1; background:#f2f7ff; }
+.content[data-page="singapore"] .section:first-child .card:nth-child(4n+2) { --sg-color:#149b83; background:#f0faf7; }
+.content[data-page="singapore"] .section:first-child .card:nth-child(4n+3) { --sg-color:#e88a2f; background:#fff7ee; }
+.content[data-page="singapore"] .section:first-child .card:nth-child(4n) { --sg-color:#8a5bd9; background:#f7f2ff; }
+.content[data-page="singapore"] .table-wrap { border-top:3px solid #149b83; }
+
+/* Analytics: each KPI is identifiable, but the dashboard stays calm */
+.content[data-page="analytics"] .stat-card { position:relative; overflow:hidden; border-top:3px solid var(--metric-color); background:linear-gradient(145deg,#fff 65%,color-mix(in srgb,var(--metric-color) 9%,#fff)); }
+.content[data-page="analytics"] .stat-card:nth-child(1) { --metric-color:#4263eb; }
+.content[data-page="analytics"] .stat-card:nth-child(2) { --metric-color:#12a37e; }
+.content[data-page="analytics"] .stat-card:nth-child(3) { --metric-color:#0e91b8; }
+.content[data-page="analytics"] .stat-card:nth-child(4) { --metric-color:#7c5ce3; }
+.content[data-page="analytics"] .stat-card:nth-child(5) { --metric-color:#e28b2f; }
+.content[data-page="analytics"] .stat-card:nth-child(6) { --metric-color:#d35c78; }
+.content[data-page="analytics"] .stat-card:nth-child(7) { --metric-color:#2a9d68; }
+.content[data-page="analytics"] .stat-card:nth-child(8) { --metric-color:#6a7488; }
+.content[data-page="analytics"] .stat-card .progress span { background:var(--metric-color); }
+.content[data-page="analytics"] .section:nth-child(2) .card:first-child { background:#eef6ff; border-left:4px solid #4263eb; }
+.content[data-page="analytics"] .section:nth-child(2) .card:last-child { background:#fff4ed; border-left:4px solid #e06b3c; }
+
+/* Brand: make standards feel like a living design system */
+.content[data-page="brand"] .section:first-child .card { position:relative; overflow:hidden; }
+.content[data-page="brand"] .section:first-child .card::after { content:""; position:absolute; right:-18px; top:-18px; width:64px; height:64px; border-radius:50%; background:color-mix(in srgb,var(--brand-card) 14%,transparent); }
+.content[data-page="brand"] .section:first-child .card:nth-child(4n+1) { --brand-card:#e06b3c; border-top:3px solid #e06b3c; background:#fff7f2; }
+.content[data-page="brand"] .section:first-child .card:nth-child(4n+2) { --brand-card:#2f7de1; border-top:3px solid #2f7de1; background:#f3f8ff; }
+.content[data-page="brand"] .section:first-child .card:nth-child(4n+3) { --brand-card:#149b83; border-top:3px solid #149b83; background:#f1faf7; }
+.content[data-page="brand"] .section:first-child .card:nth-child(4n) { --brand-card:#8a5bd9; border-top:3px solid #8a5bd9; background:#f8f3ff; }
+.content[data-page="brand"] .section:nth-child(2) .card:nth-child(1) { background:linear-gradient(135deg,#17253f,#253d64); color:#fff; }
+.content[data-page="brand"] .section:nth-child(2) .card:nth-child(1) p { color:#d9e2ef; }
+.content[data-page="brand"] .section:nth-child(2) .card:nth-child(2) { background:#fff4ed; border-left:4px solid #e06b3c; }
+.content[data-page="brand"] .section:nth-child(2) .card:nth-child(3) { background:#eefaf5; border-left:4px solid #149b83; }
+
+/* Internal / public: two clearly different zones */
+.content[data-page="public"] .section:first-child .card:first-child { background:linear-gradient(145deg,#17253f,#22395f); color:#fff; border-color:#22395f; }
+.content[data-page="public"] .section:first-child .card:first-child .list { color:#dbe4f1; }
+.content[data-page="public"] .section:first-child .card:last-child { background:linear-gradient(145deg,#eefaf5,#fff); border-top:4px solid #149b83; }
+.content[data-page="public"] .callout { background:linear-gradient(90deg,#fff3eb,#fff9f4); border-left-color:#e06b3c; }
+
+@media (max-width: 760px) {
+  .content[data-page] .card:hover { transform:none; }
+  .content[data-page="supporting"] .card,
+  .content[data-page="singapore"] .section:first-child .card { min-height:auto; }
+}

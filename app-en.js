@@ -119,7 +119,7 @@ function ideasTable(){ if(!state.ideas.length) return '<div class="empty">No ide
 function kanban(cols){ return `<div class="kanban">${cols.map(([name,items])=>`<div class="kanban-col"><h4>${name}<span>${items.length}</span></h4>${items.map(i=>`<div class="kanban-item"><strong>${i}</strong><br><small>Awaiting owner update</small></div>`).join('')}</div>`).join('')}</div>`; }
 function teamCard(name,title,desc){ return `<article class="card"><div class="character-avatar ${name==='James'?'avatar-james':name==='Angeline'?'avatar-angeline':'avatar-joseph'}">${name[0]}</div><h4>${name}</h4><span class="badge">${title}</span><p>${desc}</p></article>`; }
 
-function render(){ if(!pages[state.page]) state.page='home'; renderNav(); pageTitle.textContent=navItems.find(x=>x[0]===state.page)?.[1]||'Home'; content.innerHTML=pages[state.page](); }
+function render(){ if(!pages[state.page]) state.page='home'; renderNav(); pageTitle.textContent=navItems.find(x=>x[0]===state.page)?.[1]||'Home'; content.dataset.page=state.page; content.innerHTML=pages[state.page](); }
 window.addEventListener('hashchange',()=>{ state.page=location.hash.replace('#','')||'home'; render(); window.scrollTo(0,0); });
 
 document.getElementById('menuBtn').onclick=()=>sidebar.classList.toggle('open');
