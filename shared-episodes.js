@@ -205,6 +205,50 @@ function templateBadge(x){
 function scriptHtml(value){return `<div class="screenplay-view">${esc(value||'').split(/\n/).map(line=>{const t=line.trim();if(!t)return '<div class="script-spacer"></div>';if(/^【.*】$/.test(t)||/^\[.*\]$/.test(t))return `<h5>${esc(t)}</h5>`;if(/^(ANGELINE|JAMES|JOSEPH|旁白|画外音)[（(:]/i.test(t)||/^(ANGELINE|JAMES|JOSEPH):/i.test(t))return `<p class="dialogue-line">${esc(line)}</p>`;return `<p>${esc(line)}</p>`;}).join('')}</div>`;}
 function open(id){const x=items.find(y=>y.id===id);if(!x)return;const t=text[lang],modal=document.getElementById('episodeModal');document.getElementById('episodeModalEyebrow').textContent=`EP${String(x.episodeNo).padStart(2,'0')} · ${t.stages[x.productionStage]}`;document.getElementById('episodeModalTitle').textContent=title(x);const currentScript=lang==='en'?(x.scriptEn||x.scriptZh):(x.scriptZh||x.scriptEn);document.getElementById('episodeModalBody').innerHTML=`<div class="episode-detail-view"><div class="episode-detail-actions"><div class="episode-status-line"><span class="stage-pill stage-${x.productionStage}">${t.stages[x.productionStage]}</span><span>${t.statuses[x.scriptStatus]}</span><span>${esc(x.version)}</span>${templateBadge(x)}</div><button class="primary-btn" onclick="SharedEpisodes.edit(${x.id})">${lang==='en'?'Edit all details':'编辑全部资料'}</button></div><div class="episode-detail-grid"><section><small>${lang==='en'?'Story Summary':'剧情简介'}</small><p>${esc(summary(x))}</p></section><section><small>${lang==='en'?'Production':'制作资料'}</small><p>${lang==='en'?'Owner':'负责人'}：${esc(x.owner||'—')}<br>${lang==='en'?'Shoot date':'拍摄日期'}：${esc(x.shootDate||'—')}<br>${lang==='en'?'Progress':'完成度'}：${x.progress||0}%</p></section><section><small>${lang==='en'?'Cultural Point':'新加坡文化点'}</small><p>${esc(lang==='en'?(x.culturePointEn||x.culturePointZh):(x.culturePointZh||x.culturePointEn))}</p></section></div><div class="script-section-head"><div><h4>${lang==='en'?'Full Scene-by-Scene Script':'完整分场剧本'}</h4><p>${isTemplateScript(x)?(lang==='en'?'This episode currently uses the shared structure template and is not a finished dialogue script.':'本集目前使用统一结构模板，并非已完成的对白剧本。'):(lang==='en'?'Scene headings, action, dialogue and ending tag.':'包括场次、动作、对白、高潮与片尾钩子。')}</p></div><button class="ghost-btn" onclick="SharedEpisodes.edit(${x.id},'script')">${lang==='en'?'Edit Script':'编辑剧本'}</button></div>${scriptHtml(currentScript)}</div>`;modal.classList.add('open');modal.setAttribute('aria-hidden','false');}
 function edit(id,focus){const x=items.find(y=>y.id===id);if(!x)return;const t=text[lang];const modal=document.getElementById('episodeModal');document.getElementById('episodeModalEyebrow').textContent=`EP${String(x.episodeNo).padStart(2,'0')} · ${t.stages[x.productionStage]}`;document.getElementById('episodeModalTitle').textContent=t.edit;document.getElementById('episodeModalBody').innerHTML=`<form id="unifiedEpisodeForm" class="unified-episode-form"><input type="hidden" name="id" value="${x.id}"><div class="ue-tabs"><span>${t.scripts}</span><span>${t.production}</span><span>${t.analytics}</span></div><div class="form-grid"><label><span>中文标题</span><input name="titleZh" value="${esc(x.titleZh)}"></label><label><span>English Title</span><input name="titleEn" value="${esc(x.titleEn)}"></label><label><span>中文分类</span><input name="categoryZh" value="${esc(x.categoryZh)}"></label><label><span>English Category</span><input name="categoryEn" value="${esc(x.categoryEn)}"></label><label class="full"><span>中文简介</span><textarea name="summaryZh">${esc(x.summaryZh)}</textarea></label><label class="full"><span>English Summary</span><textarea name="summaryEn">${esc(x.summaryEn)}</textarea></label><label><span>${lang==='en'?'Script Status':'剧本状态'}</span><select name="scriptStatus">${scriptOrder.map(k=>`<option value="${k}" ${x.scriptStatus===k?'selected':''}>${t.statuses[k]}</option>`).join('')}</select></label><label><span>${lang==='en'?'Production Stage':'制作阶段'}</span><select name="productionStage">${stageOrder.map(k=>`<option value="${k}" ${x.productionStage===k?'selected':''}>${t.stages[k]}</option>`).join('')}</select></label><label><span>${lang==='en'?'Owner':'负责人'}</span><input name="owner" value="${esc(x.owner)}"></label><label><span>${lang==='en'?'Priority':'优先级'}</span><select name="priority">${['high','medium','low'].map(k=>`<option value="${k}" ${x.priority===k?'selected':''}>${t.priority[k]}</option>`).join('')}</select></label><label><span>${lang==='en'?'Shoot Date':'拍摄日期'}</span><input type="date" name="shootDate" value="${esc(x.shootDate)}"></label><label><span>${lang==='en'?'Publish Date':'发布日期'}</span><input type="date" name="publishDate" value="${esc(x.publishDate)}"></label><label><span>${lang==='en'?'Progress %':'完成度 %'}</span><input type="number" min="0" max="100" name="progress" value="${x.progress||0}"></label><label><span>${lang==='en'?'Version':'版本'}</span><input name="version" value="${esc(x.version)}"></label><label class="full"><span>${lang==='en'?'Open Issues':'待处理事项'}</span><textarea name="openIssues">${esc(x.openIssues)}</textarea></label><label class="full script-editor-field"><span>中文完整分场剧本</span><textarea rows="24" name="scriptZh">${esc(x.scriptZh)}</textarea></label><label class="full script-editor-field"><span>English Full Scene-by-Scene Script</span><textarea rows="24" name="scriptEn">${esc(x.scriptEn)}</textarea></label><label class="full"><span>中文文化点</span><textarea name="culturePointZh">${esc(x.culturePointZh)}</textarea></label><label class="full"><span>English Cultural Point</span><textarea name="culturePointEn">${esc(x.culturePointEn)}</textarea></label><label><span>Views</span><input type="number" name="views" value="${x.views||0}"></label><label><span>30s Retention %</span><input type="number" step="0.1" name="retention30" value="${x.retention30||0}"></label><label><span>60s Retention %</span><input type="number" step="0.1" name="retention60" value="${x.retention60||0}"></label><label><span>Avg Watch (sec)</span><input type="number" step="0.1" name="avgWatchSeconds" value="${x.avgWatchSeconds||0}"></label><label><span>Completion %</span><input type="number" step="0.1" name="completionRate" value="${x.completionRate||0}"></label><label><span>Next Episode %</span><input type="number" step="0.1" name="nextEpisodeRate" value="${x.nextEpisodeRate||0}"></label><label><span>Followers Gained</span><input type="number" name="followersGained" value="${x.followersGained||0}"></label><label class="full"><span>Top Comment</span><textarea name="topComment">${esc(x.topComment)}</textarea></label></div><div class="modal-actions"><button type="button" class="ghost-btn" onclick="SharedEpisodes.open(${x.id})">${lang==='en'?'Back to script':'返回剧本'}</button><button class="primary-btn">${t.save}</button></div></form>`;document.getElementById('unifiedEpisodeForm').onsubmit=saveEpisode;modal.classList.add('open');modal.setAttribute('aria-hidden','false');if(focus)setTimeout(()=>document.querySelector('[name="scriptZh"]')?.scrollIntoView({behavior:'smooth',block:'center'}),60);}
+async function saveAnalytics(e){
+ e.preventDefault();
+ const f=new FormData(e.target),id=+f.get('id'),old=items.find(x=>x.id===id)||{};
+ const payload={...old,id,
+  publishDate:f.get('publishDate')||'',
+  views:+f.get('views')||0,
+  retention30:+f.get('retention30')||0,
+  retention60:+f.get('retention60')||0,
+  avgWatchSeconds:+f.get('avgWatchSeconds')||0,
+  completionRate:+f.get('completionRate')||0,
+  nextEpisodeRate:+f.get('nextEpisodeRate')||0,
+  followersGained:+f.get('followersGained')||0,
+  topComment:f.get('topComment')||''
+ };
+ try{
+  const r=await fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
+  if(!r.ok)throw 0;
+  const d=await r.json();Object.assign(old,d.episode);
+ }catch{Object.assign(old,payload)}
+ setLocal();close();renderCurrent();
+}
+function editAnalytics(id){
+ const x=items.find(y=>y.id===id);if(!x)return;
+ const modal=document.getElementById('episodeModal');
+ document.getElementById('episodeModalEyebrow').textContent=`EP${String(x.episodeNo).padStart(2,'0')} · ${lang==='en'?'Publishing Data':'发布数据'}`;
+ document.getElementById('episodeModalTitle').textContent=lang==='en'?'Update Performance Data':'更新单集数据';
+ document.getElementById('episodeModalBody').innerHTML=`<form id="episodeAnalyticsForm" class="analytics-edit-form"><input type="hidden" name="id" value="${x.id}">
+  <div class="analytics-edit-head"><div><span>EP${String(x.episodeNo).padStart(2,'0')}</span><h4>${esc(title(x))}</h4></div><p>${lang==='en'?'Enter the latest figures from the publishing platform. Saving here updates the dashboard immediately.':'填写平台最新数据，保存后会立即同步更新上方统计与单集列表。'}</p></div>
+  <div class="analytics-form-grid">
+   <label><span>${lang==='en'?'Publish Date':'发布日期'}</span><input type="date" name="publishDate" value="${esc(x.publishDate||'')}"></label>
+   <label><span>${lang==='en'?'Views':'播放量'}</span><input type="number" min="0" step="1" name="views" value="${x.views||0}"></label>
+   <label><span>${lang==='en'?'30s Retention %':'30秒留存率 %'}</span><input type="number" min="0" max="100" step="0.1" name="retention30" value="${x.retention30||0}"></label>
+   <label><span>${lang==='en'?'60s Retention %':'60秒留存率 %'}</span><input type="number" min="0" max="100" step="0.1" name="retention60" value="${x.retention60||0}"></label>
+   <label><span>${lang==='en'?'Average Watch Time (seconds)':'平均观看时长（秒）'}</span><input type="number" min="0" step="0.1" name="avgWatchSeconds" value="${x.avgWatchSeconds||0}"></label>
+   <label><span>${lang==='en'?'Completion Rate %':'完播率 %'}</span><input type="number" min="0" max="100" step="0.1" name="completionRate" value="${x.completionRate||0}"></label>
+   <label><span>${lang==='en'?'Next Episode Rate %':'追集率 %'}</span><input type="number" min="0" max="100" step="0.1" name="nextEpisodeRate" value="${x.nextEpisodeRate||0}"></label>
+   <label><span>${lang==='en'?'Followers Gained':'新增粉丝'}</span><input type="number" min="0" step="1" name="followersGained" value="${x.followersGained||0}"></label>
+   <label class="full"><span>${lang==='en'?'Top Comment / Notes':'最受欢迎评论／备注'}</span><textarea rows="4" name="topComment">${esc(x.topComment||'')}</textarea></label>
+  </div>
+  <div class="modal-actions"><button type="button" class="ghost-btn" onclick="SharedEpisodes.close()">${lang==='en'?'Cancel':'取消'}</button><button class="primary-btn">${lang==='en'?'Save Data':'保存数据'}</button></div>
+ </form>`;
+ document.getElementById('episodeAnalyticsForm').onsubmit=saveAnalytics;
+ modal.classList.add('open');modal.setAttribute('aria-hidden','false');
+}
 function close(){const m=document.getElementById('episodeModal');m.classList.remove('open');m.setAttribute('aria-hidden','true');}
 function episodeCard(x){
  const t=text[lang];
@@ -254,7 +298,7 @@ function renderAnalytics(){
       ['新增粉丝',totalFollowers.toLocaleString(),'由本系列带来的粉丝','followers'],
       ['已有数据集数',published.length,'已发布或已录入数据','episodes']
     ];
-  const rows=items.map(x=>`<tr onclick="SharedEpisodes.open(${x.id})">
+  const rows=items.map(x=>`<tr onclick="SharedEpisodes.editAnalytics(${x.id})">
     <td><span class="analytics-ep">EP${String(x.episodeNo).padStart(2,'0')}</span></td>
     <td><strong>${esc(title(x))}</strong><small>${esc(x.publishDate|| (lang==='en'?'Not published':'尚未发布'))}</small></td>
     <td class="num">${(+x.views||0).toLocaleString()}</td>
@@ -262,7 +306,7 @@ function renderAnalytics(){
     <td class="num">${+x.avgWatchSeconds||0}${lang==='en'?'s':'秒'}</td>
     <td class="num">${+x.completionRate||0}%</td>
     <td class="num">${+x.followersGained||0}</td>
-    <td><button class="analytics-open-btn" onclick="event.stopPropagation();SharedEpisodes.open(${x.id})">${lang==='en'?'View':'查看'} <span>→</span></button></td>
+    <td><button class="analytics-open-btn" onclick="event.stopPropagation();SharedEpisodes.editAnalytics(${x.id})">${lang==='en'?'Update':'更新'} <span>→</span></button></td>
   </tr>`).join('');
   return `<div class="analytics-kpi-grid">${kpis.map(k=>`<article class="analytics-kpi kpi-${k[3]}"><div><span>${k[0]}</span><strong>${k[1]}</strong><small>${k[2]}</small></div><i></i></article>`).join('')}</div>
   <div class="analytics-section-head"><div><h4>${lang==='en'?'Episode Performance':'单集数据表现'}</h4><p>${lang==='en'?'Click an episode to enter or update its publishing data.':'点击任意集数，可录入或修改该集的发布数据。'}</p></div><span>${items.length} ${lang==='en'?'episodes':'集'}</span></div>
@@ -272,4 +316,4 @@ function renderCurrent(){const m=document.getElementById('unifiedEpisodeMount');
 function filterSeason(q,stage){const query=(q??document.getElementById('seasonSearch')?.value??'').toLowerCase(),st=stage??document.getElementById('seasonStage')?.value??'';document.querySelectorAll('#seasonGrid .episode-library-card').forEach((card,i)=>{const x=items[i];card.style.display=((!query||(`${x.episodeNo} ${title(x)}`).toLowerCase().includes(query))&&(!st||x.productionStage===st))?'':'none';});}
 function setProductionView(v,btn){productionView=v;document.querySelectorAll('.production-tabs button').forEach(b=>b.classList.remove('active'));btn?.classList.add('active');const el=document.getElementById('productionUnifiedView');if(el)el.innerHTML=v==='board'?productionBoard():v==='list'?productionList():productionCalendar();}
 function setProductionFilter(type,value){if(type==='query')productionQuery=value.toLowerCase();if(type==='owner')productionOwner=value;if(type==='priority')productionPriority=value;setProductionView(productionView);}
-return{seasonPage,scriptsPage,productionPage,analyticsPage,open,edit,close,filterSeason,setProductionView,setProductionFilter};})();
+return{seasonPage,scriptsPage,productionPage,analyticsPage,open,edit,editAnalytics,close,filterSeason,setProductionView,setProductionFilter};})();
