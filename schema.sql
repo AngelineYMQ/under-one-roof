@@ -1508,3 +1508,13 @@ CREATE TABLE IF NOT EXISTS audit_log (
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_audit_log_created_at ON audit_log(created_at DESC);
+
+
+CREATE TABLE IF NOT EXISTS brand_settings (
+  setting_key TEXT PRIMARY KEY,
+  value_zh TEXT NOT NULL DEFAULT '',
+  value_en TEXT NOT NULL DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'draft',
+  updated_by TEXT NOT NULL DEFAULT '',
+  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
