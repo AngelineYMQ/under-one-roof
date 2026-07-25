@@ -53,3 +53,8 @@ After redeployment, entries added through **新增灵感 / Add Idea** are saved 
 - System labels and interface text change with the selected language.
 - User-entered titles and descriptions remain exactly as entered; they are not automatically translated.
 - This version shares structured idea entries. It does not yet include binary file upload for images, videos or documents. That requires Cloudflare R2 or another file-storage service.
+
+
+## v6 Character update
+
+Angeline is now written as a newly arrived wealthy Chinese international student. Her room-size logic is fixed across the story bible: she rejected a family-arranged apartment to prove independence, trusted wide-angle listing photos, signed a one-year lease, and stays because she refuses to lose the deposit or admit the mistake to her parents.
