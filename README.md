@@ -61,3 +61,6 @@ Angeline is now written as a newly arrived wealthy Chinese international student
 
 ## v10 update: shared editable Script Center
 Run the updated `schema.sql` once in Cloudflare D1 to create the new `scripts` table. The Script Center then supports adding, editing, changing status, owner, version, and deleting scripts. With the `DB` binding active, changes are shared across Angeline, James, and Joseph.
+
+## v18 note
+The Team Members API now automatically creates the three core members (James, Angeline and Joseph) when the shared team table is empty. Existing team records are never overwritten.
