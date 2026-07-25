@@ -10,3 +10,16 @@ CREATE TABLE IF NOT EXISTS ideas (
 );
 
 CREATE INDEX IF NOT EXISTS idx_ideas_created_at ON ideas(created_at DESC);
+
+CREATE TABLE IF NOT EXISTS scripts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  title_en TEXT NOT NULL DEFAULT '',
+  summary TEXT NOT NULL DEFAULT '',
+  summary_en TEXT NOT NULL DEFAULT '',
+  status_code TEXT NOT NULL DEFAULT 'idea',
+  owner TEXT NOT NULL DEFAULT '',
+  version TEXT NOT NULL DEFAULT 'v0.1',
+  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_scripts_status ON scripts(status_code);

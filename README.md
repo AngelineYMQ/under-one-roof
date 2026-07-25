@@ -58,3 +58,6 @@ After redeployment, entries added through **新增灵感 / Add Idea** are saved 
 ## v6 Character update
 
 Angeline is now written as a newly arrived wealthy Chinese international student. Her room-size logic is fixed across the story bible: she rejected a family-arranged apartment to prove independence, trusted wide-angle listing photos, signed a one-year lease, and stays because she refuses to lose the deposit or admit the mistake to her parents.
+
+## v10 update: shared editable Script Center
+Run the updated `schema.sql` once in Cloudflare D1 to create the new `scripts` table. The Script Center then supports adding, editing, changing status, owner, version, and deleting scripts. With the `DB` binding active, changes are shared across Angeline, James, and Joseph.

@@ -77,7 +77,23 @@
     </div>
   </div>
 
+
+  <div class="modal" id="scriptEditModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header"><h3 id="scriptEditTitle">Script Details</h3><button class="icon-btn" type="button" data-close-script-modal>×</button></div>
+      <form id="scriptEditForm" class="form-grid">
+        <label class="full"><span id="scriptTitleLabel">Title</span><input id="scriptTitleInput" required /></label>
+        <label><span id="scriptStatusLabel">Status</span><select id="scriptStatusInput"></select></label>
+        <label><span id="scriptOwnerLabel">Owner</span><input id="scriptOwnerInput" /></label>
+        <label><span id="scriptVersionLabel">Version</span><input id="scriptVersionInput" value="v0.1" /></label>
+        <label class="full"><span id="scriptSummaryLabel">Summary</span><textarea id="scriptSummaryInput" rows="5"></textarea></label>
+        <div class="modal-actions full script-modal-actions"><button type="button" class="danger-btn" id="scriptDeleteBtn">Delete</button><span class="modal-spacer"></span><button type="button" class="ghost-btn" id="scriptCancelBtn">Cancel</button><button class="primary-btn" type="submit" id="scriptSaveBtn">Save</button></div>
+      </form>
+    </div>
+  </div>
+
   <script src="shared-ideas.js"></script>
+  <script src="shared-scripts.js"></script>
   <script>
     const params = new URLSearchParams(location.search);
     const savedLanguage = localStorage.getItem('roofLanguage');
