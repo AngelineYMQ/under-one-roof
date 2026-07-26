@@ -905,3 +905,70 @@ input, textarea, select { padding: 9px 10px; font-size: 12px; }
   .nav-submenu{margin-left:38px}
   .nav-sub-btn{font-size:13px;padding:8px}
 }
+
+/* v37 light workspace theme: brighter navigation and softer surfaces */
+:root{
+  --bg:#f7f8fb;
+  --panel:#ffffff;
+  --text:#1d2a40;
+  --muted:#66758b;
+  --line:#e3e8ef;
+  --accent:#de7445;
+  --accent-dark:#b9562e;
+  --soft:#fff3ed;
+  --shadow:0 8px 24px rgba(40,55,80,.07);
+  --navy:#213653;
+  --border:#dfe5ed;
+  --sidebar-bg:#f6f1ea;
+  --sidebar-panel:#fffaf5;
+  --sidebar-text:#4e5f76;
+  --sidebar-strong:#20304a;
+}
+body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
+.sidebar{
+  background:linear-gradient(180deg,#f8f4ee 0%,#f2f5f9 100%);
+  color:var(--sidebar-strong);
+  border-right:1px solid #dfe5ed;
+  box-shadow:8px 0 26px rgba(42,55,75,.04);
+}
+.brand{border-bottom-color:#dfe4eb}
+.brand h1{color:#1f2d43}
+.brand p{color:#7b8798}
+.nav-primary,.nav-group-toggle,.nav-btn{color:var(--sidebar-text)!important}
+.nav-primary:hover,.nav-group-toggle:hover,.nav-group.open>.nav-group-toggle,.nav-btn:hover{
+  background:#fff;
+  color:var(--sidebar-strong)!important;
+  box-shadow:0 3px 12px rgba(42,55,75,.06);
+}
+.nav-primary.active,.nav-group-toggle.active-parent,.nav-btn.active{
+  background:linear-gradient(135deg,#fff0e7,#f4f7ff);
+  color:#1e3150!important;
+  box-shadow:inset 3px 0 0 var(--accent),0 4px 14px rgba(57,73,98,.07);
+}
+.nav-sub-btn{color:#66758b}
+.nav-sub-btn:hover{background:#fff;color:#263750}
+.nav-sub-btn.active{
+  background:#fff2eb;
+  color:#9e4827;
+  box-shadow:inset 3px 0 0 var(--accent);
+}
+.sidebar-footer{border-top-color:#dfe4eb;color:#68768a}
+.status-dot{background:#39b878;box-shadow:0 0 0 4px rgba(57,184,120,.14)}
+.topbar{background:rgba(255,255,255,.96);box-shadow:0 2px 12px rgba(39,54,78,.035)}
+.hero{
+  background:linear-gradient(135deg,#edf4ff 0%,#fff3eb 55%,#eefaf5 100%);
+  color:#1d2a40;
+  border:1px solid #dde6f1;
+}
+.hero p{color:#5c6b80}
+.hero .ghost-btn{background:#fff;color:#263750;border-color:#d9e0e9}
+.hero .ghost-btn:hover{background:#f8fafc}
+.language-switch{background:#f1f4f8;border-color:#dbe2eb}
+.language-btn.active{background:#29415f;color:#fff}
+.language-btn:not(.active){color:#64748b}
+.card,.table-wrap,.modal-card,.episode,.kanban-item,.prod-stat,.schedule-stats>div{
+  box-shadow:0 5px 16px rgba(37,51,73,.045);
+}
+@media(max-width:760px){
+  .sidebar{box-shadow:14px 0 34px rgba(37,51,73,.13)}
+}

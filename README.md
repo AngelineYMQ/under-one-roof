@@ -37,3 +37,7 @@ See `RELEASE_CHECKLIST.md` for the release standard.
 
 ## v35
 Publishing & Analytics rows now open a focused data-update form for publish date, views, retention, watch time, completion, follow-through, followers and notes.
+
+
+## v37
+Light workspace colour refresh: bright sidebar, softer navigation states, lighter hero and surfaces. No data or functionality changes.
