@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS episodes (
   publish_date TEXT NOT NULL DEFAULT '',
   progress INTEGER NOT NULL DEFAULT 0,
   open_issues TEXT NOT NULL DEFAULT '',
+  open_issues_en TEXT NOT NULL DEFAULT '',
   version TEXT NOT NULL DEFAULT 'v0.1',
   script_zh TEXT NOT NULL DEFAULT '',
   script_en TEXT NOT NULL DEFAULT '',

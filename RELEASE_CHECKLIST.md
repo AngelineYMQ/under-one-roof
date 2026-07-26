@@ -11,3 +11,6 @@ Every future ZIP should be released only after this checklist passes.
 - No API contains an unfiltered `DELETE FROM <table>` statement.
 - D1 schema and API fields match.
 - GitHub Actions validation passes before deployment.
+
+- Run `node tools/audit-english-ui.mjs`; English UI must not fall back to Chinese database fields.
+- Verify Open Issues, owners, titles, summaries, roles and supporting-character cards in English mode.

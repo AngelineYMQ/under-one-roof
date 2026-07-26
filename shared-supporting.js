@@ -6,7 +6,7 @@ const tx={
 };
 function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function t(){return tx[lang];}
-function local(c,key){return lang==='en'?(c[key+'_en']||c[key+'_zh']):(c[key+'_zh']||c[key+'_en']);}
+function local(c,key){return lang==='en'?(c[key+'_en']||''):(c[key+'_zh']||c[key+'_en']||'');}
 function statusText(v){const x=t();return v==='confirmed'?x.confirmed:v==='active'?x.active:v==='paused'?x.paused:x.planned;}
 function typeText(v){return v==='guest'?t().guest:t().recurring;}
 function card(c,i){const x=t(),name=local(c,'name'),bg=local(c,'background'),rel=local(c,'relation'),story=local(c,'storyline');return `<article class="supporting-card supporting-tone-${i%5}"><div class="supporting-card-head"><div><span class="supporting-type">${typeText(c.character_type)}</span><h4>${esc(name||'—')}</h4></div><button class="mini-btn" onclick="openSupportingCharacter(${c.id})">${x.edit}</button></div><p class="supporting-background">${esc(bg||'—')}</p><div class="supporting-meta"><span>${esc(rel||'—')}</span>${c.first_episode?`<span>${x.first}: EP${String(c.first_episode).padStart(2,'0')}</span>`:''}<span class="supporting-status status-${esc(c.status||'planned')}">${statusText(c.status)}</span></div><div class="supporting-actor"><strong>${x.actor}</strong><span>${esc(c.actor_name||x.noActor)}</span>${c.actor_contact?`<small>${esc(c.actor_contact)}</small>`:''}</div>${story?`<div class="supporting-story"><strong>${x.repeat}</strong><p>${esc(story)}</p></div>`:''}</article>`;}

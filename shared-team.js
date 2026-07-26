@@ -22,8 +22,8 @@ const recommendedRoles=[
 
 function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function labels(){return tx[lang];}
-function role(m){return lang==='en'?(m.role_en||m.role_zh):(m.role_zh||m.role_en)}
-function resp(m){return lang==='en'?(m.responsibilities_en||m.responsibilities_zh):(m.responsibilities_zh||m.responsibilities_en)}
+function role(m){return lang==='en'?(m.role_en||'Role not provided'):(m.role_zh||m.role_en||'未填写职位')}
+function resp(m){return lang==='en'?(m.responsibilities_en||'Responsibilities not provided.'):(m.responsibilities_zh||m.responsibilities_en||'未填写职责。')}
 function badgeType(v){const t=labels();return v==='project'?t.project:v==='guest'?t.guest:t.permanent}
 function perm(v){const t=labels();return v==='admin'?t.admin:v==='edit'?t.editp:t.view}
 function card(m){const t=labels();const initial=esc((m.name||'?').charAt(0).toUpperCase());return `<article class="member-card ${m.is_core?'core-member':''}"><div class="member-card-head"><div class="member-avatar">${initial}</div><div><h4>${esc(m.name)}</h4><p>${esc(role(m))}</p></div><button class="mini-btn" onclick="openTeamMember(${m.id})">${t.edit}</button></div><div class="member-tags"><span>${badgeType(m.member_type)}</span><span class="${m.status==='active'?'status-active':'status-inactive'}">${m.status==='active'?t.active:t.inactive}</span><span>${perm(m.permissions)}</span></div><p class="member-resp">${esc(resp(m)||'—')}</p><dl class="member-meta">${m.contact?`<div><dt>${t.contact}</dt><dd>${esc(m.contact)}</dd></div>`:''}${m.joined_at?`<div><dt>${t.joined}</dt><dd>${esc(m.joined_at)}</dd></div>`:''}</dl></article>`}
