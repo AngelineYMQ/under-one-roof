@@ -1096,3 +1096,48 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
   .inline-episode-select{height:32px;font-size:11.5px;padding-left:9px;padding-right:26px}
   .season-row-owner .owner-select{height:32px;font-size:11.5px}
 }
+
+/* v50: compact episode inline controls — small, quiet utility typography */
+.inline-episode-select,
+.season-row-owner .owner-select {
+  height: 30px !important;
+  min-height: 30px !important;
+  padding: 0 24px 0 9px !important;
+  border-radius: 9px !important;
+  font-size: 10.5px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+}
+
+.season-row-owner small,
+.season-row-date small,
+.season-row-owner .field-label,
+.season-row-date .field-label {
+  margin-top: 2px !important;
+  font-size: 9.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.15 !important;
+  color: #8a96a8 !important;
+}
+
+.season-linear-head {
+  font-size: 10px !important;
+}
+
+@media (max-width: 900px) {
+  .inline-episode-select,
+  .season-row-owner .owner-select {
+    height: 29px !important;
+    min-height: 29px !important;
+    padding-left: 8px !important;
+    padding-right: 22px !important;
+    font-size: 10px !important;
+  }
+
+  .season-row-owner small,
+  .season-row-date small,
+  .season-row-owner .field-label,
+  .season-row-date .field-label {
+    font-size: 9px !important;
+  }
+}
