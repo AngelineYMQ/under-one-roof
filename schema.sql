@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS scripts (
   status_code TEXT NOT NULL DEFAULT 'idea',
   owner TEXT NOT NULL DEFAULT '',
   version TEXT NOT NULL DEFAULT 'v0.1',
-  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(season_no, episode_no)
 );
 CREATE INDEX IF NOT EXISTS idx_scripts_status ON scripts(status_code);
 
@@ -50,7 +51,8 @@ CREATE INDEX IF NOT EXISTS idx_team_members_order ON team_members(is_core DESC, 
 
 CREATE TABLE IF NOT EXISTS episodes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  episode_no INTEGER NOT NULL UNIQUE,
+  season_no INTEGER NOT NULL DEFAULT 1,
+  episode_no INTEGER NOT NULL,
   title_zh TEXT NOT NULL DEFAULT '',
   title_en TEXT NOT NULL DEFAULT '',
   category_zh TEXT NOT NULL DEFAULT '',
@@ -78,9 +80,11 @@ CREATE TABLE IF NOT EXISTS episodes (
   next_episode_rate REAL NOT NULL DEFAULT 0,
   followers_gained INTEGER NOT NULL DEFAULT 0,
   top_comment TEXT NOT NULL DEFAULT '',
-  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(season_no, episode_no)
 );
-CREATE INDEX IF NOT EXISTS idx_episodes_stage ON episodes(production_stage);
+CREATE INDEX IF NOT EXISTS idx_episodes_stage ON episodes(season_no, production_stage);
+CREATE INDEX IF NOT EXISTS idx_episodes_season ON episodes(season_no, episode_no);
 CREATE INDEX IF NOT EXISTS idx_episodes_script_status ON episodes(script_status);
 CREATE INDEX IF NOT EXISTS idx_episodes_shoot_date ON episodes(shoot_date);
 

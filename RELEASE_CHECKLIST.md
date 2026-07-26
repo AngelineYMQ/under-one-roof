@@ -11,3 +11,11 @@ Every future ZIP should be released only after this checklist passes.
 - No API contains an unfiltered `DELETE FROM <table>` statement.
 - D1 schema and API fields match.
 - GitHub Actions validation passes before deployment.
+
+## Multi-season checks
+- [x] Episode Management uses a permanent icon, not a fixed episode count.
+- [x] Sidebar contains only All Episodes, Script Center, and Production Progress.
+- [x] Season 1 retains all 30 existing episodes.
+- [x] Seasons 2 and 3 display reserved empty states.
+- [x] Script Center and Production Progress use the same season selector.
+- [x] D1 migration preserves existing data and changes uniqueness to season + episode number.

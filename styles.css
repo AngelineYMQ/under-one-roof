@@ -1042,3 +1042,15 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
 .episode-management-tabs button.active span{color:#b54d28}
 .episode-management-tabs button.active small{color:#8d6b5e}
 @media(max-width:680px){.episode-management-tabs{grid-template-columns:1fr;padding:5px}.episode-management-tabs button{display:flex;align-items:center;justify-content:space-between;padding:10px 12px}.episode-management-tabs button small{margin:0 0 0 10px}.episode-management-heading{margin-bottom:10px}}
+
+/* v44 multi-season episode management */
+.season-tabs{display:flex;gap:8px;align-items:center;margin:0 0 18px;padding:5px;background:#eef2f7;border:1px solid #dce4ee;border-radius:14px;width:max-content;max-width:100%;overflow:auto}
+.season-tabs button{border:0;background:transparent;color:#66758c;font-weight:750;font-size:13px;padding:9px 18px;border-radius:10px;white-space:nowrap;cursor:pointer}
+.season-tabs button:hover{background:rgba(255,255,255,.72);color:#17243c}
+.season-tabs button.active{background:#17243c;color:#fff;box-shadow:0 4px 12px rgba(23,36,60,.15)}
+.season-empty-state{min-height:360px;border:1px dashed #cdd7e5;border-radius:20px;background:linear-gradient(145deg,#fff,#f6f8fb);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;color:#69788e}
+.season-empty-state>div{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:#edf2fa;color:#3b6fc4;font-size:25px;margin-bottom:16px}
+.season-empty-state h3{margin:0 0 8px;color:#17243c;font-size:20px}
+.season-empty-state p{max-width:480px;margin:0;line-height:1.65}
+.nav-icon{min-width:24px}
+@media(max-width:720px){.season-tabs{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}.season-tabs button{padding:9px 6px}.season-empty-state{min-height:260px;padding:28px 18px}}

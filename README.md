@@ -52,3 +52,12 @@ The former Season 1, Script Center, and Production Progress sidebar entries are 
 
 ## v43 — Restore Episode Management Dropdown
 The Episode Management section is again expandable in the sidebar. It keeps the unified database and workspace while exposing Overview, All Episodes, Script Center, and Production Progress as clear child entries in both languages.
+
+## v44 — Multi-season episode structure
+
+- Episode Management uses a permanent library icon instead of the number 30.
+- The redundant Episode Overview child page was removed from the sidebar.
+- All Episodes, Script Center, and Production Progress now share Season 1 / Season 2 / Season 3 selectors.
+- Existing 30 episodes remain in Season 1.
+- Seasons 2 and 3 are reserved empty workspaces for future episodes.
+- The Episodes API automatically migrates the existing D1 table to a composite `(season_no, episode_no)` structure without deleting existing Season 1 data.
