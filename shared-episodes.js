@@ -286,7 +286,7 @@ function seasonRow(x){
  const issue=!!x.openIssues;
  const cat=lang==='en'?(x.categoryEn||x.categoryZh):(x.categoryZh||x.categoryEn);
  return `<article class="season-sequence-row ${issue?'has-issue':''}" data-search="${esc((x.episodeNo+' '+title(x)+' '+cat+' '+(x.owner||'')).toLowerCase())}" data-stage="${esc(x.productionStage)}" onclick="SharedEpisodes.open(${x.id})">
-   <div class="season-row-ep"><span>EP${String(x.episodeNo).padStart(2,'0')}</span><small>${String(x.episodeNo).padStart(2,'0')}</small></div>
+   <div class="season-row-ep"><span>EP${String(x.episodeNo).padStart(2,'0')}</span></div>
    <div class="season-row-title"><h4>${esc(title(x))}</h4><p>${esc(cat||'—')}</p></div>
    <div class="season-row-stage"><span class="stage-pill stage-${x.productionStage}">${t.stages[x.productionStage]}</span></div>
    <div class="season-row-owner"><strong>${esc(x.owner||'—')}</strong><small>${lang==='en'?'Owner':'负责人'}</small></div>
