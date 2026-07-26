@@ -1054,3 +1054,29 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
 .season-empty-state p{max-width:480px;margin:0;line-height:1.65}
 .nav-icon{min-width:24px}
 @media(max-width:720px){.season-tabs{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}.season-tabs button{padding:9px 6px}.season-empty-state{min-height:260px;padding:28px 18px}}
+
+
+/* v46: inline editable stage and owner fields in the episode sequence */
+.inline-episode-select{
+  width:100%; min-width:0; height:38px; padding:0 32px 0 12px;
+  border:1px solid #d9e1ec; border-radius:12px; background:#fff;
+  color:#24334d; font:inherit; font-size:13px; font-weight:700;
+  cursor:pointer; outline:none; transition:border-color .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.inline-episode-select:hover{border-color:#b9c7da}
+.inline-episode-select:focus{border-color:#6c8ee8;box-shadow:0 0 0 3px rgba(82,118,220,.13)}
+.inline-episode-select.is-saving{opacity:.65;cursor:wait}
+.inline-episode-select.is-saved{border-color:#21a56f;box-shadow:0 0 0 3px rgba(33,165,111,.11)}
+.inline-episode-select.is-error{border-color:#e65353;box-shadow:0 0 0 3px rgba(230,83,83,.12)}
+.stage-select.stage-outline{background:#f4efff;color:#7046c8;border-color:#e5d9ff}
+.stage-select.stage-writing{background:#eef5ff;color:#2367b8;border-color:#d9e9ff}
+.stage-select.stage-locked{background:#eaf9f7;color:#0d8176;border-color:#cceee9}
+.stage-select.stage-shoot{background:#fff7df;color:#956500;border-color:#f7e7b7}
+.stage-select.stage-filmed{background:#fff0e8;color:#c75b24;border-color:#f6d4c3}
+.stage-select.stage-post{background:#f9edff;color:#923ac0;border-color:#ecd5f7}
+.stage-select.stage-publish{background:#eaf8ef;color:#237a4b;border-color:#d0ecd9}
+.season-row-owner .owner-select{height:38px}
+.season-row-owner small{display:block;margin-top:4px}
+@media (max-width:900px){
+  .inline-episode-select{height:36px;font-size:12px}
+}

@@ -281,6 +281,11 @@ function productionPage(language){lang=language;view='production';setTimeout(loa
 function analyticsPage(language){lang=language;view='analytics';setTimeout(load,0);return `<section><div class="section-header"><div><h3>${text[lang].analytics}</h3><p>${text[lang].analyticsSub}</p></div></div><div id="unifiedEpisodeMount"><div class="empty">Loading…</div></div></section>`;}
 let productionView='board', productionQuery='', productionOwner='', productionPriority='';
 function filteredEpisodes(){return seasonItems().filter(x=>(!productionQuery||(`${x.episodeNo} ${title(x)}`).toLowerCase().includes(productionQuery))&&(!productionOwner||x.owner===productionOwner)&&(!productionPriority||x.priority===productionPriority));}
+function ownerOptions(current){
+ const names=[...new Set(['Angeline','James','Joseph',...items.map(x=>x.owner).filter(Boolean)])];
+ if(current&&!names.includes(current))names.push(current);
+ return [`<option value="">${lang==='en'?'Unassigned':'未分配'}</option>`,...names.map(name=>`<option value="${esc(name)}" ${name===current?'selected':''}>${esc(name)}</option>`)].join('');
+}
 function seasonRow(x){
  const t=text[lang];
  const issue=!!x.openIssues;
@@ -288,8 +293,8 @@ function seasonRow(x){
  return `<article class="season-sequence-row ${issue?'has-issue':''}" data-search="${esc((x.episodeNo+' '+title(x)+' '+cat+' '+(x.owner||'')).toLowerCase())}" data-stage="${esc(x.productionStage)}" onclick="SharedEpisodes.open(${x.id})">
    <div class="season-row-ep"><span>EP${String(x.episodeNo).padStart(2,'0')}</span></div>
    <div class="season-row-title"><h4>${esc(title(x))}</h4><p>${esc(cat||'—')}</p></div>
-   <div class="season-row-stage"><span class="stage-pill stage-${x.productionStage}">${t.stages[x.productionStage]}</span></div>
-   <div class="season-row-owner"><strong>${esc(x.owner||'—')}</strong><small>${lang==='en'?'Owner':'负责人'}</small></div>
+   <div class="season-row-stage"><select class="inline-episode-select stage-select stage-${x.productionStage}" aria-label="${lang==='en'?'Production stage':'制作阶段'}" onclick="event.stopPropagation()" onchange="SharedEpisodes.inlineUpdate(${x.id},'productionStage',this.value,this)">${stageOrder.map(k=>`<option value="${k}" ${x.productionStage===k?'selected':''}>${t.stages[k]}</option>`).join('')}</select></div>
+   <div class="season-row-owner"><select class="inline-episode-select owner-select" aria-label="${lang==='en'?'Owner':'负责人'}" onclick="event.stopPropagation()" onchange="SharedEpisodes.inlineUpdate(${x.id},'owner',this.value,this)">${ownerOptions(x.owner)}</select><small>${lang==='en'?'Owner':'负责人'}</small></div>
    <div class="season-row-date"><strong>${esc(x.shootDate||'—')}</strong><small>${lang==='en'?'Shoot date':'拍摄日期'}</small></div>
    <div class="season-row-progress"><div><span>${x.progress||0}%</span><i><b style="width:${Math.max(0,Math.min(100,x.progress||0))}%"></b></i></div><small>${lang==='en'?'Progress':'完成度'}</small></div>
    <div class="season-row-priority"><span class="priority priority-${x.priority}">${t.priority[x.priority]}</span></div>
@@ -312,6 +317,24 @@ function renderSeason(){
  <div class="season-sequence-intro"><div><span class="sequence-dot"></span><div><h4>${lang==='en'?`Season ${activeSeason} episodes`:`第${['一','二','三'][activeSeason-1]}季剧集`}</h4><p>${lang==='en'?'Episodes are shown in numerical order. Topic labels are reference metadata only.':'按集数顺序排列；题材仅作为辅助资料，不限制之后拍摄的内容。'}</p></div></div><strong>${lang==='en'?'Episode sequence':'剧集顺序'}</strong></div>
  <div class="season-toolbar season-toolbar-refined sequence-toolbar"><div><input id="seasonSearch" placeholder="${lang==='en'?'Search EP, title, topic or owner':'搜索集数、标题、题材或负责人'}" oninput="SharedEpisodes.filterSeason(this.value)"><select id="seasonStage" onchange="SharedEpisodes.filterSeason(null,this.value)"><option value="">${lang==='en'?'All production stages':'全部制作阶段'}</option>${stageOrder.map(k=>`<option value="${k}">${t.stages[k]}</option>`).join('')}</select></div><span>${lang==='en'?'Click any row to open the complete screenplay and production record.':'点击任一行，打开完整剧本与制作资料。'}</span></div>
  <div id="seasonGrid" class="season-linear-list"><div class="season-linear-head"><span>EP</span><span>${lang==='en'?'Title / topic':'标题／题材'}</span><span>${lang==='en'?'Stage':'阶段'}</span><span>${lang==='en'?'Owner':'负责人'}</span><span>${lang==='en'?'Shoot date':'拍摄日期'}</span><span>${lang==='en'?'Progress':'完成度'}</span><span>${lang==='en'?'Priority':'优先级'}</span><span>${lang==='en'?'Open item':'待处理事项'}</span><span></span></div>${rows}</div>`;
+}
+async function inlineUpdate(id,field,value,control){
+ const x=items.find(y=>y.id===id);if(!x)return;
+ const previous=x[field];x[field]=value;
+ if(field==='productionStage'&&control){
+   control.className=`inline-episode-select stage-select stage-${value}`;
+   control.closest('.season-sequence-row')?.setAttribute('data-stage',value);
+ }
+ if(control){control.disabled=true;control.classList.add('is-saving');}
+ try{
+   const r=await fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(x)});
+   if(!r.ok)throw new Error(await r.text());
+   if(control){control.classList.remove('is-saving');control.classList.add('is-saved');setTimeout(()=>control.classList.remove('is-saved'),900);}
+ }catch(e){
+   x[field]=previous;
+   if(control){control.value=previous||'';control.classList.remove('is-saving');control.classList.add('is-error');setTimeout(()=>control.classList.remove('is-error'),1400);}
+   alert(lang==='en'?'Update failed. Please try again.':'更新失败，请重试。');
+ }finally{if(control)control.disabled=false;}
 }
 function productionToolbar(){const owners=[...new Set(seasonItems().map(x=>x.owner).filter(Boolean))];return `${seasonTabs()}<div class="production-toolbar unified-toolbar"><div class="production-tabs"><button class="${productionView==='board'?'active':''}" onclick="SharedEpisodes.setProductionView('board',this)">${lang==='en'?'Board':'看板'}</button><button class="${productionView==='list'?'active':''}" onclick="SharedEpisodes.setProductionView('list',this)">${lang==='en'?'List':'列表'}</button><button class="${productionView==='calendar'?'active':''}" onclick="SharedEpisodes.setProductionView('calendar',this)">${lang==='en'?'Shoot calendar':'拍摄日历'}</button></div><div class="production-filters"><input placeholder="${lang==='en'?'Search episode or title':'搜索集数或标题'}" oninput="SharedEpisodes.setProductionFilter('query',this.value)"><select onchange="SharedEpisodes.setProductionFilter('owner',this.value)"><option value="">${lang==='en'?'All owners':'全部负责人'}</option>${owners.map(o=>`<option>${esc(o)}</option>`).join('')}</select><select onchange="SharedEpisodes.setProductionFilter('priority',this.value)"><option value="">${lang==='en'?'All priorities':'全部优先级'}</option>${['high','medium','low'].map(k=>`<option value="${k}">${text[lang].priority[k]}</option>`).join('')}</select></div></div>`;}
 function productionBoard(){const t=text[lang],data=filteredEpisodes();return `<div class="production-stage-groups production-stage-columns">${stageOrder.map(k=>{const g=data.filter(x=>x.productionStage===k);return `<section class="production-stage-group stage-${k}"><header><div><span class="stage-dot"></span><h4>${t.stages[k]}</h4></div><strong>${g.length}</strong></header><div class="production-stage-grid">${g.map(x=>`<article class="prod-card compact-prod-card ${x.openIssues?'is-blocked':''}" onclick="SharedEpisodes.open(${x.id})"><div class="prod-card-top"><span>EP${String(x.episodeNo).padStart(2,'0')}</span><span class="priority priority-${x.priority}">${t.priority[x.priority]}</span></div><h4>${esc(title(x))}</h4><div class="compact-prod-meta"><span>${esc(x.owner||'—')}</span><span>${esc(x.shootDate||'—')}</span><b>${x.progress||0}%</b></div><div class="prod-progress"><i style="width:${x.progress||0}%"></i></div><div class="compact-prod-status ${x.openIssues?'blocker':'clear'}">${x.openIssues?'⚠ '+esc(x.openIssues):'✓ '+(lang==='en'?'On track':'正常')}</div></article>`).join('')||`<div class="stage-empty">${lang==='en'?'No episodes':'暂无集数'}</div>`}</div></section>`}).join('')}</div>`;}
@@ -396,4 +419,4 @@ function renderCurrent(){const m=document.getElementById('unifiedEpisodeMount');
 function filterSeason(q,stage){const query=(q??document.getElementById('seasonSearch')?.value??'').toLowerCase(),st=stage??document.getElementById('seasonStage')?.value??'';document.querySelectorAll('#seasonGrid .season-sequence-row').forEach(row=>{row.style.display=((!query||(row.dataset.search||'').includes(query))&&(!st||row.dataset.stage===st))?'':'none';});}
 function setProductionView(v,btn){productionView=v;document.querySelectorAll('.production-tabs button').forEach(b=>b.classList.remove('active'));btn?.classList.add('active');const el=document.getElementById('productionUnifiedView');if(el)el.innerHTML=v==='board'?productionBoard():v==='list'?productionList():productionCalendar();}
 function setProductionFilter(type,value){if(type==='query')productionQuery=value.toLowerCase();if(type==='owner')productionOwner=value;if(type==='priority')productionPriority=value;setProductionView(productionView);}
-return{dashboardPage,managementPage,seasonPage,scriptsPage,productionPage,analyticsPage,open,edit,editAnalytics,close,filterSeason,setProductionView,setProductionFilter,setManagementView,setSeason};})();
+return{dashboardPage,managementPage,seasonPage,scriptsPage,productionPage,analyticsPage,open,edit,editAnalytics,close,filterSeason,setProductionView,setProductionFilter,setManagementView,setSeason,inlineUpdate};})();
