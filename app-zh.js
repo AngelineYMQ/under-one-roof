@@ -1,6 +1,14 @@
-const navItems = [
-  ["home","首页","⌂"],["positioning","项目定位","◎"],["world","世界观设定","◈"],["characters","人物档案","♙"],["relations","人物关系","⇄"],["season","第一季30集","30"],["ideas","剧情题材库","✦"],["scripts","剧本中心","✎"],["production","制作进度","▦"],["schedule","拍摄日程","◷"],["team","团队成员","♟"],["supporting","配角资料","♧"],["singapore","新加坡资料库","SG"],["analytics","发布与数据","↗"],["brand","品牌规范","◆"],["public","内部版与对外版","◉"]
+const navGroups = [
+  {id:'home', label:'首页工作台', icon:'⌂', page:'home'},
+  {id:'project', label:'项目设定', icon:'◎', children:[['positioning','项目定位'],['world','世界观设定'],['brand','品牌规范'],['public','内部版与对外版']]},
+  {id:'characters-assets', label:'角色与资产', icon:'♙', children:[['characters','人物档案'],['relations','人物关系'],['supporting','配角资料']]},
+  {id:'episode-management', label:'剧集管理', icon:'30', children:[['season','第一季30集'],['scripts','剧本中心'],['production','制作进度']]},
+  {id:'shooting', label:'拍摄中心', icon:'◷', children:[['schedule','拍摄日程与通告单']]},
+  {id:'resources', label:'创作资料库', icon:'✦', children:[['ideas','剧情题材库'],['singapore','新加坡资料库']]},
+  {id:'team-group', label:'团队成员', icon:'♟', page:'team'},
+  {id:'publishing', label:'发布与复盘', icon:'↗', page:'analytics'}
 ];
+const navItems = navGroups.flatMap(g => g.page ? [[g.page,g.label,g.icon]] : g.children.map(([id,label])=>[id,label,g.icon]));
 
 const episodes = [
 [1,"富二代租了最小的房间","入住篇"],[2,"照片里明明不是这样","入住篇"],[3,"她带了八个行李箱","入住篇"],[4,"有钱为什么不租整套房","入住篇"],[5,"房东的二十条规则","入住篇"],[6,"押金和面子到底哪个重要","入住篇"],
@@ -39,8 +47,18 @@ function card(title, body, extra=''){ return `<article class="card ${extra}"><h4
 function section(title, subtitle, body){ return `<section class="section"><div class="section-header"><div><h3>${title}</h3><p>${subtitle||''}</p></div></div>${body}</section>`; }
 
 function renderNav(){
-  nav.innerHTML = navItems.map(([id,label,icon])=>`<button class="nav-btn ${state.page===id?'active':''}" data-page="${id}"><span class="nav-icon">${icon}</span>${label}</button>`).join('');
+  nav.innerHTML = navGroups.map(group=>{
+    if(group.page){
+      return `<button class="nav-btn nav-primary ${state.page===group.page?'active':''}" data-page="${group.page}"><span class="nav-icon">${group.icon}</span><span>${group.label}</span></button>`;
+    }
+    const active = group.children.some(([id])=>id===state.page);
+    return `<div class="nav-group ${active?'open':''}" data-nav-group="${group.id}">
+      <button class="nav-group-toggle ${active?'active-parent':''}" type="button"><span class="nav-icon">${group.icon}</span><span>${group.label}</span><span class="nav-chevron">⌄</span></button>
+      <div class="nav-submenu">${group.children.map(([id,label])=>`<button class="nav-sub-btn ${state.page===id?'active':''}" data-page="${id}">${label}</button>`).join('')}</div>
+    </div>`;
+  }).join('');
   nav.querySelectorAll('[data-page]').forEach(btn=>btn.onclick=()=>{ location.hash=btn.dataset.page; sidebar.classList.remove('open'); });
+  nav.querySelectorAll('.nav-group-toggle').forEach(btn=>btn.onclick=()=>btn.closest('.nav-group').classList.toggle('open'));
 }
 
 const pages = {

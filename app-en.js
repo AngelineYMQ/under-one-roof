@@ -1,6 +1,14 @@
-const navItems = [
-  ["home","Home","⌂"],["positioning","Project Positioning","◎"],["world","Story World","◈"],["characters","Character Profiles","♙"],["relations","Character Relationships","⇄"],["season","Season 1: 30 Episodes","30"],["ideas","Story Topic Library","✦"],["episode","Episode Sheet","▤"],["scripts","Script Center","✎"],["production","Production Progress","▦"],["schedule","Shoot Schedule","◷"],["team","Team Members","♟"],["supporting","Supporting Characters","♧"],["singapore","Singapore Reference Library","SG"],["analytics","Publishing & Analytics","↗"],["brand","Brand Guidelines","◆"],["public","Internal & Public Sites","◉"]
+const navGroups = [
+  {id:'home', label:'Home Workspace', icon:'⌂', page:'home'},
+  {id:'project', label:'Project Setup', icon:'◎', children:[['positioning','Project Positioning'],['world','Story World'],['brand','Brand Guidelines'],['public','Internal & Public Sites']]},
+  {id:'characters-assets', label:'Characters & Assets', icon:'♙', children:[['characters','Character Profiles'],['relations','Character Relationships'],['supporting','Supporting Characters']]},
+  {id:'episode-management', label:'Episode Management', icon:'30', children:[['season','Season 1: 30 Episodes'],['scripts','Script Center'],['production','Production Progress']]},
+  {id:'shooting', label:'Shoot Center', icon:'◷', children:[['schedule','Shoot Schedule & Call Sheets']]},
+  {id:'resources', label:'Creative Library', icon:'✦', children:[['ideas','Story Topic Library'],['singapore','Singapore Reference Library']]},
+  {id:'team-group', label:'Team Members', icon:'♟', page:'team'},
+  {id:'publishing', label:'Publishing & Review', icon:'↗', page:'analytics'}
 ];
+const navItems = navGroups.flatMap(g => g.page ? [[g.page,g.label,g.icon]] : g.children.map(([id,label])=>[id,label,g.icon]));
 
 const episodes = [
 [1,"The Rich Student Rented the Smallest Room","Move-in Arc"],[2,"The Room Did Not Look Like This Online","Move-in Arc"],[3,"She Arrives with Eight Suitcases","Move-in Arc"],[4,"Why Does Someone Rich Rent Only One Room?","Move-in Arc"],[5,"The Landlord’s Twenty Rules","Move-in Arc"],[6,"Which Matters More: Deposit or Pride?","Move-in Arc"],
@@ -38,8 +46,18 @@ function card(title, body, extra=''){ return `<article class="card ${extra}"><h4
 function section(title, subtitle, body){ return `<section class="section"><div class="section-header"><div><h3>${title}</h3><p>${subtitle||''}</p></div></div>${body}</section>`; }
 
 function renderNav(){
-  nav.innerHTML = navItems.map(([id,label,icon])=>`<button class="nav-btn ${state.page===id?'active':''}" data-page="${id}"><span class="nav-icon">${icon}</span>${label}</button>`).join('');
+  nav.innerHTML = navGroups.map(group=>{
+    if(group.page){
+      return `<button class="nav-btn nav-primary ${state.page===group.page?'active':''}" data-page="${group.page}"><span class="nav-icon">${group.icon}</span><span>${group.label}</span></button>`;
+    }
+    const active = group.children.some(([id])=>id===state.page);
+    return `<div class="nav-group ${active?'open':''}" data-nav-group="${group.id}">
+      <button class="nav-group-toggle ${active?'active-parent':''}" type="button"><span class="nav-icon">${group.icon}</span><span>${group.label}</span><span class="nav-chevron">⌄</span></button>
+      <div class="nav-submenu">${group.children.map(([id,label])=>`<button class="nav-sub-btn ${state.page===id?'active':''}" data-page="${id}">${label}</button>`).join('')}</div>
+    </div>`;
+  }).join('');
   nav.querySelectorAll('[data-page]').forEach(btn=>btn.onclick=()=>{ location.hash=btn.dataset.page; sidebar.classList.remove('open'); });
+  nav.querySelectorAll('.nav-group-toggle').forEach(btn=>btn.onclick=()=>btn.closest('.nav-group').classList.toggle('open'));
 }
 
 const pages = {
