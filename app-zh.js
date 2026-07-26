@@ -62,14 +62,7 @@ function renderNav(){
 }
 
 const pages = {
-home(){
- return `<div class="hero"><p class="eyebrow">Season 1 · Internal HQ</p><h3>一位刚到新加坡的中国富二代留学生，与做房地产的房东和做社交媒体广告的租客住在同一屋檐下。</h3><p>James 是房东兼房地产从业者；Angeline 是刚到新加坡、尚未完全融入本地生活的中国富二代留学生；Joseph 是从事社交媒体营销与广告投放的长期租客。三人以 James 家客厅为核心场景，把文化冲击、合租生活、房产和内容营销融入同一个长期短剧宇宙。</p><div class="hero-actions"><button class="primary-btn" onclick="location.hash='season'">查看第一季30集</button><button class="ghost-btn" onclick="location.hash='characters'">查看人物设定</button><button class="ghost-btn" onclick="openIdeaModal()">新增剧情灵感</button></div></div>
- ${section('当前制作状态','第一季：新租客来了',`<div class="grid grid-4">
- ${statCard('计划集数','30','0%')}${statCard('已确定题材','30','100%')}${statCard('已完成剧本','0','0%')}${statCard('已拍摄','0','0%')}
- </div>`)}
- ${section('项目核心','所有团队成员必须首先理解的四件事',`<div class="grid grid-2">${card('项目简介','<p>James 是房东兼房地产从业者；Angeline 是刚来新加坡读书的中国富二代留学生；Joseph 是社交媒体营销与广告投放从业者。Angeline 和 Joseph 都租住在 James 家，三个人从陌生房东与租客逐渐变成会互相帮忙、互相拆台的朋友。</p>')}${card('核心定位','<div class="callout">用轻松短剧，让中国观众通过一名初到新加坡的中国留学生，看懂真实的新加坡生活、文化、规则与行业日常。</div>')}${card('情感核心','<p>表面互相嫌弃，实际已经像一家人。喜剧来自冲突，长期追看来自人物之间越来越深的关系。</p>')}${card('扩展方向','<p>前期以客厅为主要舞台；后期可加入厨房、门口、楼下、小贩中心、超市、MRT、巴士站及更多固定配角。</p>')}</div>`)}
- ${section('快速入口','进入日常创作与制作工作',`<div class="grid grid-3">${quick('人物档案','统一角色性格、功能和表演边界','characters')}${quick('剧情题材库','存储长期题材与新增灵感','ideas')}${quick('制作进度','追踪选题、剧本、拍摄和后期','production')}</div>`)}`;
-},
+home(){ return SharedEpisodes.dashboardPage('zh'); },
 positioning(){ return introPage('项目定位','这不是普通搞笑账号，而是一套可以持续扩展的短剧 IP。',[
  ['项目名称','暂定《同一个屋檐下》。名称可更换，但内部世界观与人物关系可先建立。'],
  ['一句话介绍','一名刚到新加坡的中国富二代留学生，误签下一间比照片小很多的房间，与做房地产的房东和做社交媒体广告的租客住在同一屋檐下。'],
