@@ -264,6 +264,16 @@ function episodeCard(x){
 }
 
 function dashboardPage(language){lang=language;view='dashboard';setTimeout(load,0);return `<div id="unifiedEpisodeMount"><div class="empty">Loading…</div></div>`;}
+function managementPage(language){
+ lang=language;view='season';setTimeout(load,0);
+ const isEn=lang==='en';
+ return `<section class="episode-management-page"><div class="section-header episode-management-heading"><div><h3>${isEn?'Episode Management':'剧集管理'}</h3><p>${isEn?'One shared episode database, shown through three focused work views.':'同一份单集数据库，通过三个工作视图管理；任何页面修改都会同步。'}</p></div></div><div class="episode-management-tabs" role="tablist"><button class="active" data-episode-view="season" onclick="SharedEpisodes.setManagementView('season',this)"><span>${isEn?'All Episodes':'全部剧集'}</span><small>${isEn?'Sequence & overview':'顺序与总览'}</small></button><button data-episode-view="scripts" onclick="SharedEpisodes.setManagementView('scripts',this)"><span>${isEn?'Scripts':'剧本'}</span><small>${isEn?'Writing & versions':'创作与版本'}</small></button><button data-episode-view="production" onclick="SharedEpisodes.setManagementView('production',this)"><span>${isEn?'Production':'制作进度'}</span><small>${isEn?'Shoot to publish':'拍摄到发布'}</small></button></div><div id="unifiedEpisodeMount"><div class="empty">Loading…</div></div></section>`;
+}
+function setManagementView(next,button){
+ view=next;
+ document.querySelectorAll('.episode-management-tabs button').forEach(x=>x.classList.toggle('active',x===button));
+ renderCurrent();
+}
 function seasonPage(language){lang=language;view='season';setTimeout(load,0);return `<section><div class="section-header"><div><h3>${text[lang].season}</h3><p>${text[lang].seasonSub}</p></div></div><div id="unifiedEpisodeMount"><div class="empty">Loading…</div></div></section>`;}
 function scriptsPage(language){lang=language;view='scripts';setTimeout(load,0);return `<section><div class="section-header"><div><h3>${text[lang].scripts}</h3><p>${text[lang].scriptsSub}</p></div></div><div id="unifiedEpisodeMount"><div class="empty">Loading…</div></div></section>`;}
 function productionPage(language){lang=language;view='production';setTimeout(load,0);return `<section><div class="section-header"><div><h3>${text[lang].production}</h3><p>${text[lang].productionSub}</p></div></div><div id="unifiedEpisodeMount"><div class="empty">Loading…</div></div></section>`;}
@@ -382,4 +392,4 @@ function renderCurrent(){const m=document.getElementById('unifiedEpisodeMount');
 function filterSeason(q,stage){const query=(q??document.getElementById('seasonSearch')?.value??'').toLowerCase(),st=stage??document.getElementById('seasonStage')?.value??'';document.querySelectorAll('#seasonGrid .season-sequence-row').forEach(row=>{row.style.display=((!query||(row.dataset.search||'').includes(query))&&(!st||row.dataset.stage===st))?'':'none';});}
 function setProductionView(v,btn){productionView=v;document.querySelectorAll('.production-tabs button').forEach(b=>b.classList.remove('active'));btn?.classList.add('active');const el=document.getElementById('productionUnifiedView');if(el)el.innerHTML=v==='board'?productionBoard():v==='list'?productionList():productionCalendar();}
 function setProductionFilter(type,value){if(type==='query')productionQuery=value.toLowerCase();if(type==='owner')productionOwner=value;if(type==='priority')productionPriority=value;setProductionView(productionView);}
-return{dashboardPage,seasonPage,scriptsPage,productionPage,analyticsPage,open,edit,editAnalytics,close,filterSeason,setProductionView,setProductionFilter};})();
+return{dashboardPage,managementPage,seasonPage,scriptsPage,productionPage,analyticsPage,open,edit,editAnalytics,close,filterSeason,setProductionView,setProductionFilter,setManagementView};})();

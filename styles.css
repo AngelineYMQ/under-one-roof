@@ -1030,3 +1030,15 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
 @media(max-width:1200px){.season-linear-head,.season-sequence-row{grid-template-columns:60px minmax(220px,1.7fr) 120px 90px 110px 130px 70px minmax(130px,1fr) 24px}.season-row-date small,.season-row-owner small{display:none}}
 @media(max-width:900px){.season-linear-head{display:none}.season-sequence-row{grid-template-columns:58px minmax(0,1fr) auto;gap:8px;padding:11px}.season-row-stage,.season-row-owner,.season-row-date,.season-row-progress,.season-row-priority,.season-row-issue{grid-column:2/-1}.season-row-stage{grid-row:2}.season-row-owner,.season-row-date{display:inline-flex;flex-direction:row;margin-right:8px}.season-row-progress{display:grid;grid-template-columns:1fr auto;gap:8px}.season-row-priority{position:absolute;right:42px;top:12px}.season-sequence-row{position:relative}.season-row-open{grid-column:3;grid-row:1}.season-row-issue{white-space:normal}.season-sequence-intro{align-items:flex-start}.season-sequence-intro>strong{display:none}}
 @media(max-width:640px){.sequence-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.sequence-summary>div:first-child{grid-column:1/-1}.season-sequence-intro p{line-height:1.45}.season-row-title h4{font-size:12.5px}}
+
+/* v42 — unified episode-management navigation */
+.episode-management-heading{margin-bottom:14px}
+.episode-management-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 18px;padding:6px;background:#f0f3f7;border:1px solid #dde4ec;border-radius:16px}
+.episode-management-tabs button{appearance:none;border:0;background:transparent;border-radius:11px;padding:11px 14px;text-align:left;color:#65738a;cursor:pointer;transition:.18s ease;min-width:0}
+.episode-management-tabs button span{display:block;font-weight:750;font-size:14px;color:#394a63}
+.episode-management-tabs button small{display:block;margin-top:3px;font-size:11px;color:#8591a3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.episode-management-tabs button:hover{background:rgba(255,255,255,.7)}
+.episode-management-tabs button.active{background:#fff;box-shadow:0 3px 12px rgba(31,48,78,.09);outline:1px solid rgba(222,105,58,.22)}
+.episode-management-tabs button.active span{color:#b54d28}
+.episode-management-tabs button.active small{color:#8d6b5e}
+@media(max-width:680px){.episode-management-tabs{grid-template-columns:1fr;padding:5px}.episode-management-tabs button{display:flex;align-items:center;justify-content:space-between;padding:10px 12px}.episode-management-tabs button small{margin:0 0 0 10px}.episode-management-heading{margin-bottom:10px}}

@@ -45,3 +45,6 @@ Light workspace colour refresh: bright sidebar, softer navigation states, lighte
 
 ## v41
 Season 1 is now displayed as one continuous EP01–EP30 sequence. Topic labels remain metadata only and no longer divide the season into themed arcs.
+
+## v42 — Unified Episode Management
+The former Season 1, Script Center, and Production Progress sidebar entries are now one Episode Management entry with three tabs. Existing routes and all shared episode data remain available for compatibility.
