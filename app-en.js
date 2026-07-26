@@ -2,7 +2,7 @@ const navGroups = [
   {id:'home', label:'Home Workspace', icon:'⌂', page:'home'},
   {id:'project', label:'Project Setup', icon:'◎', children:[['positioning','Project Positioning'],['world','Story World'],['brand','Brand Guidelines'],['public','Internal & Public Sites']]},
   {id:'characters-assets', label:'Characters & Assets', icon:'♙', children:[['characters','Character Profiles'],['relations','Character Relationships'],['supporting','Supporting Characters']]},
-  {id:'episode-management', label:'Episode Management', icon:'30', page:'episodeManagement'},
+  {id:'episode-management', label:'Episode Management', icon:'30', children:[['episodeManagement','Overview'],['season','All Episodes'],['scripts','Script Center'],['production','Production Progress']]},
   {id:'shooting', label:'Shoot Center', icon:'◷', children:[['schedule','Shoot Schedule & Call Sheets']]},
   {id:'resources', label:'Creative Library', icon:'✦', children:[['ideas','Story Topic Library'],['singapore','Singapore Reference Library']]},
   {id:'team-group', label:'Team Members', icon:'♟', page:'team'},

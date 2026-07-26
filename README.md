@@ -48,3 +48,7 @@ Season 1 is now displayed as one continuous EP01–EP30 sequence. Topic labels r
 
 ## v42 — Unified Episode Management
 The former Season 1, Script Center, and Production Progress sidebar entries are now one Episode Management entry with three tabs. Existing routes and all shared episode data remain available for compatibility.
+
+
+## v43 — Restore Episode Management Dropdown
+The Episode Management section is again expandable in the sidebar. It keeps the unified database and workspace while exposing Overview, All Episodes, Script Center, and Production Progress as clear child entries in both languages.

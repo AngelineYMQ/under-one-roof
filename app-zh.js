@@ -2,7 +2,7 @@ const navGroups = [
   {id:'home', label:'首页工作台', icon:'⌂', page:'home'},
   {id:'project', label:'项目设定', icon:'◎', children:[['positioning','项目定位'],['world','世界观设定'],['brand','品牌规范'],['public','内部版与对外版']]},
   {id:'characters-assets', label:'角色与资产', icon:'♙', children:[['characters','人物档案'],['relations','人物关系'],['supporting','配角资料']]},
-  {id:'episode-management', label:'剧集管理', icon:'30', page:'episodeManagement'},
+  {id:'episode-management', label:'剧集管理', icon:'30', children:[['episodeManagement','剧集总览'],['season','全部剧集'],['scripts','剧本中心'],['production','制作进度']]},
   {id:'shooting', label:'拍摄中心', icon:'◷', children:[['schedule','拍摄日程与通告单']]},
   {id:'resources', label:'创作资料库', icon:'✦', children:[['ideas','剧情题材库'],['singapore','新加坡资料库']]},
   {id:'team-group', label:'团队成员', icon:'♟', page:'team'},
