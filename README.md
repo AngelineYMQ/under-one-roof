@@ -52,3 +52,7 @@ The former Season 1, Script Center, and Production Progress sidebar entries are 
 
 ## v43 — Restore Episode Management Dropdown
 The Episode Management section is again expandable in the sidebar. It keeps the unified database and workspace while exposing Overview, All Episodes, Script Center, and Production Progress as clear child entries in both languages.
+
+
+## v47
+Reduced inline stage and owner dropdown typography and control height for cleaner row alignment.

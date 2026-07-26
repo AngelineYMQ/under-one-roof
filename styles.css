@@ -1080,3 +1080,19 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
 @media (max-width:900px){
   .inline-episode-select{height:36px;font-size:12px}
 }
+
+/* v47: compact inline dropdown typography */
+.inline-episode-select{
+  height:34px;
+  padding:0 28px 0 10px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:650;
+  line-height:1.2;
+}
+.season-row-owner .owner-select{height:34px;font-size:12px;font-weight:650}
+.season-row-owner small{margin-top:3px;font-size:11px;line-height:1.2}
+@media (max-width:900px){
+  .inline-episode-select{height:32px;font-size:11.5px;padding-left:9px;padding-right:26px}
+  .season-row-owner .owner-select{height:32px;font-size:11.5px}
+}
