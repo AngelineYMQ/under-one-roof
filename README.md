@@ -60,3 +60,8 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 ## v48
 - English owner dropdown now displays “All Three” instead of the stored Chinese value “三人”.
 - Episode dates are displayed as DD/MM/YYYY across episode library, production list, calendar and dashboard views; stored values remain ISO YYYY-MM-DD for database compatibility.
+
+
+## v51 English interface fixes
+- English dashboard displays shared ownership as **All Three**.
+- English mode uses **U** for the brand mark; Chinese mode keeps **屋**.

@@ -11,7 +11,7 @@
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
       <div class="brand">
-        <div class="brand-mark">屋</div>
+        <div class="brand-mark" id="brandMark">屋</div>
         <div>
           <h1 id="brandName">同一个屋檐下</h1>
           <p>Short Drama HQ</p>
@@ -126,6 +126,7 @@
     document.title = shellText.title;
     document.getElementById('metaDescription').content = shellText.description;
     document.getElementById('brandName').textContent = shellText.brand;
+    document.getElementById('brandMark').textContent = isEnglish ? 'U' : '屋';
     document.getElementById('sidebarStatus').textContent = shellText.status;
     document.getElementById('platformLabel').textContent = shellText.platform;
     document.getElementById('modalEyebrow').textContent = shellText.modalEyebrow;
