@@ -56,3 +56,7 @@ The Episode Management section is again expandable in the sidebar. It keeps the 
 
 ## v47
 Reduced inline stage and owner dropdown typography and control height for cleaner row alignment.
+
+## v48
+- English owner dropdown now displays “All Three” instead of the stored Chinese value “三人”.
+- Episode dates are displayed as DD/MM/YYYY across episode library, production list, calendar and dashboard views; stored values remain ISO YYYY-MM-DD for database compatibility.
