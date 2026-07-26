@@ -41,3 +41,7 @@ Publishing & Analytics rows now open a focused data-update form for publish date
 
 ## v37
 Light workspace colour refresh: bright sidebar, softer navigation states, lighter hero and surfaces. No data or functionality changes.
+
+
+## v41
+Season 1 is now displayed as one continuous EP01–EP30 sequence. Topic labels remain metadata only and no longer divide the season into themed arcs.
