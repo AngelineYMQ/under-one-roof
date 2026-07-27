@@ -1147,3 +1147,103 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
 @media(max-width:1250px){.dash-status-grid{grid-template-columns:repeat(3,1fr)}.dash-overview-grid{grid-template-columns:1fr 1fr}.dash-funnel-card{grid-column:1/-1}.dash-funnel{grid-template-columns:repeat(5,1fr);align-items:end}.dash-funnel-step{clip-path:none;width:100%!important;height:auto;min-height:74px;border-radius:12px;display:grid;place-items:center;padding:10px;text-align:center}.dash-bottom-summary{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:900px){.dashboard-page-head{align-items:flex-start}.dashboard-head-actions{display:none}.dash-status-grid{grid-template-columns:repeat(2,1fr)}.dash-overview-grid,.dash-lower-grid{grid-template-columns:1fr}.dash-funnel-card{grid-column:auto}.dash-donut-layout{grid-template-columns:160px 1fr}.dash-large-donut{width:150px;height:150px}.dash-large-donut>div{width:92px;height:92px}.dash-bottom-summary{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.dash-status-grid{grid-template-columns:1fr 1fr;gap:8px}.dash-status-card{min-height:92px;padding:11px}.dash-status-copy{gap:7px}.dash-status-icon{width:25px;height:25px;font-size:11px}.dash-status-copy strong{font-size:21px}.dash-mini-ring{width:40px;height:40px}.dash-mini-ring i{width:28px;height:28px}.dash-overview-grid{gap:10px}.dash-donut-layout{grid-template-columns:1fr}.dash-large-donut{margin:auto}.dash-schedule-row{grid-template-columns:72px 4px minmax(0,1fr)}.dash-schedule-row>b{display:none}.dash-funnel{grid-template-columns:1fr}.dash-funnel-step{min-height:48px;display:flex}.dash-bottom-summary{grid-template-columns:1fr 1fr;gap:8px}.dash-bottom-summary article:last-child{grid-column:1/-1}}
+
+/* v53 — refine dashboard overview panels for cleaner hierarchy */
+.dash-overview-grid{
+  grid-template-columns:minmax(0,1.08fr) minmax(0,1.12fr) minmax(300px,.92fr);
+  gap:12px;
+  align-items:stretch;
+}
+.dash-overview-grid>.dashboard-panel{
+  min-height:390px;
+  padding:16px 17px;
+  overflow:hidden;
+}
+.dash-overview-grid>.dashboard-panel>header{
+  margin-bottom:10px;
+  padding-bottom:10px;
+  border-bottom:1px solid #edf1f5;
+}
+.dash-overview-grid>.dashboard-panel>header h3{font-size:14px}
+.dash-overview-grid>.dashboard-panel>header p{font-size:10px;line-height:1.45}
+
+.dash-donut-layout{
+  grid-template-columns:158px minmax(0,1fr);
+  gap:16px;
+  align-items:center;
+  min-height:285px;
+  padding-top:2px;
+}
+.dash-large-donut{width:150px;height:150px;margin:auto}
+.dash-large-donut>div{width:90px;height:90px}
+.dash-large-donut strong{font-size:28px}
+.dash-large-donut span{font-size:10px}
+.dash-donut-legends{gap:6px}
+.dash-donut-legend{
+  grid-template-columns:8px minmax(0,1fr) 22px 38px;
+  gap:6px;
+  font-size:10px;
+  line-height:1.2;
+}
+.dash-donut-legend span{width:7px;height:7px}
+.dash-donut-legend strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-donut-legend b,.dash-donut-legend em{text-align:right}
+
+.dash-schedule-card>div{display:grid}
+.dash-schedule-row{
+  grid-template-columns:78px 4px minmax(0,1fr) 32px;
+  gap:9px;
+  min-height:66px;
+  padding:9px 1px;
+}
+.dash-schedule-line{height:36px}
+.dash-schedule-row time{font-size:10.5px}
+.dash-schedule-row div strong{font-size:11px;line-height:1.25;margin:1px 0}
+.dash-schedule-row div small,.dash-schedule-row div em{font-size:9px;line-height:1.25}
+.dash-schedule-row>b{text-align:right;font-size:9px}
+
+.dash-funnel{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+  min-height:285px;
+  padding:4px 8px 0;
+}
+.dash-funnel-step{
+  height:43px;
+  flex:none;
+  padding:0 12%;
+  font-size:10.5px;
+  line-height:1;
+  overflow:hidden;
+}
+.dash-funnel-step span,
+.dash-funnel-step b{position:relative;z-index:1;white-space:nowrap}
+.dash-funnel-step b{min-width:20px;text-align:right}
+.dash-funnel-step.f0{width:96%}
+.dash-funnel-step.f1{width:84%}
+.dash-funnel-step.f2{width:72%}
+.dash-funnel-step.f3{width:60%}
+.dash-funnel-step.f4{width:48%}
+
+@media(max-width:1250px){
+  .dash-overview-grid{grid-template-columns:1fr 1fr}
+  .dash-overview-grid>.dashboard-panel{min-height:360px}
+  .dash-funnel-card{grid-column:1/-1}
+  .dash-funnel{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));min-height:0;align-items:end;padding-top:8px}
+  .dash-funnel-step{width:100%!important;min-height:68px;height:auto;padding:10px 8px;clip-path:none;border-radius:10px;display:grid;place-items:center;gap:4px}
+}
+@media(max-width:900px){
+  .dash-overview-grid>.dashboard-panel{min-height:0}
+  .dash-donut-layout{grid-template-columns:150px minmax(0,1fr);min-height:240px}
+  .dash-funnel{grid-template-columns:1fr;align-items:stretch}
+  .dash-funnel-step{min-height:44px;display:flex;justify-content:space-between}
+}
+@media(max-width:560px){
+  .dash-overview-grid>.dashboard-panel{padding:14px}
+  .dash-donut-layout{grid-template-columns:1fr;min-height:0}
+  .dash-donut-legends{margin-top:4px}
+  .dash-schedule-row{grid-template-columns:68px 4px minmax(0,1fr)}
+  .dash-funnel{min-height:0}
+}
