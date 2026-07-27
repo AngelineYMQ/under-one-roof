@@ -34,7 +34,7 @@ async function ensure(env){
    scriptEn=scriptEn.replace(/^EP\d{2} [“"].*?[”"]/,`EP${String(x.episodeNo).padStart(2,'0')} “${x.titleEn}”`);
    if(x.episodeNo===3&&openIssues==='行李箱数量待确认'){openIssues='剧情大纲待确认';openIssuesEn='Story outline pending';}
   }
-  await env.DB.prepare('UPDATE episodes SET title_zh=?,title_en=?,summary_zh=?,summary_en=?,script_zh=?,script_en=?,open_issues=?,open_issues_en=CASE WHEN ?<>'' THEN ? ELSE open_issues_en END,updated_at=CURRENT_TIMESTAMP WHERE season_no=1 AND episode_no=?').bind(x.titleZh,x.titleEn,summaryZh,summaryEn,scriptZh,scriptEn,openIssues,openIssuesEn,openIssuesEn,x.episodeNo).run();
+  await env.DB.prepare("UPDATE episodes SET title_zh=?,title_en=?,summary_zh=?,summary_en=?,script_zh=?,script_en=?,open_issues=?,open_issues_en=CASE WHEN ? <> '' THEN ? ELSE open_issues_en END,updated_at=CURRENT_TIMESTAMP WHERE season_no=1 AND episode_no=?").bind(x.titleZh,x.titleEn,summaryZh,summaryEn,scriptZh,scriptEn,openIssues,openIssuesEn,openIssuesEn,x.episodeNo).run();
  }
 
  const issueMap={

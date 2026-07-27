@@ -21,3 +21,5 @@ Every future ZIP should be released only after this checklist passes.
 - [x] Shared time blocks can be added, edited and deleted.
 - [x] Common three-person availability is calculated automatically.
 - [x] D1 API and local fallback are included.
+
+- [x] Cloudflare Pages Functions SQL string syntax hotfix applied.

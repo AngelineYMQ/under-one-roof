@@ -113,3 +113,7 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 - Automatically calculates common time slots shared by all three members.
 - Includes common-slot, by-member and weekly overview views.
 - Added bilingual UI, D1 persistence and localStorage fallback.
+
+## v65 hotfix
+- Fixed Cloudflare Pages Functions build error in `functions/api/episodes.js`.
+- Preserved the Current Bottleneck dashboard and shared team availability calendar.
