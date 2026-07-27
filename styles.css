@@ -1556,3 +1556,68 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
   .dash-funnel-shape{height:48px!important}
   .dash-funnel-meta{min-height:48px!important}
 }
+
+
+/* v60 — keep funnel labels fully inside the card */
+.dash-funnel{
+  --funnel-graphic-col:minmax(220px,1.12fr);
+  --funnel-label-col:minmax(170px,.88fr);
+  padding:14px 22px 6px 12px!important;
+  overflow:hidden!important;
+}
+.dash-funnel-row{
+  grid-template-columns:var(--funnel-graphic-col) var(--funnel-label-col)!important;
+  gap:18px!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.dash-funnel-meta{
+  min-width:0!important;
+  width:100%!important;
+  padding-right:8px!important;
+  box-sizing:border-box!important;
+}
+.dash-funnel-meta span{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  line-height:1.2!important;
+}
+.dash-funnel-meta b{
+  min-width:26px!important;
+  padding-left:6px!important;
+}
+.dash-funnel-meta em{
+  line-height:1.15!important;
+}
+
+@media(max-width:1250px){
+  .dash-funnel{
+    --funnel-graphic-col:minmax(210px,1.08fr);
+    --funnel-label-col:minmax(180px,.92fr);
+    padding-right:18px!important;
+  }
+  .dash-funnel-row{gap:16px!important}
+}
+@media(max-width:900px){
+  .dash-funnel{
+    --funnel-graphic-col:minmax(170px,1fr);
+    --funnel-label-col:minmax(150px,1fr);
+    padding-left:8px!important;
+    padding-right:10px!important;
+  }
+  .dash-funnel-row{gap:12px!important}
+  .dash-funnel-meta span{font-size:10px!important}
+  .dash-funnel-meta b{font-size:11.5px!important}
+}
+@media(max-width:560px){
+  .dash-funnel{
+    --funnel-graphic-col:minmax(125px,.95fr);
+    --funnel-label-col:minmax(125px,1.05fr);
+  }
+  .dash-funnel-row{gap:10px!important}
+  .dash-funnel-meta{padding-right:2px!important}
+  .dash-funnel-meta span{font-size:9.5px!important}
+  .dash-funnel-meta b{font-size:10.5px!important}
+  .dash-funnel-meta em{font-size:8.5px!important}
+}

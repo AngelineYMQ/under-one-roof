@@ -88,3 +88,9 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 - Re-centred every funnel segment on one shared vertical axis.
 - Matched each segment's bottom width to the next segment's top width for a seamless silhouette.
 - Preserved external labels and responsive layout.
+
+
+## v60
+- Rebalanced funnel graphic and label columns.
+- Prevented stage labels and counts from clipping outside the dashboard card.
+- Improved label wrapping and responsive spacing.
