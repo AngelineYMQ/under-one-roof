@@ -70,3 +70,9 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 - Adds a dedicated bilingual Specials workspace under Episode Management.
 - Includes the SG61 special “A Reason to Stay” with 12 scene scripts, production notes, props, shots, runtime, shorts plan, fact-check register and production countdown.
 - Includes the original storyboard deck at `assets/nd-special-storyboard-deck.pptx`.
+
+
+## v57
+- Added complete English translations for all 12 National Day Special scene scripts.
+- English mode now displays English dialogue and English stage directions only.
+- Chinese mode preserves the original Chinese/Singlish performance script.
