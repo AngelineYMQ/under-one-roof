@@ -94,3 +94,9 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 - Rebalanced funnel graphic and label columns.
 - Prevented stage labels and counts from clipping outside the dashboard card.
 - Improved label wrapping and responsive spacing.
+
+
+## v61
+- Reduced the production funnel footprint.
+- Widened the external label area so English and Chinese stage names remain fully visible.
+- Kept counts and percentages outside the funnel for readability.

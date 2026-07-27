@@ -1621,3 +1621,85 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
   .dash-funnel-meta b{font-size:10.5px!important}
   .dash-funnel-meta em{font-size:8.5px!important}
 }
+
+
+/* v61 — compact funnel with a wider external label column */
+.dash-funnel{
+  --funnel-graphic-col:minmax(180px,.88fr);
+  --funnel-label-col:minmax(220px,1.12fr);
+  padding:16px 18px 8px 18px!important;
+  overflow:hidden!important;
+}
+.dash-funnel-row{
+  grid-template-columns:var(--funnel-graphic-col) var(--funnel-label-col)!important;
+  gap:20px!important;
+  min-height:56px!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.dash-funnel-shape{
+  height:56px!important;
+  max-width:320px!important;
+  justify-self:center!important;
+}
+.dash-funnel-meta{
+  min-width:0!important;
+  width:100%!important;
+  min-height:56px!important;
+  padding:0 10px 0 0!important;
+  box-sizing:border-box!important;
+  grid-template-columns:minmax(0,1fr) 34px!important;
+}
+.dash-funnel-meta span{
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  font-size:10.5px!important;
+}
+.dash-funnel-meta b{
+  min-width:34px!important;
+  text-align:right!important;
+  font-size:12px!important;
+}
+.dash-funnel-meta em{
+  font-size:9px!important;
+}
+
+/* Keep the same centre axis while making the graphic smaller */
+.dash-funnel-shape.f0{width:92%!important}
+.dash-funnel-shape.f1{width:74%!important}
+.dash-funnel-shape.f2{width:57%!important}
+.dash-funnel-shape.f3{width:42%!important}
+.dash-funnel-shape.f4{width:27%!important}
+
+@media(max-width:1250px){
+  .dash-funnel{
+    --funnel-graphic-col:minmax(175px,.85fr);
+    --funnel-label-col:minmax(215px,1.15fr);
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  .dash-funnel-row{gap:16px!important}
+}
+@media(max-width:760px){
+  .dash-funnel{
+    --funnel-graphic-col:minmax(135px,.8fr);
+    --funnel-label-col:minmax(150px,1.2fr);
+    padding:10px 8px 4px!important;
+  }
+  .dash-funnel-row{
+    gap:10px!important;
+    min-height:48px!important;
+  }
+  .dash-funnel-shape{
+    height:48px!important;
+    max-width:220px!important;
+  }
+  .dash-funnel-meta{
+    min-height:48px!important;
+    grid-template-columns:minmax(0,1fr) 28px!important;
+  }
+  .dash-funnel-meta span{font-size:9.5px!important}
+  .dash-funnel-meta b{font-size:10.5px!important;min-width:28px!important}
+  .dash-funnel-meta em{font-size:8.5px!important}
+}
