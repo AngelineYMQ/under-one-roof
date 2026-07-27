@@ -1247,3 +1247,90 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
   .dash-schedule-row{grid-template-columns:68px 4px minmax(0,1fr)}
   .dash-funnel{min-height:0}
 }
+
+
+/* v54 — centre donut total and move funnel labels outside the graphic */
+.dash-large-donut{position:relative}
+.dash-large-donut>div{
+  position:absolute!important;
+  inset:0!important;
+  width:auto!important;
+  height:auto!important;
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  pointer-events:none;
+}
+.dash-large-donut strong{display:block;margin:0;line-height:.95}
+.dash-large-donut span{display:block;margin-top:7px;line-height:1}
+
+.dash-funnel{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:9px;
+  min-height:285px;
+  padding:8px 8px 2px;
+}
+.dash-funnel-row{
+  display:grid;
+  grid-template-columns:minmax(120px,1fr) minmax(112px,.72fr);
+  align-items:center;
+  gap:15px;
+  min-height:43px;
+}
+.dash-funnel-shape{
+  height:39px;
+  margin:auto;
+  clip-path:polygon(7% 0,93% 0,84% 100%,16% 100%);
+  border-radius:2px;
+}
+.dash-funnel-shape.f0{width:100%;background:#686fdb}
+.dash-funnel-shape.f1{width:88%;background:#5d91d8}
+.dash-funnel-shape.f2{width:76%;background:#55a9c5}
+.dash-funnel-shape.f3{width:64%;background:#43b0a7}
+.dash-funnel-shape.f4{width:52%;background:#34a967}
+.dash-funnel-meta{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-areas:"label count" "percent percent";
+  column-gap:9px;
+  align-items:center;
+  min-width:0;
+}
+.dash-funnel-meta span{
+  grid-area:label;
+  color:#26364f;
+  font-size:10.5px;
+  font-weight:750;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.dash-funnel-meta b{
+  grid-area:count;
+  color:#17243c;
+  font-size:12px;
+  text-align:right;
+}
+.dash-funnel-meta em{
+  grid-area:percent;
+  margin-top:3px;
+  color:#8a96a8;
+  font-size:9px;
+  font-style:normal;
+}
+
+@media(max-width:1250px){
+  .dash-funnel{display:flex;min-height:0;padding-top:8px}
+  .dash-funnel-row{grid-template-columns:minmax(180px,1fr) minmax(140px,.55fr)}
+  .dash-funnel-shape{width:100%!important}
+}
+@media(max-width:560px){
+  .dash-funnel-row{grid-template-columns:minmax(115px,1fr) minmax(105px,.8fr);gap:10px}
+  .dash-funnel-shape{height:34px}
+  .dash-funnel-meta span{font-size:10px}
+  .dash-funnel-meta b{font-size:11px}
+}

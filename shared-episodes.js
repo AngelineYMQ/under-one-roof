@@ -429,7 +429,7 @@ function renderDashboard(){
   [lang==='en'?'In post':'后期制作',post],
   [lang==='en'?'Published':'已发布',published]
  ];
- const funnelHtml=funnel.map((x,i)=>`<div class="dash-funnel-step f${i}"><span>${x[0]}</span><b>${x[1]}</b></div>`).join('');
+ const funnelHtml=funnel.map((x,i)=>{const pct=Math.round((x[1]/total)*100);return `<div class="dash-funnel-row"><div class="dash-funnel-shape f${i}"></div><div class="dash-funnel-meta"><span>${x[0]}</span><b>${x[1]}</b><em>${pct}%</em></div></div>`}).join('');
  const recentRows=recent.map(x=>`<tr onclick="SharedEpisodes.open(${x.id})"><td><strong>EP${String(x.episodeNo).padStart(2,'0')}</strong><span>${esc(title(x))}</span></td><td><span class="stage-pill stage-${x.productionStage}">${t.stages[x.productionStage]}</span></td><td><div class="dash-table-progress"><i><b style="width:${x.progress||0}%"></b></i><span>${x.progress||0}%</span></div></td><td>${esc(formatDisplayDate(x.shootDate))}</td><td>${esc(displayOwner(x.owner))}</td><td><button>${lang==='en'?'Open':'打开'}</button></td></tr>`).join('');
  return `<div class="dashboard-shell dashboard-crm-layout">
   <div class="dashboard-page-head"><div><h2>${lang==='en'?'Production Overview':'制作总览'}</h2><p>${lang==='en'?'Live production progress, shooting plans, publishing data and next actions.':'实时掌握项目进度、拍摄安排、发布表现和下一步行动。'}</p></div><div class="dashboard-head-actions"><button class="ghost-btn" onclick="location.hash='episodes'">${lang==='en'?'Search episodes':'搜索剧集'}</button><button class="primary-btn" onclick="location.hash='scripts'">＋ ${lang==='en'?'New episode':'新增剧集'}</button></div></div>
