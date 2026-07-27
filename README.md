@@ -65,3 +65,8 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 ## v51 English interface fixes
 - English dashboard displays shared ownership as **All Three**.
 - English mode uses **U** for the brand mark; Chinese mode keeps **屋**.
+
+## v56 National Day Special
+- Adds a dedicated bilingual Specials workspace under Episode Management.
+- Includes the SG61 special “A Reason to Stay” with 12 scene scripts, production notes, props, shots, runtime, shorts plan, fact-check register and production countdown.
+- Includes the original storyboard deck at `assets/nd-special-storyboard-deck.pptx`.
