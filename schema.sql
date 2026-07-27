@@ -138,7 +138,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(2,'照片里明明不是这样','The Photos Looked Nothing Like This','入住篇','Moving In','照片里明明不是这样：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Photos Looked Nothing Like This: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','idea','outline','Joseph','medium','2026-08-02','',45,'等待大纲确认','v0.1','EP02《照片里明明不是这样》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(2,'房东的二十条规则','The Landlord’s Twenty Rules','入住篇','Moving In','房东的二十条规则：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Landlord’s Twenty Rules: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','idea','outline','Joseph','medium','2026-08-02','',45,'等待大纲确认','v0.1','EP02《房东的二十条规则》
 
 目标时长：4–7分钟
 
@@ -161,7 +161,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP02 “The Photos Looked Nothing Like This”
+用笑点、后果或下一集线索收尾。','EP02 “The Landlord’s Twenty Rules”
 
 Target duration: 4–7 minutes
 
@@ -185,7 +185,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(3,'她带了八个行李箱','She Brought Eight Suitcases','入住篇','Moving In','她带了八个行李箱：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','She Brought Eight Suitcases: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','idea','outline','Angeline','high','2026-08-02','',55,'行李箱数量待确认','v0.1','EP03《她带了八个行李箱》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(3,'她只带了一个登机箱','She Arrived with Just One Carry-On','入住篇','Moving In','她只带了一个登机箱：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','She Arrived with Just One Carry-On: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','idea','outline','Angeline','high','2026-08-02','',55,'剧情大纲待确认','v0.1','EP03《她只带了一个登机箱》
 
 目标时长：4–7分钟
 
@@ -208,7 +208,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP03 “She Brought Eight Suitcases”
+用笑点、后果或下一集线索收尾。','EP03 “She Arrived with Just One Carry-On”
 
 Target duration: 4–7 minutes
 
@@ -232,7 +232,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(4,'有钱为什么不租整套房','Why Not Rent the Whole Unit?','入住篇','Moving In','有钱为什么不租整套房：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Why Not Rent the Whole Unit?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','idea','outline','James','medium','2026-08-09','',35,'','v0.1','EP04《有钱为什么不租整套房》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(4,'客厅不是你的仓库','The Living Room Is Not Your Storage Room','入住篇','Moving In','客厅不是你的仓库：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Living Room Is Not Your Storage Room: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','idea','outline','James','medium','2026-08-09','',35,'','v0.1','EP04《客厅不是你的仓库》
 
 目标时长：4–7分钟
 
@@ -255,7 +255,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP04 “Why Not Rent the Whole Unit?”
+用笑点、后果或下一集线索收尾。','EP04 “The Living Room Is Not Your Storage Room”
 
 Target duration: 4–7 minutes
 
@@ -279,7 +279,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(5,'房东的二十条规则','The Landlord’s Twenty Rules','入住篇','Moving In','房东的二十条规则：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Landlord’s Twenty Rules: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','idea','outline','James','high','2026-08-09','',30,'房屋规则清单待定','v0.1','EP05《房东的二十条规则》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(5,'这个房间配不上这张床','This Room Is Not Good Enough for This Bed','入住篇','Moving In','这个房间配不上这张床：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','This Room Is Not Good Enough for This Bed: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','idea','outline','James','high','2026-08-09','',30,'房屋规则清单待定','v0.1','EP05《这个房间配不上这张床》
 
 目标时长：4–7分钟
 
@@ -302,7 +302,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP05 “The Landlord’s Twenty Rules”
+用笑点、后果或下一集线索收尾。','EP05 “This Room Is Not Good Enough for This Bed”
 
 Target duration: 4–7 minutes
 
@@ -326,7 +326,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(6,'押金和面子到底哪个重要','Deposit or Pride?','入住篇','Moving In','押金和面子到底哪个重要：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Deposit or Pride?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','idea','outline','Angeline','high','2026-08-09','',40,'押金条款需核实','v0.1','EP06《押金和面子到底哪个重要》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(6,'房东不准她换门锁','The Landlord Won’t Let Her Change the Lock','入住篇','Moving In','房东不准她换门锁：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Landlord Won’t Let Her Change the Lock: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','idea','outline','Angeline','high','2026-08-09','',40,'押金条款需核实','v0.1','EP06《房东不准她换门锁》
 
 目标时长：4–7分钟
 
@@ -349,7 +349,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP06 “Deposit or Pride?”
+用笑点、后果或下一集线索收尾。','EP06 “The Landlord Won’t Let Her Change the Lock”
 
 Target duration: 4–7 minutes
 
@@ -373,7 +373,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(7,'空调为什么不能一直开','Why Can’t the Air-Con Stay On?','生活习惯篇','Living Habits','空调为什么不能一直开：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Why Can’t the Air-Con Stay On?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','writing','writing','Joseph','medium','2026-08-16','',48,'','v0.1','EP07《空调为什么不能一直开》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(7,'空调遥控器失踪了','The Air-Con Remote Has Gone Missing','生活习惯篇','Living Habits','空调遥控器失踪了：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Air-Con Remote Has Gone Missing: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','writing','writing','Joseph','medium','2026-08-16','',48,'','v0.1','EP07《空调遥控器失踪了》
 
 目标时长：4–7分钟
 
@@ -396,7 +396,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP07 “Why Can’t the Air-Con Stay On?”
+用笑点、后果或下一集线索收尾。','EP07 “The Air-Con Remote Has Gone Missing”
 
 Target duration: 4–7 minutes
 
@@ -420,7 +420,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(8,'她第一次自己洗衣服','Her First Time Doing Laundry','生活习惯篇','Living Habits','她第一次自己洗衣服：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Her First Time Doing Laundry: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','writing','writing','Angeline','medium','2026-08-16','',42,'洗衣场景待确认','v0.1','EP08《她第一次自己洗衣服》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(8,'一顿饭，三种算法','One Meal, Three Ways to Split the Bill','生活习惯篇','Living Habits','一顿饭，三种算法：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','One Meal, Three Ways to Split the Bill: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','writing','writing','Angeline','medium','2026-08-16','',42,'洗衣场景待确认','v0.1','EP08《一顿饭，三种算法》
 
 目标时长：4–7分钟
 
@@ -443,7 +443,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP08 “Her First Time Doing Laundry”
+用笑点、后果或下一集线索收尾。','EP08 “One Meal, Three Ways to Split the Bill”
 
 Target duration: 4–7 minutes
 
@@ -467,7 +467,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(9,'谁又没有关灯','Who Left the Lights On?','生活习惯篇','Living Habits','谁又没有关灯：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Who Left the Lights On?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','writing','writing','James','low','2026-08-16','',38,'','v0.1','EP09《谁又没有关灯》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(9,'她请了人来打扫自己的房间','She Hired Someone to Clean Her Room','生活习惯篇','Living Habits','她请了人来打扫自己的房间：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','She Hired Someone to Clean Her Room: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','writing','writing','James','low','2026-08-16','',38,'','v0.1','EP09《她请了人来打扫自己的房间》
 
 目标时长：4–7分钟
 
@@ -490,7 +490,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP09 “Who Left the Lights On?”
+用笑点、后果或下一集线索收尾。','EP09 “She Hired Someone to Clean Her Room”
 
 Target duration: 4–7 minutes
 
@@ -514,7 +514,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(10,'冰箱里的进口食材是谁的','Who Owns the Imported Food in the Fridge?','生活习惯篇','Living Habits','冰箱里的进口食材是谁的：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Who Owns the Imported Food in the Fridge?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','writing','writing','Angeline','medium','2026-08-23','',40,'进口食材道具','v0.1','EP10《冰箱里的进口食材是谁的》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(10,'外卖员比房东更熟这个家','The Delivery Rider Knows the House Better Than the Landlord','生活习惯篇','Living Habits','外卖员比房东更熟这个家：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Delivery Rider Knows the House Better Than the Landlord: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','writing','writing','Angeline','medium','2026-08-23','',40,'进口食材道具','v0.1','EP10《外卖员比房东更熟这个家》
 
 目标时长：4–7分钟
 
@@ -537,7 +537,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP10 “Who Owns the Imported Food in the Fridge?”
+用笑点、后果或下一集线索收尾。','EP10 “The Delivery Rider Knows the House Better Than the Landlord”
 
 Target duration: 4–7 minutes
 
@@ -561,7 +561,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(11,'她想请人做全部家务','She Wants Someone Else to Do All the Housework','生活习惯篇','Living Habits','她想请人做全部家务：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','She Wants Someone Else to Do All the Housework: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','writing','writing','Joseph','medium','2026-08-23','',44,'家务服务费用待核实','v0.1','EP11《她想请人做全部家务》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(11,'谁拆了我的快递','Who Opened My Parcel?','生活习惯篇','Living Habits','谁拆了我的快递：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Who Opened My Parcel?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','writing','writing','Joseph','medium','2026-08-23','',44,'家务服务费用待核实','v0.1','EP11《谁拆了我的快递》
 
 目标时长：4–7分钟
 
@@ -584,7 +584,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP11 “She Wants Someone Else to Do All the Housework”
+用笑点、后果或下一集线索收尾。','EP11 “Who Opened My Parcel?”
 
 Target duration: 4–7 minutes
 
@@ -608,7 +608,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(12,'榴梿可以带回家吗','Can Durian Come Home?','生活习惯篇','Living Habits','榴梿可以带回家吗：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Can Durian Come Home?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','locked','James','medium','2026-08-23','',70,'','v0.1','EP12《榴梿可以带回家吗》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(12,'Joseph把客厅变成了摄影棚','Joseph Turns the Living Room into a Studio','生活习惯篇','Living Habits','Joseph把客厅变成了摄影棚：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Joseph Turns the Living Room into a Studio: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','locked','James','medium','2026-08-23','',70,'','v0.1','EP12《Joseph把客厅变成了摄影棚》
 
 目标时长：4–7分钟
 
@@ -631,7 +631,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP12 “Can Durian Come Home?”
+用笑点、后果或下一集线索收尾。','EP12 “Joseph Turns the Living Room into a Studio”
 
 Target duration: 4–7 minutes
 
@@ -655,7 +655,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(13,'富二代第一次洗厕所','A Wealthy Student Cleans the Toilet','生活习惯篇','Living Habits','富二代第一次洗厕所：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','A Wealthy Student Cleans the Toilet: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','locked','Angeline','high','2026-08-30','',76,'清洁道具','v0.1','EP13《富二代第一次洗厕所》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(13,'房东带客户回家看房','The Landlord Brings Clients Home for a Viewing','生活习惯篇','Living Habits','房东带客户回家看房：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Landlord Brings Clients Home for a Viewing: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','locked','Angeline','high','2026-08-30','',76,'清洁道具','v0.1','EP13《房东带客户回家看房》
 
 目标时长：4–7分钟
 
@@ -678,7 +678,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP13 “A Wealthy Student Cleans the Toilet”
+用笑点、后果或下一集线索收尾。','EP13 “The Landlord Brings Clients Home for a Viewing”
 
 Target duration: 4–7 minutes
 
@@ -702,7 +702,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(14,'带同学回家要不要通知','Must She Tell the Landlord About Guests?','生活习惯篇','Living Habits','带同学回家要不要通知：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Must She Tell the Landlord About Guests?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','locked','Joseph','medium','2026-08-30','',74,'配角未确认','v0.1','EP14《带同学回家要不要通知》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(14,'她成了房产广告里的租客','She Ends Up in a Property Advertisement','生活习惯篇','Living Habits','她成了房产广告里的租客：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','She Ends Up in a Property Advertisement: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','locked','Joseph','medium','2026-08-30','',74,'配角未确认','v0.1','EP14《她成了房产广告里的租客》
 
 目标时长：4–7分钟
 
@@ -725,7 +725,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP14 “Must She Tell the Landlord About Guests?”
+用笑点、后果或下一集线索收尾。','EP14 “She Ends Up in a Property Advertisement”
 
 Target duration: 4–7 minutes
 
@@ -749,7 +749,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(15,'她想把客厅升级成豪宅风','She Wants a Luxury Living Room Makeover','生活习惯篇','Living Habits','她想把客厅升级成豪宅风：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','She Wants a Luxury Living Room Makeover: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','locked','James','low','2026-08-30','',71,'家具改造方案','v0.1','EP15《她想把客厅升级成豪宅风》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(15,'一张沙发退了三次','The Sofa Was Returned Three Times','生活习惯篇','Living Habits','一张沙发退了三次：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Sofa Was Returned Three Times: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','locked','James','low','2026-08-30','',71,'家具改造方案','v0.1','EP15《一张沙发退了三次》
 
 目标时长：4–7分钟
 
@@ -772,7 +772,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP15 “She Wants a Luxury Living Room Makeover”
+用笑点、后果或下一集线索收尾。','EP15 “The Sofa Was Returned Three Times”
 
 Target duration: 4–7 minutes
 
@@ -796,7 +796,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(16,'用纸巾占座','Tissue Paper Means Reserved','新加坡文化篇','Singapore Culture','用纸巾占座：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Tissue Paper Means Reserved: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','shoot','Joseph','high','2026-09-06','',82,'小贩中心外景许可','v0.1','EP16《用纸巾占座》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(16,'楼下邻居上来投诉了','The Downstairs Neighbour Comes Up to Complain','新加坡文化篇','Singapore Culture','楼下邻居上来投诉了：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Downstairs Neighbour Comes Up to Complain: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','shoot','Joseph','high','2026-09-06','',82,'小贩中心外景许可','v0.1','EP16《楼下邻居上来投诉了》
 
 目标时长：4–7分钟
 
@@ -819,7 +819,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP16 “Tissue Paper Means Reserved”
+用笑点、后果或下一集线索收尾。','EP16 “The Downstairs Neighbour Comes Up to Complain”
 
 Target duration: 4–7 minutes
 
@@ -843,7 +843,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(17,'第一次自己端小贩中心餐盘','Her First Hawker-Centre Tray','新加坡文化篇','Singapore Culture','第一次自己端小贩中心餐盘：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Her First Hawker-Centre Tray: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','shoot','Angeline','high','2026-09-06','',84,'餐盘外景','v0.1','EP17《第一次自己端小贩中心餐盘》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(17,'她第一次被管理处警告','Her First Warning from Management','新加坡文化篇','Singapore Culture','她第一次被管理处警告：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Her First Warning from Management: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','shoot','Angeline','high','2026-09-06','',84,'餐盘外景','v0.1','EP17《她第一次被管理处警告》
 
 目标时长：4–7分钟
 
@@ -866,7 +866,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP17 “Her First Hawker-Centre Tray”
+用笑点、后果或下一集线索收尾。','EP17 “Her First Warning from Management”
 
 Target duration: 4–7 minutes
 
@@ -890,7 +890,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(18,'Can Can 是不是更可以','Does Can Can Mean More Can?','新加坡文化篇','Singapore Culture','Can Can 是不是更可以：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Does Can Can Mean More Can?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','shoot','James','medium','2026-09-06','',80,'Singlish台词校对','v0.1','EP18《Can Can 是不是更可以》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(18,'有钱也买不到这个时间段','Even Money Cannot Buy This Time Slot','新加坡文化篇','Singapore Culture','有钱也买不到这个时间段：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Even Money Cannot Buy This Time Slot: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','shoot','James','medium','2026-09-06','',80,'Singlish台词校对','v0.1','EP18《有钱也买不到这个时间段》
 
 目标时长：4–7分钟
 
@@ -913,7 +913,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP18 “Does Can Can Mean More Can?”
+用笑点、后果或下一集线索收尾。','EP18 “Even Money Cannot Buy This Time Slot”
 
 Target duration: 4–7 minutes
 
@@ -937,7 +937,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(19,'第一次坐巴士坐过站','Her First Bus Ride Goes Wrong','新加坡文化篇','Singapore Culture','第一次坐巴士坐过站：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Her First Bus Ride Goes Wrong: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','shoot','Angeline','medium','2026-09-13','',79,'巴士外景','v0.1','EP19《第一次坐巴士坐过站》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(19,'Joseph发错了一条视频','Joseph Posts the Wrong Video','新加坡文化篇','Singapore Culture','Joseph发错了一条视频：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Joseph Posts the Wrong Video: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','shoot','Angeline','medium','2026-09-13','',79,'巴士外景','v0.1','EP19《Joseph发错了一条视频》
 
 目标时长：4–7分钟
 
@@ -960,7 +960,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP19 “Her First Bus Ride Goes Wrong”
+用笑点、后果或下一集线索收尾。','EP19 “Joseph Posts the Wrong Video”
 
 Target duration: 4–7 minutes
 
@@ -984,7 +984,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(20,'MRT里面不能做什么','What You Cannot Do on the MRT','新加坡文化篇','Singapore Culture','MRT里面不能做什么：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','What You Cannot Do on the MRT: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','filmed','Joseph','high','2026-09-13','',88,'素材备份待确认','v0.1','EP20《MRT里面不能做什么》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(20,'一个差评，三个人失眠','One Bad Review Keeps Three People Awake','新加坡文化篇','Singapore Culture','一个差评，三个人失眠：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','One Bad Review Keeps Three People Awake: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','filmed','Joseph','high','2026-09-13','',88,'素材备份待确认','v0.1','EP20《一个差评，三个人失眠》
 
 目标时长：4–7分钟
 
@@ -1007,7 +1007,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP20 “What You Cannot Do on the MRT”
+用笑点、后果或下一集线索收尾。','EP20 “One Bad Review Keeps Three People Awake”
 
 Target duration: 4–7 minutes
 
@@ -1031,7 +1031,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(21,'垃圾到底怎么丢','How Do You Throw Away Rubbish?','新加坡文化篇','Singapore Culture','垃圾到底怎么丢：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','How Do You Throw Away Rubbish?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','filmed','James','medium','2026-09-13','',86,'补拍垃圾房镜头','v0.1','EP21《垃圾到底怎么丢》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(21,'晚上十一点的“在吗”','The 11 P.M. “Are You There?” Message','新加坡文化篇','Singapore Culture','晚上十一点的“在吗”：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The 11 P.M. “Are You There?” Message: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','filmed','James','medium','2026-09-13','',86,'补拍垃圾房镜头','v0.1','EP21《晚上十一点的“在吗”》
 
 目标时长：4–7分钟
 
@@ -1054,7 +1054,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP21 “How Do You Throw Away Rubbish?”
+用笑点、后果或下一集线索收尾。','EP21 “The 11 P.M. “Are You There?” Message”
 
 Target duration: 4–7 minutes
 
@@ -1078,7 +1078,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(22,'有钱也不能避开的罚款','Fines Even Money Cannot Avoid','新加坡文化篇','Singapore Culture','有钱也不能避开的罚款：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Fines Even Money Cannot Avoid: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','filmed','Angeline','high','2026-09-20','',90,'罚款信息待核实','v0.1','EP22《有钱也不能避开的罚款》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(22,'AI替谁做了这份工作','Whose Job Did AI Just Do?','新加坡文化篇','Singapore Culture','AI替谁做了这份工作：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Whose Job Did AI Just Do?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','filmed','Angeline','high','2026-09-20','',90,'罚款信息待核实','v0.1','EP22《AI替谁做了这份工作》
 
 目标时长：4–7分钟
 
@@ -1101,7 +1101,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP22 “Fines Even Money Cannot Avoid”
+用笑点、后果或下一集线索收尾。','EP22 “Whose Job Did AI Just Do?”
 
 Target duration: 4–7 minutes
 
@@ -1125,7 +1125,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(23,'新加坡下雨为什么没人慌','Why Singaporeans Stay Calm in Sudden Rain','新加坡文化篇','Singapore Culture','新加坡下雨为什么没人慌：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Why Singaporeans Stay Calm in Sudden Rain: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','post','Joseph','medium','2026-09-20','',92,'粗剪中','v0.1','EP23《新加坡下雨为什么没人慌》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(23,'便宜七成的报价单','A Quote That Is Seventy Percent Cheaper','新加坡文化篇','Singapore Culture','便宜七成的报价单：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','A Quote That Is Seventy Percent Cheaper: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','post','Joseph','medium','2026-09-20','',92,'粗剪中','v0.1','EP23《便宜七成的报价单》
 
 目标时长：4–7分钟
 
@@ -1148,7 +1148,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP23 “Why Singaporeans Stay Calm in Sudden Rain”
+用笑点、后果或下一集线索收尾。','EP23 “A Quote That Is Seventy Percent Cheaper”
 
 Target duration: 4–7 minutes
 
@@ -1172,7 +1172,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(24,'Joseph 偷拍她第一次做家务','Joseph Secretly Films Her Doing Housework','关系升级篇','Relationship Growth','Joseph 偷拍她第一次做家务：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Joseph Secretly Films Her Doing Housework: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','post','Joseph','high','2026-09-20','',94,'等待字幕','v0.1','EP24《Joseph 偷拍她第一次做家务》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(24,'钱到底什么时候到','When Is the Payment Actually Coming?','关系升级篇','Relationship Growth','钱到底什么时候到：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','When Is the Payment Actually Coming?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','post','Joseph','high','2026-09-20','',94,'等待字幕','v0.1','EP24《钱到底什么时候到》
 
 目标时长：4–7分钟
 
@@ -1195,7 +1195,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP24 “Joseph Secretly Films Her Doing Housework”
+用笑点、后果或下一集线索收尾。','EP24 “When Is the Payment Actually Coming?”
 
 Target duration: 4–7 minutes
 
@@ -1219,7 +1219,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(25,'她要花钱改造自己的小房间','She Pays to Upgrade Her Tiny Room','关系升级篇','Relationship Growth','她要花钱改造自己的小房间：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','She Pays to Upgrade Her Tiny Room: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','post','Angeline','medium','2026-09-27','',91,'房间改造素材','v0.1','EP25《她要花钱改造自己的小房间》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(25,'朋友，还是客户','Friend or Client?','关系升级篇','Relationship Growth','朋友，还是客户：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Friend or Client?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','post','Angeline','medium','2026-09-27','',91,'房间改造素材','v0.1','EP25《朋友，还是客户》
 
 目标时长：4–7分钟
 
@@ -1242,7 +1242,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP25 “She Pays to Upgrade Her Tiny Room”
+用笑点、后果或下一集线索收尾。','EP25 “Friend or Client?”
 
 Target duration: 4–7 minutes
 
@@ -1266,7 +1266,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(26,'James 带客户来看她嫌弃的房间','James Brings Clients to View the Room She Hates','关系升级篇','Relationship Growth','James 带客户来看她嫌弃的房间：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','James Brings Clients to View the Room She Hates: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','publish','James','high','2026-09-27','',96,'封面待确认','v0.1','EP26《James 带客户来看她嫌弃的房间》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(26,'她第一次认真算自己的学费','She Calculates Her Tuition Fees for the First Time','关系升级篇','Relationship Growth','她第一次认真算自己的学费：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','She Calculates Her Tuition Fees for the First Time: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','publish','James','high','2026-09-27','',96,'封面待确认','v0.1','EP26《她第一次认真算自己的学费》
 
 目标时长：4–7分钟
 
@@ -1289,7 +1289,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP26 “James Brings Clients to View the Room She Hates”
+用笑点、后果或下一集线索收尾。','EP26 “She Calculates Her Tuition Fees for the First Time”
 
 Target duration: 4–7 minutes
 
@@ -1313,7 +1313,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(27,'她第一次不靠家里解决问题','She Solves a Problem Without Family Money','关系升级篇','Relationship Growth','她第一次不靠家里解决问题：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','She Solves a Problem Without Family Money: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','publish','Angeline','high','2026-09-27','',97,'发布时间未定','v0.1','EP27《她第一次不靠家里解决问题》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(27,'租金吃掉了一个好生意','Rent Killed a Good Business','关系升级篇','Relationship Growth','租金吃掉了一个好生意：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Rent Killed a Good Business: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','publish','Angeline','high','2026-09-27','',97,'发布时间未定','v0.1','EP27《租金吃掉了一个好生意》
 
 目标时长：4–7分钟
 
@@ -1336,7 +1336,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP27 “She Solves a Problem Without Family Money”
+用笑点、后果或下一集线索收尾。','EP27 “Rent Killed a Good Business”
 
 Target duration: 4–7 minutes
 
@@ -1360,7 +1360,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(28,'富二代洗厕所的视频爆了','The Toilet-Cleaning Video Goes Viral','关系升级篇','Relationship Growth','富二代洗厕所的视频爆了：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','The Toilet-Cleaning Video Goes Viral: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','publish','Joseph','high','2026-10-04','',98,'平台标题待定','v0.1','EP28《富二代洗厕所的视频爆了》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(28,'不会用App的人怎么办','What Happens to People Who Cannot Use the App?','关系升级篇','Relationship Growth','不会用App的人怎么办：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','What Happens to People Who Cannot Use the App?: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','publish','Joseph','high','2026-10-04','',98,'平台标题待定','v0.1','EP28《不会用App的人怎么办》
 
 目标时长：4–7分钟
 
@@ -1383,7 +1383,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP28 “The Toilet-Cleaning Video Goes Viral”
+用笑点、后果或下一集线索收尾。','EP28 “What Happens to People Who Cannot Use the App?”
 
 Target duration: 4–7 minutes
 
@@ -1407,7 +1407,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(29,'父母突然要视频看她住哪里','Her Parents Demand a Video Tour','关系升级篇','Relationship Growth','父母突然要视频看她住哪里：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Her Parents Demand a Video Tour: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','publish','Angeline','high','2026-10-04','',95,'父母视频道具','v0.1','EP29《父母突然要视频看她住哪里》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(29,'这间房突然不出租了','This Room Is Suddenly No Longer for Rent','关系升级篇','Relationship Growth','这间房突然不出租了：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','This Room Is Suddenly No Longer for Rent: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','publish','Angeline','high','2026-10-04','',95,'父母视频道具','v0.1','EP29《这间房突然不出租了》
 
 目标时长：4–7分钟
 
@@ -1430,7 +1430,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP29 “Her Parents Demand a Video Tour”
+用笑点、后果或下一集线索收尾。','EP29 “This Room Is Suddenly No Longer for Rent”
 
 Target duration: 4–7 minutes
 
@@ -1454,7 +1454,7 @@ End with a small change in trust, friendship or Angeline’s understanding of Si
 
 [Ending]
 Close with a joke, consequence or next-episode thread.','新加坡生活、租房规则、公共习惯或本地文化差异。','Singapore living, tenancy rules, public habits or local cultural differences.');
-INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(30,'她终于承认这里像一个家','She Finally Admits This Feels Like Home','关系升级篇','Relationship Growth','她终于承认这里像一个家：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','She Finally Admits This Feels Like Home: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','publish','三人','high','2026-10-04','',99,'最终审核','v0.1','EP30《她终于承认这里像一个家》
+INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(30,'同一个屋檐下','Under One Roof','关系升级篇','Relationship Growth','同一个屋檐下：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。','Under One Roof: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.','final','publish','三人','high','2026-10-04','',99,'最终审核','v0.1','EP30《同一个屋檐下》
 
 目标时长：4–7分钟
 
@@ -1477,7 +1477,7 @@ INSERT OR IGNORE INTO episodes(episode_no,title_zh,title_en,category_zh,category
 本集结束后，三人的关系、信任或对新加坡的理解发生一点变化。
 
 【结尾】
-用笑点、后果或下一集线索收尾。','EP30 “She Finally Admits This Feels Like Home”
+用笑点、后果或下一集线索收尾。','EP30 “Under One Roof”
 
 Target duration: 4–7 minutes
 
