@@ -76,3 +76,9 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 - Added complete English translations for all 12 National Day Special scene scripts.
 - English mode now displays English dialogue and English stage directions only.
 - Chinese mode preserves the original Chinese/Singlish performance script.
+
+
+## v58
+- Rebuilt the production funnel as one continuous silhouette.
+- Each segment now connects exactly to the next with no white gaps or stepped ledges.
+- Increased top width and strengthened the taper toward the bottom.
