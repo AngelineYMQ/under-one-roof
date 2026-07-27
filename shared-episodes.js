@@ -422,14 +422,32 @@ function renderDashboard(){
  ].map(([key,label])=>{const count=items.filter(x=>x.productionStage===key).length;const pct=Math.round(count/total*100);return `<article class="dash-status-card dash-${key}" style="--status:${stageColors[key]};--pct:${pct*3.6}deg"><div class="dash-status-copy"><span class="dash-status-icon">${stageIcons[key]}</span><div><small>${label}</small><strong>${count}</strong><em>${lang==='en'?'Share':'占比'} ${pct}%</em></div></div><div class="dash-mini-ring"><i></i></div></article>`}).join('');
  const stageLegend=stageCounts.map(x=>`<div class="dash-donut-legend"><span style="background:${stageColors[x.key]}"></span><strong>${x.label}</strong><b>${x.count}</b><em>(${Math.round(x.count/total*100)}%)</em></div>`).join('');
  const upcomingHtml=upcoming.map(x=>`<button class="dash-schedule-row" onclick="SharedEpisodes.open(${x.id})"><time>${esc(formatDisplayDate(x.shootDate))}</time><span class="dash-schedule-line" style="background:${stageColors[x.productionStage]}"></span><div><small>${t.stages[x.productionStage]}</small><strong>EP${String(x.episodeNo).padStart(2,'0')} · ${esc(title(x))}</strong><em>${esc(displayOwner(x.owner))}</em></div><b>${lang==='en'?'Open':'打开'}</b></button>`).join('')||`<div class="dash-empty">${lang==='en'?'No shoot dates arranged':'尚未安排拍摄日期'}</div>`;
- const funnel=[
-  [lang==='en'?'Topics confirmed':'已确认题材',total],
-  [lang==='en'?'Scripts ready':'剧本可执行',locked],
-  [lang==='en'?'Filmed':'完成拍摄',filmed],
-  [lang==='en'?'In post':'后期制作',post],
-  [lang==='en'?'Published':'已发布',published]
- ];
- const funnelHtml=funnel.map((x,i)=>{const pct=Math.round((x[1]/total)*100);return `<div class="dash-funnel-row"><div class="dash-funnel-shape f${i}"></div><div class="dash-funnel-meta"><span>${x[0]}</span><b>${x[1]}</b><em>${pct}%</em></div></div>`}).join('');
+ const bottleneckCandidates=['writing','locked','shoot','post'].map(key=>({key,count:items.filter(x=>x.productionStage===key).length}));
+ const bottleneck=bottleneckCandidates.sort((a,b)=>b.count-a.count)[0]||{key:'writing',count:0};
+ const blockerByStage={
+  writing:lang==='en'?'Complete script drafts':'完成剧本初稿',
+  locked:lang==='en'?'Confirm final scripts':'确认最终剧本',
+  shoot:lang==='en'?'Lock shooting arrangements':'锁定拍摄安排',
+  post:lang==='en'?'Complete editing review':'完成剪辑审核'
+ };
+ const actionByStage={
+  writing:lang==='en'?'Draft scripts → review → lock':'完成初稿 → 审核 → 锁定剧本',
+  locked:lang==='en'?'Confirm scripts → schedule shoot → assign crew':'确认剧本 → 安排拍摄 → 分配人员',
+  shoot:lang==='en'?'Confirm schedule → shoot → hand off footage':'确认档期 → 完成拍摄 → 移交素材',
+  post:lang==='en'?'Edit → review → schedule release':'完成剪辑 → 审核 → 安排发布'
+ };
+ const focusPool=items.filter(x=>x.productionStage===bottleneck.key).sort((a,b)=>a.episodeNo-b.episodeNo);
+ const focusEpisodes=(focusPool.length?focusPool:issueItems).slice(0,3).map(x=>`EP${String(x.episodeNo).padStart(2,'0')}`).join('、')||(lang==='en'?'No urgent episodes':'暂无紧急剧集');
+ const nextMilestone=upcoming[0]
+  ? `${formatDisplayDate(upcoming[0].shootDate)} · EP${String(upcoming[0].episodeNo).padStart(2,'0')} ${lang==='en'?'shoot':'开始拍摄'}`
+  : (lang==='en'?'No shoot milestone scheduled':'尚未安排拍摄节点');
+ const bottleneckHtml=`<div class="dash-bottleneck-alert"><span>⚠</span><strong>${lang==='en'?'Largest backlog':'最大积压阶段'}：${t.stages[bottleneck.key]}</strong><b>${bottleneck.count} ${lang==='en'?'eps':'集'}</b></div>
+  <div class="dash-bottleneck-list">
+   <div><span class="dash-bottleneck-icon blue">◷</span><small>${lang==='en'?'Primary blocker':'主要卡点'}</small><strong>${blockerByStage[bottleneck.key]}</strong></div>
+   <div><span class="dash-bottleneck-icon purple">◎</span><small>${lang==='en'?'Priority this week':'本周需推进'}</small><strong>${focusEpisodes}</strong></div>
+   <div><span class="dash-bottleneck-icon green">◴</span><small>${lang==='en'?'Next milestone':'下个关键节点'}</small><strong>${nextMilestone}</strong></div>
+   <div><span class="dash-bottleneck-icon red">⌖</span><small>${lang==='en'?'Recommended action':'建议行动'}</small><strong>${actionByStage[bottleneck.key]}</strong></div>
+  </div>`;
  const recentRows=recent.map(x=>`<tr onclick="SharedEpisodes.open(${x.id})"><td><strong>EP${String(x.episodeNo).padStart(2,'0')}</strong><span>${esc(title(x))}</span></td><td><span class="stage-pill stage-${x.productionStage}">${t.stages[x.productionStage]}</span></td><td><div class="dash-table-progress"><i><b style="width:${x.progress||0}%"></b></i><span>${x.progress||0}%</span></div></td><td>${esc(formatDisplayDate(x.shootDate))}</td><td>${esc(displayOwner(x.owner))}</td><td><button>${lang==='en'?'Open':'打开'}</button></td></tr>`).join('');
  return `<div class="dashboard-shell dashboard-crm-layout">
   <div class="dashboard-page-head"><div><h2>${lang==='en'?'Production Overview':'制作总览'}</h2><p>${lang==='en'?'Live production progress, shooting plans, publishing data and next actions.':'实时掌握项目进度、拍摄安排、发布表现和下一步行动。'}</p></div><div class="dashboard-head-actions"><button class="ghost-btn" onclick="location.hash='episodes'">${lang==='en'?'Search episodes':'搜索剧集'}</button><button class="primary-btn" onclick="location.hash='scripts'">＋ ${lang==='en'?'New episode':'新增剧集'}</button></div></div>
@@ -437,7 +455,7 @@ function renderDashboard(){
   <div class="dash-overview-grid">
    <section class="dashboard-panel dash-donut-card"><header><div><h3>${lang==='en'?'Production workflow overview':'制作流程概览'}</h3><p>${lang==='en'?'Episode distribution across all production stages.':'各制作阶段的集数分布。'}</p></div></header><div class="dash-donut-layout"><div class="dashboard-donut dash-large-donut" style="--dash-donut:conic-gradient(${stops})"><div><strong>${total}</strong><span>${lang==='en'?'episodes':'集'}</span></div></div><div class="dash-donut-legends">${stageLegend}</div></div></section>
    <section class="dashboard-panel dash-schedule-card"><header><div><h3>${lang==='en'?'Upcoming shoot schedule':'近期拍摄安排'}</h3><p>${lang==='en'?'The next confirmed or planned shoots.':'下一批已确认或计划中的拍摄。'}</p></div><button onclick="location.hash='schedule'">${lang==='en'?'View all':'查看全部'}</button></header><div>${upcomingHtml}</div></section>
-   <section class="dashboard-panel dash-funnel-card"><header><div><h3>${lang==='en'?'Production conversion funnel':'制作转化漏斗'}</h3><p>${lang==='en'?'Where episodes drop between idea and publication.':'从题材到发布，查看每一步的转化。'}</p></div></header><div class="dash-funnel">${funnelHtml}</div></section>
+   <section class="dashboard-panel dash-bottleneck-card"><header><div><h3>${lang==='en'?'Current bottleneck':'当前瓶颈'}</h3><p>${lang==='en'?'Identify the largest backlog and the next actions that unblock production.':'识别主要卡点，聚焦推进关键环节。'}</p></div></header><div class="dash-bottleneck">${bottleneckHtml}</div></section>
   </div>
   <div class="dash-lower-grid">
    <section class="dashboard-panel dash-recent-card"><header><div><h3>${lang==='en'?'Recently updated episodes':'最近更新剧集'}</h3><p>${lang==='en'?'The latest episodes edited by the team.':'团队最近修改的剧集。'}</p></div><button onclick="location.hash='episodes'">${lang==='en'?'View all':'查看全部'}</button></header><div class="table-wrap dash-recent-table"><table><thead><tr><th>${lang==='en'?'Episode':'剧集'}</th><th>${lang==='en'?'Stage':'阶段'}</th><th>${lang==='en'?'Progress':'完成度'}</th><th>${lang==='en'?'Shoot date':'拍摄日期'}</th><th>${lang==='en'?'Owner':'负责人'}</th><th></th></tr></thead><tbody>${recentRows}</tbody></table></div></section>

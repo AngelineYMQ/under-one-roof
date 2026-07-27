@@ -1703,3 +1703,21 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
   .dash-funnel-meta b{font-size:10.5px!important;min-width:28px!important}
   .dash-funnel-meta em{font-size:8.5px!important}
 }
+
+/* v63 — replace the duplicated funnel with an actionable bottleneck panel */
+.dash-bottleneck-card{border-color:#efd18d;background:linear-gradient(180deg,#fffdfa 0%,#fff 100%)}
+.dash-bottleneck{padding:10px 2px 2px}
+.dash-bottleneck-alert{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:9px;align-items:center;padding:11px 12px;border:1px solid #f2d89b;border-radius:10px;background:#fff9eb;color:#313d50}
+.dash-bottleneck-alert>span{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:#fff0c5;color:#e49b19;font-size:12px}
+.dash-bottleneck-alert strong{font-size:11px;line-height:1.35}
+.dash-bottleneck-alert b{font-size:19px;color:#17243c;white-space:nowrap}
+.dash-bottleneck-list{display:grid;margin-top:8px}
+.dash-bottleneck-list>div{display:grid;grid-template-columns:24px 86px minmax(0,1fr);gap:8px;align-items:center;min-height:45px;padding:6px 4px;border-bottom:1px solid #edf0f4}
+.dash-bottleneck-list>div:last-child{border-bottom:0}
+.dash-bottleneck-icon{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800}
+.dash-bottleneck-icon.blue{background:#edf4ff;color:#3979e7}.dash-bottleneck-icon.purple{background:#f2edff;color:#7d58dc}.dash-bottleneck-icon.green{background:#eaf8ef;color:#36a863}.dash-bottleneck-icon.red{background:#fff0ec;color:#e46042}
+.dash-bottleneck-list small{font-size:9.5px;color:#768399}
+.dash-bottleneck-list strong{font-size:10.5px;color:#26344a;line-height:1.35;font-weight:650}
+@media(max-width:1250px){.dash-bottleneck-card{grid-column:1/-1}.dash-bottleneck-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}.dash-bottleneck-list>div:nth-last-child(-n+2){border-bottom:0}}
+@media(max-width:900px){.dash-bottleneck-card{grid-column:auto}.dash-bottleneck-list{grid-template-columns:1fr}.dash-bottleneck-list>div{border-bottom:1px solid #edf0f4!important}.dash-bottleneck-list>div:last-child{border-bottom:0!important}}
+@media(max-width:560px){.dash-bottleneck-alert{grid-template-columns:24px minmax(0,1fr) auto;padding:10px 9px}.dash-bottleneck-alert b{font-size:16px}.dash-bottleneck-list>div{grid-template-columns:22px 78px minmax(0,1fr);gap:6px}.dash-bottleneck-list small{font-size:9px}.dash-bottleneck-list strong{font-size:10px}}

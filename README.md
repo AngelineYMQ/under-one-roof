@@ -100,3 +100,9 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 - Reduced the production funnel footprint.
 - Widened the external label area so English and Chinese stage names remain fully visible.
 - Kept counts and percentages outside the funnel for readability.
+
+## v63 — Current Bottleneck panel
+- Replaced the duplicated production funnel with an actionable Current Bottleneck panel.
+- Detects the largest active-stage backlog from live episode data.
+- Shows the primary blocker, priority episodes, next shoot milestone and recommended action.
+- Added full Chinese and English interface text and responsive layouts.
