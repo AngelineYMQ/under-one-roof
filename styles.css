@@ -1334,3 +1334,86 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
   .dash-funnel-meta span{font-size:10px}
   .dash-funnel-meta b{font-size:11px}
 }
+
+/* v55 — continuous production funnel with stronger top-to-bottom taper */
+.dash-funnel{
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:0!important;
+  min-height:300px!important;
+  padding:12px 6px 4px!important;
+}
+.dash-funnel-row{
+  display:grid!important;
+  grid-template-columns:minmax(190px,1.28fr) minmax(120px,.72fr)!important;
+  align-items:center!important;
+  gap:18px!important;
+  min-height:0!important;
+  margin:0!important;
+}
+.dash-funnel-shape{
+  height:56px!important;
+  margin:0 auto!important;
+  border-radius:0!important;
+}
+.dash-funnel-shape.f0{
+  width:100%!important;
+  clip-path:polygon(0 0,100% 0,90% 100%,10% 100%)!important;
+}
+.dash-funnel-shape.f1{
+  width:90%!important;
+  clip-path:polygon(0 0,100% 0,89% 100%,11% 100%)!important;
+}
+.dash-funnel-shape.f2{
+  width:80%!important;
+  clip-path:polygon(0 0,100% 0,90.5% 100%,9.5% 100%)!important;
+}
+.dash-funnel-shape.f3{
+  width:65%!important;
+  clip-path:polygon(0 0,100% 0,88.5% 100%,11.5% 100%)!important;
+}
+.dash-funnel-shape.f4{
+  width:50%!important;
+  clip-path:polygon(0 0,100% 0,82% 100%,18% 100%)!important;
+}
+.dash-funnel-meta{
+  min-height:56px!important;
+  align-content:center!important;
+  padding:0 2px!important;
+  border-bottom:1px solid #edf1f5;
+}
+.dash-funnel-row:last-child .dash-funnel-meta{border-bottom:0}
+.dash-funnel-meta span{font-size:11px!important}
+.dash-funnel-meta b{font-size:13px!important}
+.dash-funnel-meta em{font-size:9.5px!important}
+
+@media(max-width:1250px){
+  .dash-funnel{
+    display:flex!important;
+    flex-direction:column!important;
+    min-height:300px!important;
+    padding:12px 18px 4px!important;
+  }
+  .dash-funnel-row{
+    grid-template-columns:minmax(230px,1.35fr) minmax(150px,.65fr)!important;
+    gap:22px!important;
+  }
+  .dash-funnel-shape.f0{width:100%!important}
+  .dash-funnel-shape.f1{width:90%!important}
+  .dash-funnel-shape.f2{width:80%!important}
+  .dash-funnel-shape.f3{width:65%!important}
+  .dash-funnel-shape.f4{width:50%!important}
+}
+@media(max-width:700px){
+  .dash-funnel{min-height:0!important;padding:10px 2px 2px!important}
+  .dash-funnel-row{
+    grid-template-columns:minmax(120px,1.15fr) minmax(105px,.85fr)!important;
+    gap:10px!important;
+  }
+  .dash-funnel-shape{height:45px!important}
+  .dash-funnel-meta{min-height:45px!important}
+  .dash-funnel-meta span{font-size:10px!important}
+  .dash-funnel-meta b{font-size:11.5px!important}
+  .dash-funnel-meta em{font-size:9px!important}
+}
