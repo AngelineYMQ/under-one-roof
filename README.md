@@ -106,3 +106,10 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 - Detects the largest active-stage backlog from live episode data.
 - Shows the primary blocker, priority episodes, next shoot milestone and recommended action.
 - Added full Chinese and English interface text and responsive layouts.
+
+## v64 Team Availability Calendar
+- Added a shared weekly availability page for Angeline, James and Joseph.
+- Supports adding, editing and deleting recurring weekly time blocks.
+- Automatically calculates common time slots shared by all three members.
+- Includes common-slot, by-member and weekly overview views.
+- Added bilingual UI, D1 persistence and localStorage fallback.

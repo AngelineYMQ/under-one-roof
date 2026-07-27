@@ -14,3 +14,10 @@ Every future ZIP should be released only after this checklist passes.
 
 - Run `node tools/audit-english-ui.mjs`; English UI must not fall back to Chinese database fields.
 - Verify Open Issues, owners, titles, summaries, roles and supporting-character cards in English mode.
+
+## v64
+- [x] Team Availability appears under Shoot Center.
+- [x] Chinese and English views are complete.
+- [x] Shared time blocks can be added, edited and deleted.
+- [x] Common three-person availability is calculated automatically.
+- [x] D1 API and local fallback are included.

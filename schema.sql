@@ -1523,3 +1523,14 @@ CREATE TABLE IF NOT EXISTS brand_settings (
   updated_by TEXT NOT NULL DEFAULT '',
   updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS availability (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ member TEXT NOT NULL DEFAULT '',
+ day_of_week INTEGER NOT NULL DEFAULT 1,
+ start_time TEXT NOT NULL DEFAULT '',
+ end_time TEXT NOT NULL DEFAULT '',
+ note TEXT NOT NULL DEFAULT '',
+ deleted_at TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_availability_day ON availability(day_of_week,start_time);
