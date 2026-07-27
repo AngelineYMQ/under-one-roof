@@ -82,3 +82,9 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 - Rebuilt the production funnel as one continuous silhouette.
 - Each segment now connects exactly to the next with no white gaps or stepped ledges.
 - Increased top width and strengthened the taper toward the bottom.
+
+
+## v59
+- Re-centred every funnel segment on one shared vertical axis.
+- Matched each segment's bottom width to the next segment's top width for a seamless silhouette.
+- Preserved external labels and responsive layout.
