@@ -306,7 +306,15 @@ function editAnalytics(id){
  document.getElementById('episodeAnalyticsForm').onsubmit=saveAnalytics;
  modal.classList.add('open');modal.setAttribute('aria-hidden','false');
 }
-function close(){const m=document.getElementById('episodeModal');m.classList.remove('open');m.setAttribute('aria-hidden','true');}
+function close(){
+ const m=document.getElementById('episodeModal');
+ m.classList.remove('open');
+ m.setAttribute('aria-hidden','true');
+ const route=location.hash.replace('#','');
+ if(/^episode-\d{1,2}$/.test(route)){
+  history.replaceState(null,'',`${location.pathname}${location.search}#season-all`);
+ }
+}
 function formatDisplayDate(value){
  if(!value)return '—';
  const m=String(value).match(/^(\d{4})-(\d{2})-(\d{2})$/);
