@@ -121,3 +121,14 @@ Reduced inline stage and owner dropdown typography and control height for cleane
 ## v65 hotfix
 - Fixed Cloudflare Pages Functions build error in `functions/api/episodes.js`.
 - Preserved the Current Bottleneck dashboard and shared team availability calendar.
+
+## v70 Shareable Routes
+
+All major work views now have stable shareable hashes. These include season-specific episode lists, script and analytics views, production board/list/calendar views, individual episode links, availability tabs, and shoot schedule cards/calendar/list views. Browser refresh, back/forward navigation, and language switching preserve the selected route.
+
+
+## v71 Monthly Production Calendar
+- Replaced the compact calendar cards with a full month grid.
+- Added previous/next month navigation.
+- Added filming and video-editing calendar events with date, time and assignee.
+- Added bilingual UI and D1 storage support for event type, title and assignee.

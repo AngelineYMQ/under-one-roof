@@ -23,3 +23,15 @@ Every future ZIP should be released only after this checklist passes.
 - [x] D1 API and local fallback are included.
 
 - [x] Cloudflare Pages Functions SQL string syntax hotfix applied.
+
+- [x] Major tabs and work views have independent shareable URLs
+- [x] Individual episodes open from `#episode-01` through `#episode-30`
+- [x] Season, production and schedule subviews restore after refresh
+- [x] Browser back/forward and bilingual switching preserve the route
+
+
+## v71 Monthly Production Calendar
+- Replaced the compact calendar cards with a full month grid.
+- Added previous/next month navigation.
+- Added filming and video-editing calendar events with date, time and assignee.
+- Added bilingual UI and D1 storage support for event type, title and assignee.
