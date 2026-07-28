@@ -39,6 +39,7 @@ function parseRoute(raw){
   let m;
   if((m=route.match(/^episode-(\d{1,2})$/))) return {page:'season',episode:+m[1],route};
   if((m=route.match(/^season-(all|special)$/))) return {page:'season',scope:m[1],route};
+  if((m=route.match(/^(season|scripts|analytics)-(all|special)$/))) return {page:m[1],scope:m[2],route};
   if((m=route.match(/^(season|scripts|analytics)-season-([123])$/))) return {page:m[1],season:+m[2],scope:`season${m[2]}`,route};
   if((m=route.match(/^production-(board|list|calendar)-(all|special)$/))) return {page:'production',productionView:m[1],scope:m[2],route};
   if((m=route.match(/^production-(board|list|calendar)-season-([123])$/))) return {page:'production',productionView:m[1],season:+m[2],scope:`season${m[2]}`,route};
@@ -102,7 +103,7 @@ season(){ const r=currentRoute(); setTimeout(()=>{if(r.scope)SharedEpisodes.setC
 special(){ return SharedSpecial.page('zh'); },
 ideas(){ return `${section('剧情题材库','长期题材分类，不只服务第一季',`<div class="grid grid-3">${Object.entries(topicGroups).map(([k,v])=>card(k,`<div class="filters">${v.map(x=>badge(x)).join('')}</div>`)).join('')}</div>`)}${section('团队灵感箱','内容统一保存；连接 Cloudflare D1 后，三位成员在不同设备上都能实时看到',`<div id="ideasTable">${ideasTable()}</div>`)}`; },
 episode(){ return `${section('单集资料页模板','每一集都应使用同一套字段',`<div class="table-wrap"><table><thead><tr><th>栏目</th><th>内容示例</th></tr></thead><tbody>${[['集数','EP01'],['标题','富二代租了最小的房间'],['系列','入住篇'],['核心文化点','新加坡租房'],['主角','James、Angeline、Joseph'],['配角','无'],['场景','客厅'],['时长','4–7分钟'],['剧情状态','灵感／大纲／剧本／已拍／已剪／已发布'],['编剧','姓名'],['导演','姓名'],['拍摄日期','日期'],['发布日期','日期'],['发布平台','抖音／小红书／视频号／YouTube'],['道具','合同、行李箱、钥匙'],['备注','明确“广角照片、已签一年租约、押金与面子”三项设定']].map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td></tr>`).join('')}</tbody></table></div>`)}${section('每集内容结构','所有正式剧本必须包括',`<div class="grid grid-3">${['标题与封面句：观众一眼看懂冲突','开场钩子：前10–20秒建立人物处境与异常事件','第一幕建置：交代人物目标、场景和冲突起点','剧情目标：谁想做什么','阻力与升级：谁阻止，事情如何越来越严重','中段反转：让观众继续看下去','高潮与最终反转：兑现标题承诺','结尾钩子／互动问题：促进评论或下一集追看','完整台词：按角色和动作拆分','镜头与剪辑：景别、反应镜头、字幕、音效','发布文案：各平台标题、简介和标签','数据复盘：首30秒留存、平均观看时长、完播率、追集率与评论反馈'].map((x,i)=>card(`0${i+1}`,`<p>${x}</p>`)).join('')}</div>`)}`; },
-scripts(){ const r=currentRoute(); setTimeout(()=>{if(r.season)SharedEpisodes.setSeason(r.season);},80); return SharedEpisodes.scriptsPage('zh'); },
+scripts(){ const r=currentRoute(); setTimeout(()=>{if(r.scope)SharedEpisodes.setCollectionScope(r.scope);else if(r.season)SharedEpisodes.setSeason(r.season);},80); return SharedEpisodes.scriptsPage('zh'); },
 production(){ const r=currentRoute(); setTimeout(()=>{if(r.scope)SharedEpisodes.setCollectionScope(r.scope);else if(r.season)SharedEpisodes.setSeason(r.season); if(r.productionView)SharedEpisodes.setProductionView(r.productionView);},80); return SharedEpisodes.productionPage('zh'); },
 availability(){ return availabilityPageZh(); },
 'availability-common'(){ return availabilityPageZh('overlap'); },
@@ -112,7 +113,7 @@ schedule(){ const r=currentRoute(); scheduleViewModeZh=r.scheduleView||'cards'; 
 team(){ return teamPage('zh'); },
 supporting(){ return supportingPage('zh'); },
 singapore(){ const cats=['租房','交通','饮食','工作','教育','法律与罚款','节日','语言','社交习惯','政府服务','医疗','银行','手机与网络']; return `${section('新加坡资料库','所有文化与政策信息必须准确并注明来源',`<div class="grid grid-4">${cats.map(x=>card(x,'<p>保存主题说明、官方来源、最后核实日期、可对应剧集、是否已使用。</p>')).join('')}</div>`)}${section('资料条目标准','防止短剧传播错误信息',`<div class="table-wrap"><table><thead><tr><th>字段</th><th>要求</th></tr></thead><tbody><tr><td>主题</td><td>明确到一个可拍摄的问题</td></tr><tr><td>简单说明</td><td>用观众听得懂的话解释</td></tr><tr><td>官方来源</td><td>优先政府、法定机构或官方运营方</td></tr><tr><td>最后核实日期</td><td>政策与费用类内容必须更新</td></tr><tr><td>对应剧集</td><td>标记可以融入哪一集</td></tr><tr><td>是否已使用</td><td>避免重复或方便制作续集</td></tr></tbody></table></div>`)}`; },
-analytics(){ const r=currentRoute(); setTimeout(()=>{if(r.season)SharedEpisodes.setSeason(r.season);},80); return SharedEpisodes.analyticsPage('zh'); },
+analytics(){ const r=currentRoute(); setTimeout(()=>{if(r.scope)SharedEpisodes.setCollectionScope(r.scope);else if(r.season)SharedEpisodes.setSeason(r.season);},80); return SharedEpisodes.analyticsPage('zh'); },
 brand(){ return SharedBrand.page('zh'); },
 public(){ return `${section('网站分区','前期先做内部版，未来再开放对外版',`<div class="grid grid-2">${card('内部版','<ul class="list"><li>剧本</li><li>拍摄日程</li><li>联系方式</li><li>未发布内容</li><li>制作预算</li><li>内部讨论</li><li>数据表现</li></ul>')}${card('对外版','<ul class="list"><li>项目介绍</li><li>人物介绍</li><li>已发布剧集</li><li>幕后花絮</li><li>合作方式</li><li>演员招募</li><li>品牌合作</li><li>联系方式</li></ul>')}</div>`)}${section('第一版完成标准','任何新加入的人，在30分钟内必须看懂',`<div class="callout">这是什么项目、自己演谁或负责什么、目前拍到哪里、下一步要做什么。</div>`)}`; }
 };
