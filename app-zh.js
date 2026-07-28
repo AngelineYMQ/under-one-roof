@@ -3,7 +3,7 @@ const navGroups = [
   {id:'project', label:'项目设定', icon:'◎', children:[['positioning','项目定位'],['world','世界观设定'],['brand','品牌规范'],['public','内部版与对外版']]},
   {id:'characters-assets', label:'角色与资产', icon:'♙', children:[['characters','人物档案'],['relations','人物关系'],['supporting','配角资料']]},
   {id:'episode-management', label:'剧集管理', icon:'▤', children:[['season','全部剧集'],['special','特别篇'],['scripts','剧本中心'],['production','制作进度']]},
-  {id:'shooting', label:'拍摄中心', icon:'◷', children:[['availability','三人共同时间'],['schedule','拍摄日程与通告单']]},
+  {id:'shooting', label:'拍摄中心', icon:'◷', children:[['availability-common','三人共同时间'],['schedule','拍摄日程与通告单']]},
   {id:'resources', label:'创作资料库', icon:'✦', children:[['ideas','剧情题材库'],['singapore','新加坡资料库']]},
   {id:'team-group', label:'团队成员', icon:'♟', page:'team'},
   {id:'publishing', label:'发布与复盘', icon:'↗', page:'analytics'}
@@ -88,6 +88,9 @@ episode(){ return `${section('单集资料页模板','每一集都应使用同�
 scripts(){ return SharedEpisodes.scriptsPage('zh'); },
 production(){ return SharedEpisodes.productionPage('zh'); },
 availability(){ return availabilityPageZh(); },
+'availability-common'(){ return availabilityPageZh('overlap'); },
+'availability-members'(){ return availabilityPageZh('people'); },
+'availability-dates'(){ return availabilityPageZh('week'); },
 schedule(){ return schedulePageZh(); },
 team(){ return teamPage('zh'); },
 supporting(){ return supportingPage('zh'); },
@@ -178,7 +181,7 @@ function ideasTable(){ if(!state.ideas.length) return '<div class="empty">暂无
 function kanban(cols){ return `<div class="kanban">${cols.map(([name,items])=>`<div class="kanban-col"><h4>${name}<span>${items.length}</span></h4>${items.map(i=>`<div class="kanban-item"><strong>${i}</strong><br><small>待负责人更新</small></div>`).join('')}</div>`).join('')}</div>`; }
 function teamCard(name,title,desc){ return `<article class="card"><div class="character-avatar ${name==='James'?'avatar-james':name==='Angeline'?'avatar-angeline':'avatar-joseph'}">${name[0]}</div><h4>${name}</h4><span class="badge">${title}</span><p>${desc}</p></article>`; }
 
-function render(){ if(!pages[state.page]) state.page='home'; renderNav(); pageTitle.textContent=navItems.find(x=>x[0]===state.page)?.[1]||'首页'; content.dataset.page=state.page; content.innerHTML=pages[state.page](); }
+function render(){ if(!pages[state.page]) state.page='home'; renderNav(); const availabilityTitle=['availability','availability-common','availability-members','availability-dates'].includes(state.page)?'三人共同时间':null; pageTitle.textContent=availabilityTitle||navItems.find(x=>x[0]===state.page)?.[1]||'首页'; content.dataset.page=state.page; content.innerHTML=pages[state.page](); }
 window.addEventListener('hashchange',()=>{ state.page=location.hash.replace('#','')||'home'; render(); window.scrollTo(0,0); });
 
 document.getElementById('menuBtn').onclick=()=>sidebar.classList.toggle('open');
@@ -222,10 +225,10 @@ const availabilitySeedZh=[
 ];
 const weekZh=['周一','周二','周三','周四','周五','周六','周日'];
 const memberClassZh={Angeline:'av-angeline',James:'av-james',Joseph:'av-joseph'};
-function availabilityPageZh(){setTimeout(initAvailabilityZh,0);return `${section('三人共同时间','记录 Angeline、James 与 Joseph 具体有空的日期和时间，系统会自动找出三个人都方便的共同空档。',`<div class="availability-head"><div><span class="availability-kicker">团队共享排期</span><p>先登记各自时间，再从共同空档安排拍摄。</p></div><button class="primary-btn" onclick="openAvailabilityZh()">＋ 添加有空时间</button></div><div class="availability-tabs"><button class="active" onclick="setAvailabilityViewZh('overlap',this)">共同空档</button><button onclick="setAvailabilityViewZh('people',this)">按成员查看</button><button onclick="setAvailabilityViewZh('week',this)">日期总览</button></div><div id="availabilityViewZh"><div class="empty">正在载入团队时间…</div></div>`)}`;}
+function availabilityPageZh(mode='overlap'){availabilityModeZh=mode;setTimeout(initAvailabilityZh,0);return `${section('三人共同时间','记录 Angeline、James 与 Joseph 具体有空的日期和时间，系统会自动找出三个人都方便的共同空档。',`<div class="availability-head"><div><span class="availability-kicker">团队共享排期</span><p>先登记各自时间，再从共同空档安排拍摄。</p></div><button class="primary-btn" onclick="openAvailabilityZh()">＋ 添加有空时间</button></div><div class="availability-tabs"><button class="${mode==='overlap'?'active':''}" onclick="setAvailabilityViewZh('overlap')">共同空档</button><button class="${mode==='people'?'active':''}" onclick="setAvailabilityViewZh('people')">按成员查看</button><button class="${mode==='week'?'active':''}" onclick="setAvailabilityViewZh('week')">日期总览</button></div><div id="availabilityViewZh"><div class="empty">正在载入团队时间…</div></div>`)}`;}
 async function initAvailabilityZh(){availabilityZh=await SharedAvailability.load(availabilitySeedZh);renderAvailabilityZh();}
 let availabilityModeZh='overlap';
-window.setAvailabilityViewZh=(v,b)=>{availabilityModeZh=v;document.querySelectorAll('.availability-tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderAvailabilityZh();};
+window.setAvailabilityViewZh=(v)=>{const route=v==='people'?'availability-members':v==='week'?'availability-dates':'availability-common';location.hash=route;};
 function toMinZh(t){const [h,m]=String(t).split(':').map(Number);return h*60+m}function fmtMinZh(n){return `${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`}
 function dateLabelZh(v){if(!v)return '未设置日期';const d=new Date(v+'T00:00:00');return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()} · ${weekZh[(d.getDay()+6)%7]}`}
 function commonSlotsZh(){const out=[];const dates=[...new Set(availabilityZh.map(x=>x.availabilityDate).filter(Boolean))];for(const date of dates){const groups=['Angeline','James','Joseph'].map(m=>availabilityZh.filter(x=>x.member===m&&x.availabilityDate===date));if(groups.some(g=>!g.length))continue;for(const a of groups[0])for(const j of groups[1])for(const o of groups[2]){const s=Math.max(toMinZh(a.startTime),toMinZh(j.startTime),toMinZh(o.startTime)),e=Math.min(toMinZh(a.endTime),toMinZh(j.endTime),toMinZh(o.endTime));if(e-s>=60)out.push({availabilityDate:date,startTime:fmtMinZh(s),endTime:fmtMinZh(e),minutes:e-s})}}return out.sort((a,b)=>a.availabilityDate.localeCompare(b.availabilityDate)||a.startTime.localeCompare(b.startTime));}

@@ -3,7 +3,7 @@ const navGroups = [
   {id:'project', label:'Project Setup', icon:'◎', children:[['positioning','Project Positioning'],['world','Story World'],['brand','Brand Guidelines'],['public','Internal & Public Sites']]},
   {id:'characters-assets', label:'Characters & Assets', icon:'♙', children:[['characters','Character Profiles'],['relations','Character Relationships'],['supporting','Supporting Characters']]},
   {id:'episode-management', label:'Episode Management', icon:'▤', children:[['season','All Episodes'],['special','Specials'],['scripts','Script Center'],['production','Production Progress']]},
-  {id:'shooting', label:'Shoot Center', icon:'◷', children:[['availability','Team Availability'],['schedule','Shoot Schedule & Call Sheets']]},
+  {id:'shooting', label:'Shoot Center', icon:'◷', children:[['availability-common','Team Availability'],['schedule','Shoot Schedule & Call Sheets']]},
   {id:'resources', label:'Creative Library', icon:'✦', children:[['ideas','Story Topic Library'],['singapore','Singapore Reference Library']]},
   {id:'team-group', label:'Team Members', icon:'♟', page:'team'},
   {id:'publishing', label:'Publishing & Review', icon:'↗', page:'analytics'}
@@ -87,6 +87,9 @@ episode(){ return `${section('Episode SheetTemplate','Every episode should use t
 scripts(){ return SharedEpisodes.scriptsPage('en'); },
 production(){ return SharedEpisodes.productionPage('en'); },
 availability(){ return availabilityPageEn(); },
+'availability-common'(){ return availabilityPageEn('overlap'); },
+'availability-members'(){ return availabilityPageEn('people'); },
+'availability-dates'(){ return availabilityPageEn('week'); },
 schedule(){ return schedulePageEn(); },
 team(){ return teamPage('en'); },
 supporting(){ return supportingPage('en'); },
@@ -134,7 +137,7 @@ function ideasTable(){ if(!state.ideas.length) return '<div class="empty">No ide
 function kanban(cols){ return `<div class="kanban">${cols.map(([name,items])=>`<div class="kanban-col"><h4>${name}<span>${items.length}</span></h4>${items.map(i=>`<div class="kanban-item"><strong>${i}</strong><br><small>Awaiting owner update</small></div>`).join('')}</div>`).join('')}</div>`; }
 function teamCard(name,title,desc){ return `<article class="card"><div class="character-avatar ${name==='James'?'avatar-james':name==='Angeline'?'avatar-angeline':'avatar-joseph'}">${name[0]}</div><h4>${name}</h4><span class="badge">${title}</span><p>${desc}</p></article>`; }
 
-function render(){ if(!pages[state.page]) state.page='home'; renderNav(); pageTitle.textContent=navItems.find(x=>x[0]===state.page)?.[1]||'Home'; content.dataset.page=state.page; content.innerHTML=pages[state.page](); }
+function render(){ if(!pages[state.page]) state.page='home'; renderNav(); const availabilityTitle=['availability','availability-common','availability-members','availability-dates'].includes(state.page)?'Team Availability':null; pageTitle.textContent=availabilityTitle||navItems.find(x=>x[0]===state.page)?.[1]||'Home'; content.dataset.page=state.page; content.innerHTML=pages[state.page](); }
 window.addEventListener('hashchange',()=>{ state.page=location.hash.replace('#','')||'home'; render(); window.scrollTo(0,0); });
 
 document.getElementById('menuBtn').onclick=()=>sidebar.classList.toggle('open');
@@ -190,10 +193,10 @@ function availabilityNoteEn(note=''){
  if(availabilityNoteTranslationsEn[value])return availabilityNoteTranslationsEn[value];
  return /[\u3400-\u9fff]/.test(value)?'Note entered in Chinese':value;
 }
-function availabilityPageEn(){setTimeout(initAvailabilityEn,0);return `${section('Team Availability','Record the exact dates and times when Angeline, James and Joseph are free. The system automatically finds slots that work for all three.',`<div class="availability-head"><div><span class="availability-kicker">Shared team planning</span><p>Add individual availability first, then schedule filming from the common slots.</p></div><button class="primary-btn" onclick="openAvailabilityEn()">＋ Add Availability</button></div><div class="availability-tabs"><button class="active" onclick="setAvailabilityViewEn('overlap',this)">Common Slots</button><button onclick="setAvailabilityViewEn('people',this)">By Member</button><button onclick="setAvailabilityViewEn('week',this)">Date Overview</button></div><div id="availabilityViewEn"><div class="empty">Loading team availability…</div></div>`)}`;}
+function availabilityPageEn(mode='overlap'){availabilityModeEn=mode;setTimeout(initAvailabilityEn,0);return `${section('Team Availability','Record the exact dates and times when Angeline, James and Joseph are free. The system automatically finds slots that work for all three.',`<div class="availability-head"><div><span class="availability-kicker">Shared team planning</span><p>Add individual availability first, then schedule filming from the common slots.</p></div><button class="primary-btn" onclick="openAvailabilityEn()">＋ Add Availability</button></div><div class="availability-tabs"><button class="${mode==='overlap'?'active':''}" onclick="setAvailabilityViewEn('overlap')">Common Slots</button><button class="${mode==='people'?'active':''}" onclick="setAvailabilityViewEn('people')">By Member</button><button class="${mode==='week'?'active':''}" onclick="setAvailabilityViewEn('week')">Date Overview</button></div><div id="availabilityViewEn"><div class="empty">Loading team availability…</div></div>`)}`;}
 async function initAvailabilityEn(){availabilityEn=await SharedAvailability.load(availabilitySeedEn);renderAvailabilityEn();}
 let availabilityModeEn='overlap';
-window.setAvailabilityViewEn=(v,b)=>{availabilityModeEn=v;document.querySelectorAll('.availability-tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderAvailabilityEn();};
+window.setAvailabilityViewEn=(v)=>{const route=v==='people'?'availability-members':v==='week'?'availability-dates':'availability-common';location.hash=route;};
 function toMinEn(t){const [h,m]=String(t).split(':').map(Number);return h*60+m}function fmtMinEn(n){return `${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`}
 function dateLabelEn(v){if(!v)return 'Date not set';const d=new Date(v+'T00:00:00');return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()} · ${weekEn[(d.getDay()+6)%7]}`}
 function commonSlotsEn(){const out=[];const dates=[...new Set(availabilityEn.map(x=>x.availabilityDate).filter(Boolean))];for(const date of dates){const groups=['Angeline','James','Joseph'].map(m=>availabilityEn.filter(x=>x.member===m&&x.availabilityDate===date));if(groups.some(g=>!g.length))continue;for(const a of groups[0])for(const j of groups[1])for(const o of groups[2]){const s=Math.max(toMinEn(a.startTime),toMinEn(j.startTime),toMinEn(o.startTime)),e=Math.min(toMinEn(a.endTime),toMinEn(j.endTime),toMinEn(o.endTime));if(e-s>=60)out.push({availabilityDate:date,startTime:fmtMinEn(s),endTime:fmtMinEn(e),minutes:e-s})}}return out.sort((a,b)=>a.availabilityDate.localeCompare(b.availabilityDate)||a.startTime.localeCompare(b.startTime));}
