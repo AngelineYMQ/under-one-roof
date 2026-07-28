@@ -206,7 +206,21 @@ document.getElementById('addIdeaBtn')?.addEventListener('click',openIdeaModal);
 document.querySelectorAll('[data-close-modal]').forEach(x=>x.onclick=()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
 document.getElementById('ideaForm').onsubmit=async(e)=>{ e.preventDefault(); const d=Object.fromEntries(new FormData(e.target)); const saved=await SharedIdeas.add({...d,statusCode:'idea'}); state.ideas.unshift(saved); e.target.reset(); modal.classList.remove('open'); if(state.page==='ideas') render(); };
 
-SharedIdeas.load(defaultIdeas).then(ideas=>{ state.ideas=ideas; render(); });
+// Render immediately from local data so the dashboard never waits for D1/API startup.
+render();
+
+// Refresh shared ideas in the background. Only redraw the ideas page when its data changes.
+const refreshSharedIdeas = () => SharedIdeas.load(defaultIdeas, { timeoutMs: 3500 }).then(ideas=>{
+  const changed = JSON.stringify(ideas) !== JSON.stringify(state.ideas);
+  state.ideas = ideas;
+  if(changed && state.page==='ideas') render();
+}).catch(()=>{});
+
+if('requestIdleCallback' in window){
+  requestIdleCallback(refreshSharedIdeas, { timeout: 1200 });
+}else{
+  setTimeout(refreshSharedIdeas, 0);
+}
 
 const productionStagesZh = [
  {id:'outline',name:'选题与大纲',color:'purple',episodes:[1,2,3,4,5,6]},

@@ -132,3 +132,9 @@ All major work views now have stable shareable hashes. These include season-spec
 - Added previous/next month navigation.
 - Added filming and video-editing calendar events with date, time and assignee.
 - Added bilingual UI and D1 storage support for event type, title and assignee.
+
+## v72 — Fast initial dashboard render
+- The homepage now renders immediately from locally cached data instead of waiting for `/api/ideas`.
+- Shared D1 idea data refreshes in the background during browser idle time.
+- The ideas API request has a timeout and can no longer hold up the initial page display.
+- A background refresh only redraws the Story Topic Library when its records actually changed.

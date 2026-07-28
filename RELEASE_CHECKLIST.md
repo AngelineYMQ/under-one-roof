@@ -35,3 +35,9 @@ Every future ZIP should be released only after this checklist passes.
 - Added previous/next month navigation.
 - Added filming and video-editing calendar events with date, time and assignee.
 - Added bilingual UI and D1 storage support for event type, title and assignee.
+
+## v72 performance checks
+- [x] Initial render runs before the shared ideas API request.
+- [x] D1 ideas synchronization runs in the background.
+- [x] Ideas API request aborts after the configured timeout.
+- [x] Background synchronization does not rerender unrelated pages.

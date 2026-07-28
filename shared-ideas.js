@@ -25,10 +25,21 @@ const SharedIdeas = (() => {
     localStorage.setItem(KEY, JSON.stringify(ideas || []));
   }
 
-  async function load(defaultIdeas = []) {
+  async function load(defaultIdeas = [], options = {}) {
     migrate(defaultIdeas);
     try {
-      const response = await fetch('/api/ideas', { headers: { accept: 'application/json' } });
+      const timeoutMs = Number(options.timeoutMs || 5000);
+      const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      const timeoutId = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
+      let response;
+      try {
+        response = await fetch('/api/ideas', {
+          headers: { accept: 'application/json' },
+          signal: controller?.signal
+        });
+      } finally {
+        if (timeoutId) clearTimeout(timeoutId);
+      }
       if (!response.ok) throw new Error('Shared database unavailable');
       const data = await response.json();
       const ideas = Array.isArray(data.ideas) ? data.ideas : [];
