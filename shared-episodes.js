@@ -507,8 +507,9 @@ function renderAnalytics(){
 
 function renderDashboard(){
  const t=text[lang];
- const total=items.length||1;
- const avgProgress=Math.round(items.reduce((a,x)=>a+(+x.progress||0),0)/total);
+ const stats=getStatistics(items);
+ const total=stats.total||1;
+ const avgProgress=stats.averageProgress;
  const issueItems=items.filter(hasIssue).sort((a,b)=>a.episodeNo-b.episodeNo);
  const stageColors={outline:'#5B8DEF',writing:'#8758E8',locked:'#35B98F',shoot:'#F59E42',filmed:'#23B7A4',post:'#E46F4C',publish:'#20A969'};
  const stageIcons={outline:'✉',writing:'✓',locked:'▣',shoot:'➤',filmed:'◆',post:'✦',publish:'★'};
