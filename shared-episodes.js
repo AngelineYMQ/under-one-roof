@@ -197,7 +197,30 @@ James holds up a printed list.
 JAMES: Before you settle in, there are twenty house rules.
 ANGELINE: Twenty?
 CUT TO BLACK: Next episode — “The Landlord’s Twenty Rules.”`;
-async function load(){let remote=[];try{const r=await fetch('/api/episodes',{cache:'no-store'});if(r.ok){const d=await r.json();remote=d.episodes||[];}}catch(e){}const local=JSON.parse(localStorage.getItem('uorEpisodes')||'[]');items=(remote.length?remote:(local.length?local:DEFAULT_EPISODES.map(x=>({...x})))).map(x=>({...x,seasonNo:+x.seasonNo||1}));const ep1=items.find(x=>x.episodeNo===1);if(ep1&&(!ep1.scriptZh||ep1.scriptZh.includes('以人物正在做的事情直接建立异常状况'))){ep1.scriptZh=EP01_DETAILED_ZH;ep1.scriptEn=EP01_DETAILED_EN;ep1.version='v0.2';try{fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(ep1)});}catch(e){}}loaded=true;setLocal();renderCurrent();if(!remote.length){try{await fetch('/api/episodes',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({episodes:items})});}catch(e){}}}
+function normaliseEpisodes(source){return source.map(x=>({...x,seasonNo:+x.seasonNo||1}));}
+function applyEpisodeOneUpgrade(){const ep1=items.find(x=>x.episodeNo===1);if(ep1&&(!ep1.scriptZh||ep1.scriptZh.includes('以人物正在做的事情直接建立异常状况'))){ep1.scriptZh=EP01_DETAILED_ZH;ep1.scriptEn=EP01_DETAILED_EN;ep1.version='v0.2';return ep1;}return null;}
+async function fetchEpisodesWithTimeout(timeoutMs=2500){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);try{const r=await fetch('/api/episodes',{cache:'no-store',signal:controller.signal});if(!r.ok)return [];const d=await r.json();return Array.isArray(d.episodes)?d.episodes:[];}catch(e){return [];}finally{clearTimeout(timer);}}
+function load(){
+  // Paint immediately from local cache (or bundled defaults). D1 must never block the first screen.
+  let local=[];try{local=JSON.parse(localStorage.getItem('uorEpisodes')||'[]');}catch(e){}
+  items=normaliseEpisodes(local.length?local:DEFAULT_EPISODES.map(x=>({...x})));
+  const upgraded=applyEpisodeOneUpgrade();
+  loaded=true;setLocal();renderCurrent();
+
+  // Reconcile with D1 after first paint, during idle time where supported.
+  const sync=async()=>{
+    const remote=await fetchEpisodesWithTimeout();
+    if(remote.length){
+      const next=normaliseEpisodes(remote);
+      const changed=JSON.stringify(next)!==JSON.stringify(items);
+      if(changed){items=next;applyEpisodeOneUpgrade();setLocal();renderCurrent();}
+    }else{
+      try{await fetch('/api/episodes',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({episodes:items})});}catch(e){}
+    }
+    if(upgraded){try{fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(upgraded)});}catch(e){}}
+  };
+  if('requestIdleCallback' in window)requestIdleCallback(sync,{timeout:900});else setTimeout(sync,0);
+}
 function setLocal(){localStorage.setItem('uorEpisodes',JSON.stringify(items));}
 async function saveEpisode(e){e.preventDefault();const f=new FormData(e.target),id=+f.get('id'),old=items.find(x=>x.id===id)||{};const payload={...old,id,seasonNo:+f.get('seasonNo')||old.seasonNo||1,titleZh:f.has('titleZh')?f.get('titleZh'):old.titleZh,titleEn:f.has('titleEn')?f.get('titleEn'):old.titleEn,categoryZh:f.has('categoryZh')?f.get('categoryZh'):old.categoryZh,categoryEn:f.has('categoryEn')?f.get('categoryEn'):old.categoryEn,summaryZh:f.has('summaryZh')?f.get('summaryZh'):old.summaryZh,summaryEn:f.has('summaryEn')?f.get('summaryEn'):old.summaryEn,scriptStatus:f.get('scriptStatus'),productionStage:f.get('productionStage'),owner:f.get('owner'),priority:f.get('priority'),shootDate:f.get('shootDate'),publishDate:f.get('publishDate'),progress:+f.get('progress')||0,openIssues:f.has('openIssues')?f.get('openIssues'):old.openIssues,openIssuesEn:f.has('openIssuesEn')?f.get('openIssuesEn'):old.openIssuesEn,version:f.get('version'),scriptZh:f.has('scriptZh')?f.get('scriptZh'):old.scriptZh,scriptEn:f.has('scriptEn')?f.get('scriptEn'):old.scriptEn,culturePointZh:f.has('culturePointZh')?f.get('culturePointZh'):old.culturePointZh,culturePointEn:f.has('culturePointEn')?f.get('culturePointEn'):old.culturePointEn,views:+f.get('views')||0,retention30:+f.get('retention30')||0,retention60:+f.get('retention60')||0,avgWatchSeconds:+f.get('avgWatchSeconds')||0,completionRate:+f.get('completionRate')||0,nextEpisodeRate:+f.get('nextEpisodeRate')||0,followersGained:+f.get('followersGained')||0,topComment:f.get('topComment')};try{const r=await fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw 0;const d=await r.json();Object.assign(old,d.episode)}catch{Object.assign(old,payload)}setLocal();close();renderCurrent();}
 

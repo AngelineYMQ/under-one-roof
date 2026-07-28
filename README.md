@@ -138,3 +138,8 @@ All major work views now have stable shareable hashes. These include season-spec
 - Shared D1 idea data refreshes in the background during browser idle time.
 - The ideas API request has a timeout and can no longer hold up the initial page display.
 - A background refresh only redraws the Story Topic Library when its records actually changed.
+
+## v74 homepage loading fix
+- The episode dashboard now paints from local cache or bundled defaults immediately.
+- D1 episode data is reconciled in the background with a timeout.
+- Direct mobile routes remain deferred until all app modules are initialized.
