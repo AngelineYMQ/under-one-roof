@@ -206,8 +206,7 @@ document.getElementById('addIdeaBtn')?.addEventListener('click',openIdeaModal);
 document.querySelectorAll('[data-close-modal]').forEach(x=>x.onclick=()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
 document.getElementById('ideaForm').onsubmit=async(e)=>{ e.preventDefault(); const d=Object.fromEntries(new FormData(e.target)); const saved=await SharedIdeas.add({...d,statusCode:'idea'}); state.ideas.unshift(saved); e.target.reset(); modal.classList.remove('open'); if(state.page==='ideas') render(); };
 
-// Render immediately from local data so the dashboard never waits for D1/API startup.
-render();
+// Initial render is deferred until every route-specific module has been initialized.
 
 // Refresh shared ideas in the background. Only redraw the ideas page when its data changes.
 const refreshSharedIdeas = () => SharedIdeas.load(defaultIdeas, { timeoutMs: 3500 }).then(ideas=>{
@@ -301,3 +300,6 @@ window.deleteShootDayZh=async()=>{const id=document.querySelector('#shootDayForm
 window.viewShootDayZh=id=>{const x=shootDaysZh.find(i=>String(i.id)===String(id));if(!x)return;showScheduleModalZh(`${x.date} · 当日通告单`,`<div class="call-sheet"><div class="call-sheet-hero"><div><span>${shootStatusZh[x.status]}</span><h3>${x.location}</h3><p>${x.episodes}</p></div><div><small>集合时间</small><strong>${x.callTime||'—'}</strong><small>预计收工</small><strong>${x.endTime||'—'}</strong></div></div><div class="call-sheet-grid"><div><small>负责人</small><strong>${x.owner||'—'}</strong></div><div><small>出席演员</small><strong>${x.cast||'—'}</strong></div><div><small>工作人员</small><strong>${x.crew||'—'}</strong></div></div><h4>当天时间轴</h4><div class="timeline-lines">${(x.timeline||'尚未填写').split('\n').map(t=>`<p>${t}</p>`).join('')}</div><h4>服装与道具</h4><div class="call-sheet-text">${(x.wardrobeProps||'尚未填写').replace(/\n/g,'<br>')}</div><h4>待处理事项</h4><div class="${x.issues?'shoot-issue':'shoot-clear'}">${x.issues||'暂无待处理事项'}</div><h4>现场备注</h4><div class="call-sheet-text">${(x.notes||'暂无').replace(/\n/g,'<br>')}</div><div class="modal-actions"><button class="ghost-btn" onclick="openShootDayZh('${x.id}')">编辑</button><button class="primary-btn" onclick="window.print()">打印／存为 PDF</button></div></div>`);};
 function showScheduleModalZh(title,body){let m=document.getElementById('scheduleModalZh');if(!m){m=document.createElement('div');m.id='scheduleModalZh';m.className='modal';m.innerHTML='<div class="modal-card schedule-modal-card"><div class="modal-header"><h3 id="scheduleModalTitleZh"></h3><button class="icon-btn" onclick="closeScheduleModalZh()">×</button></div><div id="scheduleModalBodyZh"></div></div>';document.body.appendChild(m)}document.getElementById('scheduleModalTitleZh').textContent=title;document.getElementById('scheduleModalBodyZh').innerHTML=body;m.classList.add('open');}
 window.closeScheduleModalZh=()=>document.getElementById('scheduleModalZh')?.classList.remove('open');
+
+// Render only after all route-specific variables and functions are initialized.
+render();
