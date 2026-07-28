@@ -1800,3 +1800,11 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
 .legend-dot.shoot{background:#e46d42}.legend-dot.editing{background:#6d66db}
 @media(max-width:900px){.month-calendar{overflow-x:auto}.month-weekdays,.month-grid{min-width:840px}.month-cell{min-height:120px}}
 @media(max-width:600px){.schedule-head-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}.schedule-head-actions button{width:100%;font-size:10px}.month-calendar>header{position:sticky;left:0;min-width:840px}.month-calendar>footer{min-width:840px}}
+
+/* v75: integrate the SG61 special into all-episode, script and production views */
+.special-integrated-row,
+.special-list-row { background: linear-gradient(90deg, rgba(244, 116, 67, .08), rgba(255,255,255,.98)); }
+.special-integrated-row .season-row-ep span { font-size: 11px; letter-spacing: .04em; }
+.special-script-card,
+.special-production-card { border: 1px solid rgba(230, 105, 55, .35) !important; background: linear-gradient(145deg,#fff8f2,#fff) !important; }
+.special-badge { display:inline-flex; padding:3px 7px; border-radius:999px; background:#fff0e8; color:#c94f24; font-size:11px; font-weight:800; }
