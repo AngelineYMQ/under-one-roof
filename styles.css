@@ -2053,3 +2053,14 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
     font-size:12px;
   }
 }
+
+.month-event.meeting{--event-color:#2563eb;background:#eff6ff;border-left-color:#2563eb}
+.month-event.other{--event-color:#64748b;background:#f1f5f9;border-left-color:#64748b}
+.legend-dot.meeting{background:#2563eb}
+.legend-dot.other{background:#64748b}
+.schedule-head-actions{display:flex;justify-content:flex-end}
+.schedule-head-actions .primary-btn{min-width:160px}
+@media(max-width:600px){
+  .schedule-head-actions{display:block}
+  .schedule-head-actions .primary-btn{width:100%}
+}
