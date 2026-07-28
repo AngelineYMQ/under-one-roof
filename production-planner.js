@@ -104,13 +104,31 @@
   }
 
   async function loadSchedules(force=false) {
-    state.schedule = await SharedSchedules.load([], {force});
+    const raw = await SharedSchedules.load([], {force});
+    state.schedule = (Array.isArray(raw)?raw:[]).map(x => ({
+      eventType: x.eventType || 'shoot',
+      status: x.status || 'planning',
+      title: x.title || '',
+      owner: x.owner || x.assignee || '',
+      assignee: x.assignee || x.owner || '',
+      startTime: x.startTime || x.callTime || '',
+      endTime: x.endTime || '',
+      ...x
+    }));
     state.scheduleLoaded = true;
     return state.schedule;
   }
 
   async function loadAvailability() {
-    state.availability = await SharedAvailability.load([]);
+    const raw = await SharedAvailability.load([]);
+    state.availability = (Array.isArray(raw)?raw:[]).map(x => ({
+      ...x,
+      date: x.date || x.availabilityDate || '',
+      availabilityDate: x.availabilityDate || x.date || '',
+      member: x.member || x.owner || '',
+      owner: x.owner || x.member || '',
+      note: x.note || x.notes || ''
+    }));
     state.availabilityLoaded = true;
     return state.availability;
   }
@@ -399,7 +417,8 @@
     event.preventDefault();
     const fd = new FormData(event.target);
     const old = state.availability.find(x=>String(x.id)===String(id)) || {};
-    const record = {...old,id:id||undefined,member:fd.get('member'),owner:fd.get('member'),date:fd.get('date'),startTime:fd.get('startTime'),endTime:fd.get('endTime'),note:fd.get('note')};
+    const selectedDate = fd.get('date');
+    const record = {...old,id:id||undefined,member:fd.get('member'),owner:fd.get('member'),date:selectedDate,availabilityDate:selectedDate,startTime:fd.get('startTime'),endTime:fd.get('endTime'),note:fd.get('note')};
     if (id) await SharedAvailability.update(record); else await SharedAvailability.add(record);
     closeModal();
     await loadAvailability();
@@ -421,16 +440,11 @@
   }
 
   function install() {
-    window.schedulePageZh = () => schedulePage('zh');
-    window.schedulePageEn = () => schedulePage('en');
-    window.availabilityPageZh = mode => availabilityPage('zh', mode==='overlap'?'common':mode==='people'?'members':mode==='week'?'dates':mode);
-    window.availabilityPageEn = mode => availabilityPage('en', mode==='overlap'?'common':mode==='people'?'members':mode==='week'?'dates':mode);
-    window.setAvailabilityViewZh = v => setAvailabilityView(v==='overlap'?'common':v==='people'?'members':'dates');
-    window.setAvailabilityViewEn = v => setAvailabilityView(v==='overlap'?'common':v==='people'?'members':'dates');
     if (typeof render === 'function') render();
   }
 
   window.ProductionPlanner = {
+    schedulePage, availabilityPage,
     closeModal, renderSchedule, renderAvailability, openScheduleForm, saveSchedule, deleteSchedule,
     setScheduleView, changeMonth, openAvailabilityForm, saveAvailability, deleteAvailability,
     setAvailabilityView
