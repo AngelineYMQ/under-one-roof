@@ -2023,3 +2023,33 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
     display:none;
   }
 }
+
+
+/* v91 explicit editing-schedule action */
+.editing-schedule-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:38px;
+  padding:0 16px;
+  border:1px solid #8b5cf6;
+  border-radius:10px;
+  background:#f4efff;
+  color:#6d3fd1;
+  font-weight:800;
+  cursor:pointer;
+  white-space:nowrap;
+  box-shadow:0 4px 12px rgba(109,63,209,.08);
+}
+.editing-schedule-btn:hover{
+  background:#ebe2ff;
+}
+@media(max-width:600px){
+  .editing-schedule-btn,
+  .schedule-head-actions .primary-btn{
+    width:100%;
+    min-height:42px;
+    padding:0 10px;
+    font-size:12px;
+  }
+}
