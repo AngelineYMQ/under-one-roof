@@ -383,7 +383,17 @@ function episodeCard(x){
  </article>`;
 }
 
-function dashboardPage(language){lang=language;view='dashboard';setTimeout(load,0);return `<div id="unifiedEpisodeMount"><div class="empty">Loading…</div></div>`;}
+function dashboardPage(language){
+ lang=language;view='dashboard';
+ setTimeout(load,0);
+ setTimeout(()=>{
+  if(!window.SharedSchedules?.load)return;
+  window.SharedSchedules.load().then(()=>{
+   if(view==='dashboard'&&document.getElementById('unifiedEpisodeMount'))renderCurrent();
+  }).catch(()=>{});
+ },0);
+ return `<div id="unifiedEpisodeMount"><div class="empty">Loading…</div></div>`;
+}
 function managementPage(language){
  lang=language;view='season';setTimeout(load,0);
  const isEn=lang==='en';
@@ -515,7 +525,11 @@ function renderDashboard(){
  const stageIcons={outline:'✉',writing:'✓',locked:'▣',shoot:'➤',filmed:'◆',post:'✦',publish:'★'};
  const stageCounts=stageOrder.map(k=>({key:k,label:t.stages[k],count:items.filter(x=>x.productionStage===k).length}));
  let cursor=0;const stops=stageCounts.map(x=>{const start=cursor;cursor+=x.count/total*360;return `${stageColors[x.key]} ${start}deg ${cursor}deg`;}).join(',');
- const upcoming=items.filter(x=>x.shootDate).sort((a,b)=>String(a.shootDate).localeCompare(String(b.shootDate))).slice(0,4);
+ const scheduleRecords=(window.SharedSchedules?.peek?.()||[])
+  .filter(x=>x&&x.eventType!=='editing'&&x.date&&x.status!=='cancelled')
+  .sort((a,b)=>`${a.date} ${a.startTime||a.callTime||''}`.localeCompare(`${b.date} ${b.startTime||b.callTime||''}`));
+ const today=new Date().toISOString().slice(0,10);
+ const upcoming=scheduleRecords.filter(x=>x.date>=today).slice(0,4);
  const recent=items.slice().sort((a,b)=>String(b.updatedAt||'').localeCompare(String(a.updatedAt||''))||a.episodeNo-b.episodeNo).slice(0,6);
  const published=stats.publish;
  const filmed=stats.filmedOrLater;
@@ -529,7 +543,12 @@ function renderDashboard(){
   ['outline',lang==='en'?'Idea & Outline':'选题与大纲'],['writing',lang==='en'?'Writing':'剧本编写'],['locked',lang==='en'?'Script Locked':'剧本锁定'],['shoot',lang==='en'?'Ready to Shoot':'待拍摄'],['post',lang==='en'?'Post-production':'后期制作'],['publish',lang==='en'?'Published':'已发布']
  ].map(([key,label])=>{const count=items.filter(x=>x.productionStage===key).length;const pct=Math.round(count/total*100);return `<article class="dash-status-card dash-${key}" style="--status:${stageColors[key]};--pct:${pct*3.6}deg"><div class="dash-status-copy"><span class="dash-status-icon">${stageIcons[key]}</span><div><small>${label}</small><strong>${count}</strong><em>${lang==='en'?'Share':'占比'} ${pct}%</em></div></div><div class="dash-mini-ring"><i></i></div></article>`}).join('');
  const stageLegend=stageCounts.map(x=>`<div class="dash-donut-legend"><span style="background:${stageColors[x.key]}"></span><strong>${x.label}</strong><b>${x.count}</b><em>(${Math.round(x.count/total*100)}%)</em></div>`).join('');
- const upcomingHtml=upcoming.map(x=>`<button class="dash-schedule-row" onclick="SharedEpisodes.open(${x.id})"><time>${esc(formatDisplayDate(x.shootDate))}</time><span class="dash-schedule-line" style="background:${stageColors[x.productionStage]}"></span><div><small>${t.stages[x.productionStage]}</small><strong>EP${String(x.episodeNo).padStart(2,'0')} · ${esc(title(x))}</strong><em>${esc(displayOwner(x.owner))}</em></div><b>${lang==='en'?'Open':'打开'}</b></button>`).join('')||`<div class="dash-empty">${lang==='en'?'No shoot dates arranged':'尚未安排拍摄日期'}</div>`;
+ const upcomingHtml=upcoming.map(x=>{
+  const time=[x.startTime||x.callTime||'',x.endTime||''].filter(Boolean).join('–')||'—';
+  const label=x.episodes||x.title||(lang==='en'?'Shoot day':'拍摄日');
+  const meta=[time,x.location||'',x.owner||x.assignee||''].filter(Boolean).join(' · ');
+  return `<button class="dash-schedule-row" onclick="location.hash='schedule-cards'"><time>${esc(formatDisplayDate(x.date))}</time><span class="dash-schedule-line" style="background:#8758E8"></span><div><small>${lang==='en'?'Scheduled shoot':'已安排拍摄'}</small><strong>${esc(label)}</strong><em>${esc(meta)}</em></div><b>${lang==='en'?'Open':'打开'}</b></button>`;
+ }).join('')||`<div class="dash-empty">${lang==='en'?'No shoot dates arranged':'尚未安排拍摄日期'}</div>`;
  const bottleneckCandidates=['writing','locked','shoot','post'].map(key=>({key,count:items.filter(x=>x.productionStage===key).length}));
  const bottleneck=bottleneckCandidates.sort((a,b)=>b.count-a.count)[0]||{key:'writing',count:0};
  const blockerByStage={
