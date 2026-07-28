@@ -1808,3 +1808,218 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
 .special-script-card,
 .special-production-card { border: 1px solid rgba(230, 105, 55, .35) !important; background: linear-gradient(145deg,#fff8f2,#fff) !important; }
 .special-badge { display:inline-flex; padding:3px 7px; border-radius:999px; background:#fff0e8; color:#c94f24; font-size:11px; font-weight:800; }
+
+
+/* v90 compact full-month calendar — desktop fits without vertical scrolling */
+.month-calendar{
+  width:100%;
+}
+.month-calendar>header{
+  grid-template-columns:34px 1fr 34px;
+  min-height:48px;
+  padding:7px 12px;
+}
+.month-calendar>header h3{
+  font-size:16px;
+}
+.month-nav{
+  width:30px;
+  height:30px;
+  border-radius:8px;
+  font-size:20px;
+}
+.month-weekdays span{
+  padding:6px 4px;
+  font-size:9px;
+}
+.month-cell{
+  min-height:70px;
+  height:70px;
+  padding:4px 5px;
+  overflow:hidden;
+}
+.month-day-number{
+  width:22px;
+  height:20px;
+  border-radius:6px;
+  font-size:11px;
+  line-height:20px;
+}
+.month-events{
+  gap:2px;
+  margin-top:1px;
+  max-height:43px;
+  overflow:hidden;
+}
+.month-event{
+  border-left-width:2px;
+  border-radius:5px;
+  padding:3px 5px;
+}
+.month-event span{
+  display:inline;
+  margin-right:4px;
+  font-size:8px;
+}
+.month-event b{
+  display:inline;
+  font-size:9px;
+  margin:0;
+}
+.month-event small{
+  display:none;
+}
+.month-calendar>footer{
+  padding:6px 12px;
+  font-size:9px;
+}
+.schedule-toolbar{
+  margin-bottom:10px;
+}
+#scheduleViewZh,
+#scheduleViewEn{
+  min-height:0;
+}
+
+/* Medium screens: keep all seven days visible; no horizontal calendar scrolling */
+@media(max-width:900px){
+  .month-calendar{
+    overflow:visible;
+  }
+  .month-weekdays,
+  .month-grid{
+    min-width:0;
+    width:100%;
+  }
+  .month-cell{
+    min-height:66px;
+    height:66px;
+  }
+}
+
+/* Mobile: complete month remains visible in one screen-width */
+@media(max-width:600px){
+  .schedule-head{
+    gap:8px;
+  }
+  .schedule-stats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:7px;
+  }
+  .schedule-head-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+  .schedule-toolbar{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:7px;
+  }
+  .schedule-toolbar .production-tabs{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+  }
+  .schedule-toolbar select,
+  .schedule-toolbar input{
+    width:100%;
+  }
+  .month-calendar{
+    border-radius:12px;
+  }
+  .month-calendar>header{
+    position:static;
+    min-width:0;
+    grid-template-columns:30px 1fr 30px;
+    padding:6px 8px;
+  }
+  .month-calendar>header h3{
+    font-size:14px;
+  }
+  .month-nav{
+    width:28px;
+    height:28px;
+    font-size:18px;
+  }
+  .month-weekdays{
+    min-width:0;
+  }
+  .month-weekdays span{
+    padding:5px 1px;
+    font-size:8px;
+  }
+  .month-grid{
+    min-width:0;
+  }
+  .month-cell{
+    min-height:52px;
+    height:52px;
+    padding:2px;
+  }
+  .month-day-number{
+    width:18px;
+    height:17px;
+    line-height:17px;
+    font-size:9px;
+  }
+  .month-events{
+    gap:1px;
+    margin-top:0;
+    max-height:31px;
+  }
+  .month-event{
+    min-height:12px;
+    padding:1px 2px;
+    border-left-width:2px;
+    border-radius:3px;
+  }
+  .month-event span,
+  .month-event small{
+    display:none;
+  }
+  .month-event b{
+    display:block;
+    font-size:7px;
+    line-height:10px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .month-calendar>footer{
+    min-width:0;
+    padding:5px 8px;
+    gap:12px;
+    font-size:8px;
+  }
+}
+
+/* Narrow phones: events become clear colour markers while the full month stays visible */
+@media(max-width:390px){
+  .month-cell{
+    min-height:46px;
+    height:46px;
+  }
+  .month-events{
+    display:flex;
+    flex-wrap:wrap;
+    align-content:flex-start;
+    gap:2px;
+    padding:1px 2px;
+    max-height:22px;
+  }
+  .month-event{
+    width:7px;
+    height:7px;
+    min-height:7px;
+    padding:0;
+    border:0;
+    border-radius:50%;
+    background:var(--event-color);
+  }
+  .month-event b,
+  .month-event span,
+  .month-event small{
+    display:none;
+  }
+}
