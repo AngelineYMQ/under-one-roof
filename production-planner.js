@@ -83,7 +83,15 @@
   };
   const itemType = x => TYPE_ORDER.includes(x.eventType) ? x.eventType : 'other';
   const ownerOf = x => x.assignee || x.owner || '';
-  const titleOf = x => x.title || x.episodes || t().untitled;
+  const titleOf = x => {
+    if (x.title) return x.title;
+    if (x.episodes) return x.episodes;
+    const type = itemType(x);
+    if (type === 'shoot') return state.lang==='en' ? `Shoot Schedule${x.location?` · ${x.location}`:''}` : `拍摄安排${x.location?` · ${x.location}`:''}`;
+    if (type === 'editing') return state.lang==='en' ? 'Editing Schedule' : '剪辑安排';
+    if (type === 'meeting') return state.lang==='en' ? 'Meeting' : '约见／面谈';
+    return state.lang==='en' ? 'Calendar Item' : '日历事项';
+  };
   const timeOf = x => `${x.startTime || x.callTime || '—'}–${x.endTime || '—'}`;
 
   function modal(title, body) {
@@ -115,6 +123,14 @@
       endTime: x.endTime || '',
       ...x
     }));
+    if (!state.scheduleLoaded && state.schedule.length) {
+      const dated = state.schedule.filter(x=>x.date).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+      const preferred = dated.find(x=>x.status!=='completed'&&x.status!=='cancelled') || dated[0];
+      if (preferred?.date) {
+        const [yy,mm] = String(preferred.date).slice(0,10).split('-').map(Number);
+        if (yy && mm) state.month = new Date(yy, mm-1, 1);
+      }
+    }
     state.scheduleLoaded = true;
     return state.schedule;
   }
@@ -227,7 +243,7 @@
       <th>${t().owner}</th><th>${t().location}</th><th>${t().actions}</th>
     </tr></thead><tbody>${data.map(x=>`<tr>
       <td>${fmtDate(x.date)}</td><td><span class="planner-type type-${itemType(x)}">${t().types[itemType(x)]}</span></td>
-      <td><strong>${esc(titleOf(x))}</strong><small>${esc(x.episodes||'')}</small></td>
+      <td class="planner-item-title type-${itemType(x)}"><strong>${esc(titleOf(x))}</strong><small>${esc(x.episodes||'')}</small></td>
       <td>${esc(timeOf(x))}</td><td>${esc(ownerOf(x)||t().unassigned)}</td><td>${esc(x.location||'—')}</td>
       <td><button class="ghost-btn" onclick="ProductionPlanner.openScheduleForm('${esc(x.id)}')">${t().edit}</button></td>
     </tr>`).join('')}</tbody></table></div>`;
@@ -255,9 +271,13 @@
     </div>`;
   }
 
-  function openScheduleForm(id='', date='') {
+  function openScheduleForm(id='', date='', startTime='', endTime='') {
     const x = state.schedule.find(i => String(i.id)===String(id)) || {
-      eventType:'shoot', status:'planning', date, startTime:'10:00', endTime:'12:00'
+      eventType:'shoot',
+      status:'planning',
+      date,
+      startTime:startTime||'10:00',
+      endTime:endTime||'12:00'
     };
     modal(id ? t().edit : t().addItem.replace(/^＋?\s*/, ''), `
       <form class="planner-form" onsubmit="ProductionPlanner.saveSchedule(event, '${esc(id)}')">
@@ -381,18 +401,24 @@
     const data = filteredAvailability();
     if (state.availabilityView==='common') {
       const common = computeCommonSlots();
-      mount.innerHTML = common.length ? `<div class="common-slot-grid">${common.map(x=>`<article class="common-slot-card"><header><strong>${fmtDate(x.date)}</strong><span>${x.startTime}–${x.endTime}</span></header><p>${MEMBERS.join(' · ')}</p><button class="primary-btn" onclick="ProductionPlanner.openScheduleForm('', '${x.date}')">${state.lang==='en'?'Create calendar item':'建立日历事项'}</button></article>`).join('')}</div>` : `<div class="empty">${t().noCommon}</div>`;
+      mount.innerHTML = common.length ? `<div class="common-slot-grid">${common.map(x=>`<article class="common-slot-card"><header><strong>${fmtDate(x.date)}</strong><span>${x.startTime}–${x.endTime}</span></header><p>${MEMBERS.join(' · ')}</p><button class="primary-btn" onclick="ProductionPlanner.openScheduleForm('', '${x.date}', '${x.startTime}', '${x.endTime}')">${state.lang==='en'?'Create calendar item':'建立日历事项'}</button></article>`).join('')}</div>` : `<div class="empty">${t().noCommon}</div>`;
     } else if (state.availabilityView==='members') {
-      mount.innerHTML = `<div class="availability-member-grid">${MEMBERS.map(member=>`<section><header><strong>${member}</strong><span>${data.filter(x=>(x.member||x.owner)===member).length}</span></header>${data.filter(x=>(x.member||x.owner)===member).sort((a,b)=>`${a.date}${a.startTime}`.localeCompare(`${b.date}${b.startTime}`)).map(x=>availabilityRow(x)).join('')||`<div class="empty">${t().none}</div>`}</section>`).join('')}</div>`;
+      mount.innerHTML = `<div class="availability-member-grid">${MEMBERS.map(member=>`<section class="availability-member-card member-${member.toLowerCase()}"><header><div class="member-heading"><span>${member.charAt(0)}</span><strong>${member}</strong></div><b>${data.filter(x=>(x.member||x.owner)===member).length}</b></header>${data.filter(x=>(x.member||x.owner)===member).sort((a,b)=>`${a.date}${a.startTime}`.localeCompare(`${b.date}${b.startTime}`)).map(x=>availabilityRow(x)).join('')||`<div class="empty">${t().none}</div>`}</section>`).join('')}</div>`;
     } else {
       const dates = [...new Set(data.map(x=>x.date).filter(Boolean))].sort();
-      mount.innerHTML = dates.length ? `<div class="availability-date-list">${dates.map(date=>`<section><h4>${fmtDate(date)}</h4>${data.filter(x=>x.date===date).map(x=>availabilityRow(x)).join('')}</section>`).join('')}</div>` : `<div class="empty">${t().none}</div>`;
+      mount.innerHTML = dates.length ? `<div class="availability-date-grid">${dates.map(date=>{
+        const rows=data.filter(x=>x.date===date).sort((a,b)=>String(a.startTime).localeCompare(String(b.startTime)));
+        return `<section class="availability-date-card"><header><div><strong>${fmtDate(date)}</strong><small>${rows.length} ${state.lang==='en'?'time blocks':'个时间段'}</small></div><span>${[...new Set(rows.map(x=>x.member||x.owner))].length}/3</span></header><div class="availability-date-members">${rows.map(x=>{
+          const member=x.member||x.owner||t().unassigned;
+          return `<button class="availability-date-row member-${member.toLowerCase()}" onclick="ProductionPlanner.openAvailabilityForm('${esc(x.id)}')"><span class="availability-member-dot">${esc(member.charAt(0))}</span><b>${esc(member)}</b><strong>${esc(x.startTime||'—')}–${esc(x.endTime||'—')}</strong><small>${esc(x.note||x.notes||'')}</small></button>`;
+        }).join('')}</div></section>`;
+      }).join('')}</div>` : `<div class="empty">${t().none}</div>`;
     }
   }
 
   function availabilityRow(x) {
     const member = x.member || x.owner || t().unassigned;
-    return `<button class="availability-row-new" onclick="ProductionPlanner.openAvailabilityForm('${esc(x.id)}')"><span>${esc(member)}</span><strong>${fmtDate(x.date)} · ${esc(x.startTime||'—')}–${esc(x.endTime||'—')}</strong><small>${esc(x.note||x.notes||'')}</small></button>`;
+    return `<button class="availability-row-new member-${member.toLowerCase()}" onclick="ProductionPlanner.openAvailabilityForm('${esc(x.id)}')"><span>${esc(member)}</span><strong>${fmtDate(x.date)} · ${esc(x.startTime||'—')}–${esc(x.endTime||'—')}</strong><small>${esc(x.note||x.notes||'')}</small></button>`;
   }
 
   function openAvailabilityForm(id='') {
