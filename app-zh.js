@@ -38,8 +38,10 @@ function parseRoute(raw){
   const route=(raw||'home').replace(/^#/,'');
   let m;
   if((m=route.match(/^episode-(\d{1,2})$/))) return {page:'season',episode:+m[1],route};
-  if((m=route.match(/^(season|scripts|analytics)-season-([123])$/))) return {page:m[1],season:+m[2],route};
-  if((m=route.match(/^production-(board|list|calendar)-season-([123])$/))) return {page:'production',productionView:m[1],season:+m[2],route};
+  if((m=route.match(/^season-(all|special)$/))) return {page:'season',scope:m[1],route};
+  if((m=route.match(/^(season|scripts|analytics)-season-([123])$/))) return {page:m[1],season:+m[2],scope:`season${m[2]}`,route};
+  if((m=route.match(/^production-(board|list|calendar)-(all|special)$/))) return {page:'production',productionView:m[1],scope:m[2],route};
+  if((m=route.match(/^production-(board|list|calendar)-season-([123])$/))) return {page:'production',productionView:m[1],season:+m[2],scope:`season${m[2]}`,route};
   if(route==='production') return {page:'production',productionView:'board',season:1,route};
   if((m=route.match(/^schedule-(cards|calendar|list)$/))) return {page:'schedule',scheduleView:m[1],route};
   if(route==='schedule') return {page:'schedule',scheduleView:'cards',route};
@@ -73,7 +75,7 @@ function renderNav(){
       <div class="nav-submenu">${group.children.map(([id,label])=>`<button class="nav-sub-btn ${state.page===id || (id==='season'&&state.page==='season') || (id==='production'&&state.page==='production') || (id==='schedule'&&state.page==='schedule') || (id==='availability-common'&&state.page.startsWith('availability'))?'active':''}" data-page="${id}">${label}</button>`).join('')}</div>
     </div>`;
   }).join('');
-  nav.querySelectorAll('[data-page]').forEach(btn=>btn.onclick=()=>{ goRoute(btn.dataset.page==='season'?'season-season-1':btn.dataset.page==='production'?'production-board-season-1':btn.dataset.page==='schedule'?'schedule-cards':btn.dataset.page); sidebar.classList.remove('open'); });
+  nav.querySelectorAll('[data-page]').forEach(btn=>btn.onclick=()=>{ goRoute(btn.dataset.page==='season'?'season-all':btn.dataset.page==='production'?'production-board-all':btn.dataset.page==='schedule'?'schedule-cards':btn.dataset.page); sidebar.classList.remove('open'); });
   nav.querySelectorAll('.nav-group-toggle').forEach(btn=>btn.onclick=()=>btn.closest('.nav-group').classList.toggle('open'));
 }
 
@@ -96,12 +98,12 @@ characters(){ return `${section('核心人物','现实职业保留，人物性�
 relations(){ return `${section('人物关系','固定关系决定每一集的冲突方式',`<div class="grid grid-2">${card('James × Angeline','<p><strong>房东规则 vs 富家留学生</strong></p><p>James 坚持租约、押金和房屋规则；Angeline 认为很多问题可以花钱解决，却又不肯白白损失押金，也不愿承认自己被照片误导。</p>')}${card('James × Joseph','<p><strong>看房秩序 vs 内容流量</strong></p><p>James 需要专业接待客户，Joseph 却总想拍摄、制造话题或测试广告效果。</p>')}${card('Angeline × Joseph','<p><strong>大小姐日常 vs 内容流量</strong></p><p>Joseph 把 Angeline 初到新加坡的文化冲击当成天然内容；Angeline 一边嫌弃他偷拍，一边又在意视频里自己是否好看。</p>')}${card('三人整体关系','<div class="callout"><strong>表面互相嫌弃，实际已经像一家人。</strong></div>')}</div>`)}
  ${section('关系发展原则','第一季不是只有单集笑点，还要让关系慢慢升级',`<div class="timeline"><div class="timeline-item"><h4>陌生与试探</h4><p>入住初期，大家用规则和小心思保护自己。</p></div><div class="timeline-item"><h4>摩擦与依赖</h4><p>生活习惯不断冲突，但开始互相帮忙。</p></div><div class="timeline-item"><h4>真正成为一家人</h4><p>发生生病、搬走、新租客等事件后，三人才意识到彼此的重要性。</p></div></div>`)}`; },
 episodeManagement(){ return SharedEpisodes.managementPage('zh'); },
-season(){ const r=currentRoute(); setTimeout(()=>{if(r.season)SharedEpisodes.setSeason(r.season);},80); return SharedEpisodes.seasonPage('zh'); },
+season(){ const r=currentRoute(); setTimeout(()=>{if(r.scope)SharedEpisodes.setCollectionScope(r.scope);else if(r.season)SharedEpisodes.setSeason(r.season);},80); return SharedEpisodes.seasonPage('zh'); },
 special(){ return SharedSpecial.page('zh'); },
 ideas(){ return `${section('剧情题材库','长期题材分类，不只服务第一季',`<div class="grid grid-3">${Object.entries(topicGroups).map(([k,v])=>card(k,`<div class="filters">${v.map(x=>badge(x)).join('')}</div>`)).join('')}</div>`)}${section('团队灵感箱','内容统一保存；连接 Cloudflare D1 后，三位成员在不同设备上都能实时看到',`<div id="ideasTable">${ideasTable()}</div>`)}`; },
 episode(){ return `${section('单集资料页模板','每一集都应使用同一套字段',`<div class="table-wrap"><table><thead><tr><th>栏目</th><th>内容示例</th></tr></thead><tbody>${[['集数','EP01'],['标题','富二代租了最小的房间'],['系列','入住篇'],['核心文化点','新加坡租房'],['主角','James、Angeline、Joseph'],['配角','无'],['场景','客厅'],['时长','4–7分钟'],['剧情状态','灵感／大纲／剧本／已拍／已剪／已发布'],['编剧','姓名'],['导演','姓名'],['拍摄日期','日期'],['发布日期','日期'],['发布平台','抖音／小红书／视频号／YouTube'],['道具','合同、行李箱、钥匙'],['备注','明确“广角照片、已签一年租约、押金与面子”三项设定']].map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td></tr>`).join('')}</tbody></table></div>`)}${section('每集内容结构','所有正式剧本必须包括',`<div class="grid grid-3">${['标题与封面句：观众一眼看懂冲突','开场钩子：前10–20秒建立人物处境与异常事件','第一幕建置：交代人物目标、场景和冲突起点','剧情目标：谁想做什么','阻力与升级：谁阻止，事情如何越来越严重','中段反转：让观众继续看下去','高潮与最终反转：兑现标题承诺','结尾钩子／互动问题：促进评论或下一集追看','完整台词：按角色和动作拆分','镜头与剪辑：景别、反应镜头、字幕、音效','发布文案：各平台标题、简介和标签','数据复盘：首30秒留存、平均观看时长、完播率、追集率与评论反馈'].map((x,i)=>card(`0${i+1}`,`<p>${x}</p>`)).join('')}</div>`)}`; },
 scripts(){ const r=currentRoute(); setTimeout(()=>{if(r.season)SharedEpisodes.setSeason(r.season);},80); return SharedEpisodes.scriptsPage('zh'); },
-production(){ const r=currentRoute(); setTimeout(()=>{if(r.season)SharedEpisodes.setSeason(r.season); if(r.productionView)SharedEpisodes.setProductionView(r.productionView);},80); return SharedEpisodes.productionPage('zh'); },
+production(){ const r=currentRoute(); setTimeout(()=>{if(r.scope)SharedEpisodes.setCollectionScope(r.scope);else if(r.season)SharedEpisodes.setSeason(r.season); if(r.productionView)SharedEpisodes.setProductionView(r.productionView);},80); return SharedEpisodes.productionPage('zh'); },
 availability(){ return availabilityPageZh(); },
 'availability-common'(){ return availabilityPageZh('overlap'); },
 'availability-members'(){ return availabilityPageZh('people'); },
