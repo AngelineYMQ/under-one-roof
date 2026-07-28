@@ -2066,136 +2066,80 @@ body{background:linear-gradient(180deg,#fbfcfe 0%,#f5f7fa 100%)}
 }
 
 
-/* v93 unified calendar item cards */
-.calendar-item-grid{
+/* v94 safe unified calendar card layout — CSS only */
+.shoot-day-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:14px;
   align-items:start;
 }
-.calendar-item-card{
-  --item-accent:#64748b;
-  background:#fff;
+.shoot-card.generic-calendar-card{
+  display:block;
+  min-height:190px;
+  padding:15px;
   border:1px solid #dfe5ed;
-  border-top:4px solid var(--item-accent);
+  border-top:4px solid #e8703d;
   border-radius:14px;
-  padding:14px;
+  background:#fff;
   box-shadow:0 5px 16px rgba(22,36,61,.06);
   cursor:pointer;
-  transition:transform .16s ease,box-shadow .16s ease;
 }
-.calendar-item-card:hover{
+.shoot-card.generic-calendar-card:hover{
   transform:translateY(-2px);
   box-shadow:0 9px 22px rgba(22,36,61,.1);
 }
-.calendar-item-card.type-shoot{--item-accent:#e8703d}
-.calendar-item-card.type-editing{--item-accent:#8b5cf6}
-.calendar-item-card.type-meeting{--item-accent:#2563eb}
-.calendar-item-card.type-other{--item-accent:#64748b}
-.calendar-item-card>header{
+.shoot-card.generic-calendar-card .shoot-card-top{
   display:flex;
-  align-items:flex-start;
   justify-content:space-between;
-  gap:10px;
-}
-.calendar-item-card>header>div{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-.calendar-item-card>header strong{
-  font-size:12px;
-  color:#26354c;
-}
-.calendar-type-badge{
-  display:inline-flex;
-  width:max-content;
   align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+}
+.shoot-card.generic-calendar-card .shoot-card-top strong{
+  display:inline-flex;
   min-height:24px;
+  align-items:center;
   padding:0 9px;
   border-radius:999px;
-  background:color-mix(in srgb,var(--item-accent) 12%,white);
-  color:var(--item-accent);
+  background:#fff1e8;
+  color:#d85e2c;
   font-size:10px;
   font-weight:800;
 }
-.calendar-status{
-  padding:5px 8px;
-  border-radius:999px;
-  background:#f1f4f8;
+.shoot-card.generic-calendar-card .shoot-card-top span{
   color:#536176;
-  font-size:9px;
-  font-weight:800;
+  font-size:11px;
+  font-weight:700;
 }
-.calendar-item-card h4{
-  margin:14px 0 12px;
+.shoot-card.generic-calendar-card h4{
+  margin:0 0 12px;
   color:#152238;
   font-size:16px;
-  line-height:1.35;
+  line-height:1.4;
 }
-.calendar-item-meta{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:7px;
-}
-.calendar-item-meta>div{
-  min-width:0;
-  padding:8px;
+.shoot-card.generic-calendar-card p{
+  margin:0 0 10px;
+  padding:9px 10px;
   border-radius:9px;
   background:#f7f9fc;
+  color:#34445c;
+  font-size:11px;
+  line-height:1.5;
 }
-.calendar-item-meta small{
+.shoot-card.generic-calendar-card>small{
   display:block;
-  margin-bottom:3px;
-  color:#7a8699;
-  font-size:9px;
-}
-.calendar-item-meta b{
-  display:block;
-  overflow:hidden;
-  color:#25344b;
-  font-size:10.5px;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-.calendar-location,
-.calendar-note{
-  margin:10px 0 0;
-  padding:8px 10px;
-  border-radius:9px;
+  color:#6f7c90;
   font-size:10px;
   line-height:1.5;
 }
-.calendar-location{
-  background:#f8fafc;
-  color:#536176;
-}
-.calendar-note{
-  background:#fff8ef;
-  color:#8a542b;
-}
-.calendar-item-card>footer{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:12px;
-  padding-top:10px;
-  border-top:1px solid #edf0f5;
-  color:#778397;
-  font-size:9.5px;
-}
-.calendar-item-card>footer b{
-  color:var(--item-accent);
-  font-size:16px;
-}
 @media(max-width:1000px){
-  .calendar-item-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .shoot-day-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:600px){
-  .calendar-item-grid{grid-template-columns:1fr;gap:10px}
-  .calendar-item-card{padding:12px}
-  .calendar-item-card h4{font-size:14px}
-  .calendar-item-meta{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .calendar-item-meta>div{padding:7px 6px}
-  .calendar-item-meta b{font-size:9.5px}
+  .shoot-day-grid{grid-template-columns:1fr;gap:10px}
+  .shoot-card.generic-calendar-card{
+    min-height:0;
+    padding:12px;
+  }
+  .shoot-card.generic-calendar-card h4{font-size:14px}
 }
