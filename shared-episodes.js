@@ -36,6 +36,10 @@ function getStatistics(source=items){
  const data=Array.isArray(source)?source:[];
  const total=data.length;
  const countStage=stage=>data.filter(x=>x.productionStage===stage).length;
+ const reachedStage=stage=>{
+  const targetIndex=stageOrder.indexOf(stage);
+  return data.filter(x=>stageOrder.indexOf(x.productionStage)>=targetIndex).length;
+ };
  const average=key=>total?data.reduce((sum,x)=>sum+(+x[key]||0),0)/total:0;
  return {
   total,
@@ -47,6 +51,12 @@ function getStatistics(source=items){
   filmed:countStage('filmed'),
   post:countStage('post'),
   publish:countStage('publish'),
+  reachedOutline:reachedStage('outline'),
+  reachedWriting:reachedStage('writing'),
+  reachedLocked:reachedStage('locked'),
+  reachedShoot:reachedStage('shoot'),
+  reachedPost:reachedStage('post'),
+  reachedPublish:reachedStage('publish'),
   productionReady:data.filter(x=>['locked','shoot','filmed','post','publish'].includes(x.productionStage)).length,
   shooting:data.filter(x=>['shoot','filmed'].includes(x.productionStage)).length,
   filmedOrLater:data.filter(x=>['filmed','post','publish'].includes(x.productionStage)).length,
@@ -539,9 +549,26 @@ function renderDashboard(){
  const followers=stats.totalFollowers;
  const avg30=items.length?(items.reduce((a,x)=>a+(+x.retention30||0),0)/items.length).toFixed(1):'0.0';
  const avgCompletion=items.length?(items.reduce((a,x)=>a+(+x.completionRate||0),0)/items.length).toFixed(1):'0.0';
+ const milestoneCounts={
+  outline:stats.reachedOutline,
+  writing:stats.reachedWriting,
+  locked:stats.reachedLocked,
+  shoot:stats.reachedShoot,
+  post:stats.reachedPost,
+  publish:stats.reachedPublish
+ };
  const topCards=[
-  ['outline',lang==='en'?'Idea & Outline':'选题与大纲'],['writing',lang==='en'?'Writing':'剧本编写'],['locked',lang==='en'?'Script Locked':'剧本锁定'],['shoot',lang==='en'?'Ready to Shoot':'待拍摄'],['post',lang==='en'?'Post-production':'后期制作'],['publish',lang==='en'?'Published':'已发布']
- ].map(([key,label])=>{const count=items.filter(x=>x.productionStage===key).length;const pct=Math.round(count/total*100);return `<article class="dash-status-card dash-${key}" style="--status:${stageColors[key]};--pct:${pct*3.6}deg"><div class="dash-status-copy"><span class="dash-status-icon">${stageIcons[key]}</span><div><small>${label}</small><strong>${count}</strong><em>${lang==='en'?'Share':'占比'} ${pct}%</em></div></div><div class="dash-mini-ring"><i></i></div></article>`}).join('');
+  ['outline',lang==='en'?'Idea & Outline':'选题与大纲'],
+  ['writing',lang==='en'?'Script Writing':'剧本编写'],
+  ['locked',lang==='en'?'Script Locked':'剧本锁定'],
+  ['shoot',lang==='en'?'Entered Shooting':'进入拍摄'],
+  ['post',lang==='en'?'Entered Post-production':'进入后期'],
+  ['publish',lang==='en'?'Published':'已发布']
+ ].map(([key,label])=>{
+  const count=milestoneCounts[key]||0;
+  const pct=Math.round(count/total*100);
+  return `<article class="dash-status-card dash-${key}" style="--status:${stageColors[key]};--pct:${pct*3.6}deg"><div class="dash-status-copy"><span class="dash-status-icon">${stageIcons[key]}</span><div><small>${label}</small><strong>${count}</strong><em>${lang==='en'?'Cumulative reach':'累计覆盖'} ${pct}%</em></div></div><div class="dash-mini-ring"><i></i></div></article>`;
+ }).join('');
  const stageLegend=stageCounts.map(x=>`<div class="dash-donut-legend"><span style="background:${stageColors[x.key]}"></span><strong>${x.label}</strong><b>${x.count}</b><em>(${Math.round(x.count/total*100)}%)</em></div>`).join('');
  const upcomingHtml=upcoming.map(x=>{
   const time=[x.startTime||x.callTime||'',x.endTime||''].filter(Boolean).join('–')||'—';
