@@ -1,4 +1,4 @@
-## v67 — Date-specific team availability
+## v68 — Date-specific team availability
 
 Availability entries now require an exact calendar date. Common slots are calculated only when all three members are available on the same date.
 
