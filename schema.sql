@@ -1527,10 +1527,11 @@ CREATE TABLE IF NOT EXISTS brand_settings (
 CREATE TABLE IF NOT EXISTS availability (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  member TEXT NOT NULL DEFAULT '',
+ availability_date TEXT NOT NULL DEFAULT '',
  day_of_week INTEGER NOT NULL DEFAULT 1,
  start_time TEXT NOT NULL DEFAULT '',
  end_time TEXT NOT NULL DEFAULT '',
  note TEXT NOT NULL DEFAULT '',
  deleted_at TEXT
 );
-CREATE INDEX IF NOT EXISTS idx_availability_day ON availability(day_of_week,start_time);
+CREATE INDEX IF NOT EXISTS idx_availability_date ON availability(availability_date,start_time);

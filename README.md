@@ -1,3 +1,7 @@
+## v67 — Date-specific team availability
+
+Availability entries now require an exact calendar date. Common slots are calculated only when all three members are available on the same date.
+
 # Under One Roof HQ — v32 batch consistency release
 
 A static bilingual production HQ for Cloudflare Pages with D1-backed Pages Functions.
