@@ -5,6 +5,7 @@ const navGroups = [
   {id:'episode-management', label:'剧集管理', icon:'▤', children:[['season','全部剧集'],['special','特别篇'],['scripts','剧本中心'],['production','制作进度']]},
   {id:'shooting', label:'拍摄中心', icon:'◷', children:[['availability-common','三人共同时间'],['schedule','拍摄日程与通告单']]},
   {id:'resources', label:'创作资料库', icon:'✦', children:[['ideas','剧情题材库'],['singapore','新加坡资料库']]},
+  {id:'competitors', label:'竞争对手', icon:'◈', page:'competitors'},
   {id:'team-group', label:'团队成员', icon:'♟', page:'team'},
   {id:'publishing', label:'发布与复盘', icon:'↗', page:'analytics'}
 ];
@@ -79,6 +80,7 @@ function renderNav(){
 
 const pages = {
 home(){ return SharedEpisodes.dashboardPage('zh'); },
+competitors(){ return CompetitorAnalysis.page('zh'); },
 positioning(){ return introPage('项目定位','这不是普通搞笑账号，而是一套可以持续扩展的短剧 IP。',[
  ['项目名称','暂定《同一个屋檐下》。名称可更换，但内部世界观与人物关系可先建立。'],
  ['一句话介绍','一名刚到新加坡的中国富二代留学生，误签下一间比照片小很多的房间，与做房地产的房东和做社交媒体广告的租客住在同一屋檐下。'],
@@ -102,11 +104,11 @@ ideas(){ return `${section('剧情题材库','长期题材分类，不只服务�
 episode(){ return `${section('单集资料页模板','每一集都应使用同一套字段',`<div class="table-wrap"><table><thead><tr><th>栏目</th><th>内容示例</th></tr></thead><tbody>${[['集数','EP01'],['标题','富二代租了最小的房间'],['系列','入住篇'],['核心文化点','新加坡租房'],['主角','James、Angeline、Joseph'],['配角','无'],['场景','客厅'],['时长','4–7分钟'],['剧情状态','灵感／大纲／剧本／已拍／已剪／已发布'],['编剧','姓名'],['导演','姓名'],['拍摄日期','日期'],['发布日期','日期'],['发布平台','抖音／小红书／视频号／YouTube'],['道具','合同、行李箱、钥匙'],['备注','明确“广角照片、已签一年租约、押金与面子”三项设定']].map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td></tr>`).join('')}</tbody></table></div>`)}${section('每集内容结构','所有正式剧本必须包括',`<div class="grid grid-3">${['标题与封面句：观众一眼看懂冲突','开场钩子：前10–20秒建立人物处境与异常事件','第一幕建置：交代人物目标、场景和冲突起点','剧情目标：谁想做什么','阻力与升级：谁阻止，事情如何越来越严重','中段反转：让观众继续看下去','高潮与最终反转：兑现标题承诺','结尾钩子／互动问题：促进评论或下一集追看','完整台词：按角色和动作拆分','镜头与剪辑：景别、反应镜头、字幕、音效','发布文案：各平台标题、简介和标签','数据复盘：首30秒留存、平均观看时长、完播率、追集率与评论反馈'].map((x,i)=>card(`0${i+1}`,`<p>${x}</p>`)).join('')}</div>`)}`; },
 scripts(){ const r=currentRoute(); setTimeout(()=>{if(r.season)SharedEpisodes.setSeason(r.season);},80); return SharedEpisodes.scriptsPage('zh'); },
 production(){ const r=currentRoute(); setTimeout(()=>{if(r.season)SharedEpisodes.setSeason(r.season); if(r.productionView)SharedEpisodes.setProductionView(r.productionView);},80); return SharedEpisodes.productionPage('zh'); },
-availability(){ return window.ProductionPlanner?.availabilityPage ? window.ProductionPlanner.availabilityPage('zh','common') : availabilityPageZh(); },
-'availability-common'(){ return window.ProductionPlanner?.availabilityPage ? window.ProductionPlanner.availabilityPage('zh','common') : availabilityPageZh('overlap'); },
-'availability-members'(){ return window.ProductionPlanner?.availabilityPage ? window.ProductionPlanner.availabilityPage('zh','members') : availabilityPageZh('people'); },
-'availability-dates'(){ return window.ProductionPlanner?.availabilityPage ? window.ProductionPlanner.availabilityPage('zh','dates') : availabilityPageZh('week'); },
-schedule(){ const r=currentRoute(); return window.ProductionPlanner?.schedulePage ? window.ProductionPlanner.schedulePage('zh') : (scheduleViewModeZh=r.scheduleView||'cards',schedulePageZh()); },
+availability(){ return availabilityPageZh(); },
+'availability-common'(){ return availabilityPageZh('overlap'); },
+'availability-members'(){ return availabilityPageZh('people'); },
+'availability-dates'(){ return availabilityPageZh('week'); },
+schedule(){ const r=currentRoute(); scheduleViewModeZh=r.scheduleView||'cards'; return schedulePageZh(); },
 team(){ return teamPage('zh'); },
 supporting(){ return supportingPage('zh'); },
 singapore(){ const cats=['租房','交通','饮食','工作','教育','法律与罚款','节日','语言','社交习惯','政府服务','医疗','银行','手机与网络']; return `${section('新加坡资料库','所有文化与政策信息必须准确并注明来源',`<div class="grid grid-4">${cats.map(x=>card(x,'<p>保存主题说明、官方来源、最后核实日期、可对应剧集、是否已使用。</p>')).join('')}</div>`)}${section('资料条目标准','防止短剧传播错误信息',`<div class="table-wrap"><table><thead><tr><th>字段</th><th>要求</th></tr></thead><tbody><tr><td>主题</td><td>明确到一个可拍摄的问题</td></tr><tr><td>简单说明</td><td>用观众听得懂的话解释</td></tr><tr><td>官方来源</td><td>优先政府、法定机构或官方运营方</td></tr><tr><td>最后核实日期</td><td>政策与费用类内容必须更新</td></tr><tr><td>对应剧集</td><td>标记可以融入哪一集</td></tr><tr><td>是否已使用</td><td>避免重复或方便制作续集</td></tr></tbody></table></div>`)}`; },

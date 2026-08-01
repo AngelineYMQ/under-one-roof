@@ -5,6 +5,7 @@ const navGroups = [
   {id:'episode-management', label:'Episode Management', icon:'▤', children:[['season','All Episodes'],['special','Specials'],['scripts','Script Center'],['production','Production Progress']]},
   {id:'shooting', label:'Shoot Center', icon:'◷', children:[['availability-common','Team Availability'],['schedule','Shoot Schedule & Call Sheets']]},
   {id:'resources', label:'Creative Library', icon:'✦', children:[['ideas','Story Topic Library'],['singapore','Singapore Reference Library']]},
+  {id:'competitors', label:'Competitors', icon:'◈', page:'competitors'},
   {id:'team-group', label:'Team Members', icon:'♟', page:'team'},
   {id:'publishing', label:'Publishing & Review', icon:'↗', page:'analytics'}
 ];
@@ -78,6 +79,7 @@ function renderNav(){
 
 const pages = {
 home(){ return SharedEpisodes.dashboardPage('en'); },
+competitors(){ return CompetitorAnalysis.page('en'); },
 positioning(){ return introPage('Project Positioning','This is not just a comedy account. It is an expandable short-drama IP.',[
  ['Project Name','Working title: Under One Roof. The title may change, but the story world and character relationships can be established now.'],
  ['One-line Introduction','A wealthy Chinese international student mistakenly signs for a room far smaller than it looked online, then moves in with a property-agent landlord and a social media advertising tenant.'],
@@ -101,11 +103,11 @@ ideas(){ return `${section('Story Topic Library','Long-term topic categories bey
 episode(){ return `${section('Episode SheetTemplate','Every episode should use the same fields',`<div class="table-wrap"><table><thead><tr><th>Field</th><th>Example</th></tr></thead><tbody>${[['Episode','EP01'],['Title','The Rich Student Rented the Smallest Room'],['Arc','Move-in Arc'],['Core Cultural Point','SingaporeHousing & Tenancy'],['Main Cast','James, Angeline and Joseph'],['Supporting Cast','None'],['Scene','Living Room'],['Duration','4–7 minutes'],['Story Status','Idea / Outline / Script / Filmed / Edited / Published'],['Writer','Name'],['Director','Name'],['Shoot Date','Date'],['Publication Date','Date'],['Platforms','Douyin / Xiaohongshu / WeChat Channels / YouTube'],['Props','Contract, Suitcases, Keys'],['Notes','Keep the wide-angle photos, one-year lease, deposit, and pride logic consistent']].map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td></tr>`).join('')}</tbody></table></div>`)}${section('Episode Structure','Every final script must include',`<div class="grid grid-3">${['Opening Hook: Establish the abnormal situation within 10–20 seconds','Act One Setup: Character goal, setting, stakes and starting conflict','Act Two Escalation: At least two failed attempts and a midpoint reversal','Act Three Climax: The three approaches collide and create a consequence','Relationship Beat: Reveal a weakness or change the trio’s relationship','Full Scene Dialogue: Organised by scene, action and character','Shot & Sound Plan: Coverage, reactions, blocking, subtitles and sound','Release Review: First-30-second retention, completion and next-episode conversion'].map((x,i)=>card(`0${i+1}`,`<p>${x}</p>`)).join('')}</div>`)}`; },
 scripts(){ const r=currentRoute(); setTimeout(()=>{if(r.season)SharedEpisodes.setSeason(r.season);},80); return SharedEpisodes.scriptsPage('en'); },
 production(){ const r=currentRoute(); setTimeout(()=>{if(r.season)SharedEpisodes.setSeason(r.season); if(r.productionView)SharedEpisodes.setProductionView(r.productionView);},80); return SharedEpisodes.productionPage('en'); },
-availability(){ return window.ProductionPlanner?.availabilityPage ? window.ProductionPlanner.availabilityPage('en','common') : availabilityPageEn(); },
-'availability-common'(){ return window.ProductionPlanner?.availabilityPage ? window.ProductionPlanner.availabilityPage('en','common') : availabilityPageEn('overlap'); },
-'availability-members'(){ return window.ProductionPlanner?.availabilityPage ? window.ProductionPlanner.availabilityPage('en','members') : availabilityPageEn('people'); },
-'availability-dates'(){ return window.ProductionPlanner?.availabilityPage ? window.ProductionPlanner.availabilityPage('en','dates') : availabilityPageEn('week'); },
-schedule(){ const r=currentRoute(); return window.ProductionPlanner?.schedulePage ? window.ProductionPlanner.schedulePage('en') : (scheduleViewModeEn=r.scheduleView||'cards',schedulePageEn()); },
+availability(){ return availabilityPageEn(); },
+'availability-common'(){ return availabilityPageEn('overlap'); },
+'availability-members'(){ return availabilityPageEn('people'); },
+'availability-dates'(){ return availabilityPageEn('week'); },
+schedule(){ const r=currentRoute(); scheduleViewModeEn=r.scheduleView||'cards'; return schedulePageEn(); },
 team(){ return teamPage('en'); },
 supporting(){ return supportingPage('en'); },
 singapore(){ const cats=['Housing & Tenancy','Transport','Food','Work','Education','Laws & Fines','Festivals','Language','Social Customs','Government Services','Healthcare','Banking','Mobile & Internet']; return `${section('Singapore Reference Library','All cultural and policy information must be accurate and sourced',`<div class="grid grid-4">${cats.map(x=>card(x,'<p>Store the topic explanation, official source, last verification date, related episodes, and whether it has been used.</p>')).join('')}</div>`)}${section('Reference Entry Standard','Prevent inaccurate information from appearing in the series',`<div class="table-wrap"><table><thead><tr><th>Field</th><th>Requirement</th></tr></thead><tbody><tr><td>Topic</td><td>Define one filmable question</td></tr><tr><td>Plain-language Explanation</td><td>Explain it in audience-friendly language</td></tr><tr><td>Official Source</td><td>Prioritise government agencies, statutory boards, or official operators</td></tr><tr><td>Last Verified</td><td>Policies and fees must be kept current</td></tr><tr><td>Related Episodes</td><td>Identify where the information can be used</td></tr><tr><td>Used</td><td>Prevent duplication or support sequels</td></tr></tbody></table></div>`)}`; },
