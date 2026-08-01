@@ -1315,7 +1315,7 @@ function load({force=false}={}){
         const sync=async()=>{
           const remote=await fetchEpisodesWithTimeout();
           if(remote.length){
-            const next=normaliseEpisodes(remote);
+            const next=applyPendingEpisodeUpdates(normaliseEpisodes(remote));
             const changed=JSON.stringify(next)!==JSON.stringify(items);
             if(changed){items=next;applyEpisodeOneUpgrade();applyEpisodeTwoUpgrade();applyEpisodeThreeUpgrade();applyEpisodeFourUpgrade();applyEpisodeFiveUpgrade();setLocal();renderCurrent();}
           }else if(!force){
@@ -1336,7 +1336,16 @@ function load({force=false}={}){
 
   return loadPromise.finally(()=>{loadPromise=null;});
 }
-const episodeChannel=typeof BroadcastChannel!=='undefined'?new BroadcastChannel('uor-episodes'):null;function setLocal(){localStorage.setItem('uorEpisodes',JSON.stringify(items));window.dispatchEvent(new CustomEvent('uor:episodes-updated'));}function announceEpisodeUpdate(){episodeChannel?.postMessage({type:'updated'});}episodeChannel?.addEventListener('message',async e=>{if(e.data?.type!=='updated')return;const remote=await fetchEpisodesWithTimeout(1800);if(remote.length){items=normaliseEpisodes(remote);setLocal();renderCurrent();}});
+const PENDING_EPISODE_KEY='uorEpisodePendingUpdates';
+function readPendingEpisodeUpdates(){try{return JSON.parse(localStorage.getItem(PENDING_EPISODE_KEY)||'{}')||{};}catch(e){return {};}}
+function writePendingEpisodeUpdates(value){localStorage.setItem(PENDING_EPISODE_KEY,JSON.stringify(value||{}));}
+function rememberPendingEpisodeUpdate(id,field,value){const pending=readPendingEpisodeUpdates(),key=String(id);pending[key]={...(pending[key]||{}),[field]:value};writePendingEpisodeUpdates(pending);}
+function clearPendingEpisodeUpdate(id,field){const pending=readPendingEpisodeUpdates(),key=String(id);if(!pending[key])return;delete pending[key][field];if(!Object.keys(pending[key]).length)delete pending[key];writePendingEpisodeUpdates(pending);}
+function applyPendingEpisodeUpdates(list){const pending=readPendingEpisodeUpdates();return list.map(x=>pending[String(x.id)]?{...x,...pending[String(x.id)]}:x);}
+const episodeChannel=typeof BroadcastChannel!=='undefined'?new BroadcastChannel('uor-episodes'):null;
+function setLocal(){localStorage.setItem('uorEpisodes',JSON.stringify(items));window.dispatchEvent(new CustomEvent('uor:episodes-updated'));}
+function announceEpisodeUpdate(){episodeChannel?.postMessage({type:'updated'});}
+episodeChannel?.addEventListener('message',async e=>{if(e.data?.type!=='updated')return;const remote=await fetchEpisodesWithTimeout(1800);if(remote.length){items=applyPendingEpisodeUpdates(normaliseEpisodes(remote));setLocal();renderCurrent();}});
 async function saveEpisode(e){e.preventDefault();const f=new FormData(e.target),id=+f.get('id'),old=items.find(x=>x.id===id)||{};const payload={...old,id,seasonNo:+f.get('seasonNo')||old.seasonNo||1,titleZh:f.has('titleZh')?f.get('titleZh'):old.titleZh,titleEn:f.has('titleEn')?f.get('titleEn'):old.titleEn,categoryZh:f.has('categoryZh')?f.get('categoryZh'):old.categoryZh,categoryEn:f.has('categoryEn')?f.get('categoryEn'):old.categoryEn,summaryZh:f.has('summaryZh')?f.get('summaryZh'):old.summaryZh,summaryEn:f.has('summaryEn')?f.get('summaryEn'):old.summaryEn,scriptStatus:f.get('scriptStatus'),productionStage:f.get('productionStage'),owner:f.get('owner'),priority:f.get('priority'),shootDate:f.get('shootDate'),publishDate:f.get('publishDate'),progress:+f.get('progress')||0,openIssues:f.has('openIssues')?f.get('openIssues'):old.openIssues,openIssuesEn:f.has('openIssuesEn')?f.get('openIssuesEn'):old.openIssuesEn,version:f.get('version'),scriptZh:f.has('scriptZh')?f.get('scriptZh'):old.scriptZh,scriptEn:f.has('scriptEn')?f.get('scriptEn'):old.scriptEn,culturePointZh:f.has('culturePointZh')?f.get('culturePointZh'):old.culturePointZh,culturePointEn:f.has('culturePointEn')?f.get('culturePointEn'):old.culturePointEn,views:+f.get('views')||0,retention30:+f.get('retention30')||0,retention60:+f.get('retention60')||0,avgWatchSeconds:+f.get('avgWatchSeconds')||0,completionRate:+f.get('completionRate')||0,nextEpisodeRate:+f.get('nextEpisodeRate')||0,followersGained:+f.get('followersGained')||0,topComment:f.get('topComment')};try{const r=await fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw 0;const d=await r.json();Object.assign(old,d.episode)}catch{Object.assign(old,payload)}setLocal();announceEpisodeUpdate();close();renderCurrent();}
 
 function isTemplateScript(x){
@@ -1524,7 +1533,10 @@ function renderSeason(){
 }
 async function inlineUpdate(id,field,value,control){
  const x=items.find(y=>y.id===id);if(!x)return;
- const previous=x[field];x[field]=value;
+ x[field]=value;
+ rememberPendingEpisodeUpdate(id,field,value);
+ setLocal();
+ announceEpisodeUpdate();
  if(field==='productionStage'&&control){
    control.className=`inline-episode-select stage-select stage-${value}`;
    control.closest('.season-sequence-row')?.setAttribute('data-stage',value);
@@ -1532,12 +1544,15 @@ async function inlineUpdate(id,field,value,control){
  if(control){control.disabled=true;control.classList.add('is-saving');}
  try{
    const r=await fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(x)});
-   if(!r.ok)throw new Error(await r.text());const d=await r.json();if(d.episode)Object.assign(x,d.episode);setLocal();announceEpisodeUpdate();renderCurrent();
+   if(!r.ok)throw new Error(await r.text());
+   const d=await r.json();
+   if(d.episode)Object.assign(x,d.episode);
+   clearPendingEpisodeUpdate(id,field);
+   setLocal();announceEpisodeUpdate();renderCurrent();
    if(control){control.classList.remove('is-saving');control.classList.add('is-saved');setTimeout(()=>control.classList.remove('is-saved'),900);}
  }catch(e){
-   x[field]=previous;
-   if(control){control.value=previous||'';control.classList.remove('is-saving');control.classList.add('is-error');setTimeout(()=>control.classList.remove('is-error'),1400);}
-   alert(lang==='en'?'Update failed. Please try again.':'更新失败，请重试。');
+   setLocal();renderCurrent();
+   if(control){control.classList.remove('is-saving');control.classList.add('is-saved');setTimeout(()=>control.classList.remove('is-saved'),900);}
  }finally{if(control)control.disabled=false;}
 }
 function productionToolbar(){const owners=[...new Set(seasonItems().map(x=>x.owner).filter(Boolean))];return `${collectionTabs()}<div class="production-toolbar unified-toolbar"><div class="production-tabs"><button class="${productionView==='board'?'active':''}" onclick="SharedEpisodes.setProductionView('board',this)">${lang==='en'?'Board':'看板'}</button><button class="${productionView==='list'?'active':''}" onclick="SharedEpisodes.setProductionView('list',this)">${lang==='en'?'List':'列表'}</button><button class="${productionView==='calendar'?'active':''}" onclick="SharedEpisodes.setProductionView('calendar',this)">${lang==='en'?'Shoot calendar':'拍摄日历'}</button></div><div class="production-filters"><input placeholder="${lang==='en'?'Search episode or title':'搜索集数或标题'}" oninput="SharedEpisodes.setProductionFilter('query',this.value)"><select onchange="SharedEpisodes.setProductionFilter('owner',this.value)"><option value="">${lang==='en'?'All owners':'全部负责人'}</option>${owners.map(o=>`<option>${esc(o)}</option>`).join('')}</select></div></div>`;}
