@@ -80,48 +80,39 @@ async function ensure(env){
   for(const [name,type] of additions){
    if(!names.has(name))await env.DB.prepare(`ALTER TABLE episodes ADD COLUMN ${name} ${type}`).run();
   }
-  await env.DB.prepare(`UPDATE episodes SET
-   current_stage=CASE production_stage
-    WHEN 'outline' THEN 'development'
-    WHEN 'writing' THEN 'writing'
-    WHEN 'locked' THEN 'writing'
-    WHEN 'shoot' THEN 'production'
-    WHEN 'filmed' THEN 'production'
-    WHEN 'post' THEN 'post'
-    WHEN 'publish' THEN 'publishing'
-    ELSE COALESCE(NULLIF(current_stage,''),'development') END,
-   current_substatus=CASE production_stage
-    WHEN 'outline' THEN 'story_development'
-    WHEN 'writing' THEN 'script_writing'
-    WHEN 'locked' THEN 'script_locked'
-    WHEN 'shoot' THEN 'shoot_preparation'
-    WHEN 'filmed' THEN 'assets_pending'
-    WHEN 'post' THEN 'editing'
-    WHEN 'publish' THEN CASE WHEN publish_date<>'' THEN 'published' ELSE 'ready_to_publish' END
-    ELSE COALESCE(NULLIF(current_substatus,''),'story_development') END,
-   blocker=CASE WHEN blocker='' THEN open_issues ELSE blocker END,
-   outline_completed_at=CASE
-    WHEN outline_completed_at IS NULL AND production_stage<>'outline' THEN updated_at
-    ELSE outline_completed_at END,
-   writing_started_at=CASE
-    WHEN writing_started_at IS NULL AND production_stage IN('writing','locked','shoot','filmed','post','publish') THEN updated_at
-    ELSE writing_started_at END,
-   script_locked_at=CASE
-    WHEN script_locked_at IS NULL AND production_stage IN('locked','shoot','filmed','post','publish') THEN updated_at
-    ELSE script_locked_at END,
-   shoot_started_at=CASE
-    WHEN shoot_started_at IS NULL AND production_stage IN('filmed','post','publish') THEN updated_at
-    ELSE shoot_started_at END,
-   shoot_completed_at=CASE
-    WHEN shoot_completed_at IS NULL AND production_stage IN('filmed','post','publish') THEN updated_at
-    ELSE shoot_completed_at END,
-   edit_completed_at=CASE
-    WHEN edit_completed_at IS NULL AND production_stage='publish' THEN updated_at
-    ELSE edit_completed_at END,
-   published_at=CASE
-    WHEN published_at IS NULL AND publish_date<>'' THEN publish_date
-    ELSE published_at END
-  `).run();
+  await env.DB.prepare(`CREATE TABLE IF NOT EXISTS app_migrations(
+   migration_key TEXT PRIMARY KEY,
+   applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  )`).run();
+  const resetKey='2026-08-01-uor-reset-to-outline';
+  const alreadyReset=await env.DB.prepare(
+   'SELECT migration_key FROM app_migrations WHERE migration_key=?'
+  ).bind(resetKey).first();
+  if(!alreadyReset){
+   await env.DB.prepare(`UPDATE episodes SET
+    production_stage='outline',
+    script_status='idea',
+    current_stage='development',
+    current_substatus='story_development',
+    progress=0,
+    blocker='',
+    open_issues='',
+    open_issues_en='',
+    outline_completed_at=COALESCE(outline_completed_at,updated_at,CURRENT_TIMESTAMP),
+    writing_started_at=NULL,
+    script_locked_at=NULL,
+    shoot_started_at=NULL,
+    shoot_completed_at=NULL,
+    assets_archived_at=NULL,
+    edit_completed_at=NULL,
+    published_at=NULL,
+    reviewed_at=NULL,
+    updated_at=CURRENT_TIMESTAMP
+   `).run();
+   await env.DB.prepare(
+    'INSERT INTO app_migrations(migration_key) VALUES(?)'
+   ).bind(resetKey).run();
+  }
  }
 
  await env.DB.prepare('CREATE INDEX IF NOT EXISTS idx_episodes_stage ON episodes(season_no,production_stage)').run();

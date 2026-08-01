@@ -1,12 +1,16 @@
-Upload:
+Upload this file:
 
-1. `functions/api/episodes.js` — replace the existing file.
-2. `shared-episode-core.js` — add to the repository root.
-3. `migrations/0004_episode_lifecycle_core.sql` — keep as migration documentation/reference.
-4. `P0-A-ARCHITECTURE.md` — keep as the implementation contract.
+- functions/api/episodes.js
 
-Important:
-- Do not manually run the SQL file if the columns already exist.
-- The updated episodes API performs the column additions idempotently on first request.
-- This release deliberately does not redesign pages yet.
-- Existing Chinese/English pages and legacy `productionStage` writes remain compatible.
+Optional documentation:
+- migrations/0005_reset_actual_project_stage.sql
+- P0-A-ARCHITECTURE.md
+- shared-episode-core.js
+
+What this fixes:
+- Removes the false historical stages inherited from seeded/demo episode data.
+- Resets all 42 episodes to Development / Story Development.
+- Keeps outline completion as the only completed milestone.
+- Clears writing, locked, shooting, post-production and publishing milestones.
+- Runs only once through the app_migrations guard.
+- Does not delete episode titles, owners, summaries, scripts, schedules or other content.
