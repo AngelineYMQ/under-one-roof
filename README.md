@@ -143,3 +143,8 @@ All major work views now have stable shareable hashes. These include season-spec
 - The episode dashboard now paints from local cache or bundled defaults immediately.
 - D1 episode data is reconciled in the background with a timeout.
 - Direct mobile routes remain deferred until all app modules are initialized.
+
+## v75
+- Integrated the SG61 special into All Episodes, Script Center and Production Progress.
+- Reset all 30 regular Season 1 episodes to Topic & Outline / Idea status using a one-time D1 migration.
+- Preserved the special as a completed, script-locked project.
