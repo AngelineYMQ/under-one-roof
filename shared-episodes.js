@@ -70,193 +70,1213 @@ function getStatistics(source=items){
 
 const EP01_DETAILED_ZH=`EP01《富二代租了最小的房间》
 
-目标时长：5–6分钟
-主要场景：James家客厅、房间门口
-主要人物：James、Angeline、Joseph
-道具：八个行李箱、手机、钥匙、租约、卷尺
+定稿拍摄版｜目标时长：5分20秒—5分30秒
 
-【场景1｜客厅／白天｜0:00–0:35】
-门铃连续响。James开门，先看到一个行李箱，再看到第二个、第三个。镜头慢慢拉开，门外排着八个行李箱。
+本集主线：Angeline相信钱能解决一切，入住第一天却发现，钱可以买东西，却不能让已经签下的房间变大，也不能让合同和共同生活规则自动消失。
 
-ANGELINE（站在行李后面）：你好，我来入住。
-JAMES：你是搬家，还是把中国的家搬过来？
-JOSEPH（拿手机开始拍）：不要动，这个开场很好。
-ANGELINE：你在拍什么？
-JOSEPH：记录富二代第一次独立生活。
-ANGELINE：谁告诉你我是富二代？
-JOSEPH：正常留学生不会带八个箱子。
+人物关系推进：
+• Angeline第一次为自己的冲动决定承担后果；
+• James发现她虽然嘴硬，但并非毫无责任感；
+• Joseph前期把一切当素材，看到Angeline与妈妈通话后第一次主动放下手机。
 
-【场景2｜房间门口｜0:35–1:25】
-James把钥匙交给Angeline，指向一扇小门。Angeline打开门，停住。
+场景：HDB屋外走廊、客厅、普通房
+人物：Angeline、James、Joseph
+核心道具：一个超大号行李箱、手机、钥匙、租约、卷尺、超长入住规则纸
 
-ANGELINE：我的房间在哪里？
+【0—3秒｜反常识视觉钩子】
+
+【EP01-SC01-S01｜走廊广角全景｜必拍】
+安静的HDB走廊。
+
+一个超大号行李箱孤零零地立在James家门外。
+
+没有人。
+
+门缓缓打开。
+
+James探出头，先看行李箱，再看空荡荡的走廊。
+
+下一秒，Angeline从行李箱后面站起来。
+
+ANGELINE：你好，我来入住。
+
+切James反应。
+
+【3—25秒｜人物登场＋核心对立】
+
+【EP01-SC01-S02｜门口三人中景】
+James看向Angeline身后。
+
+JAMES：其他行李呢？
+
+Angeline回头看了一眼。
+
+ANGELINE：没有了。
+
+JAMES：你要住一年。
+
+ANGELINE：对啊。
+
+Joseph听到动静，从屋内走出来。
+
+看到唯一的行李箱，顺手举起手机。
+
+JOSEPH：等一下。你来新加坡住一年，只带一个箱子？
+
+Angeline不以为意。
+
+ANGELINE：护照、电脑、几套衣服，够了。
+
+JAMES：被子呢？
+
+ANGELINE：买。
+
+JOSEPH：日用品？
+
+ANGELINE：买。
+
+JAMES：剩下的衣服？
+
+ANGELINE：缺什么就买什么。我为什么要从中国搬一堆东西过来？
+
+Joseph看着她。
+
+JOSEPH：她不是来搬家的。她是来拯救新加坡零售业的。
+
+Angeline拉起箱子。
+
+ANGELINE：钱能解决的事情，就不要浪费时间准备。
+
+James侧身让她进门。
+
+JAMES：先看房间。再决定钱能解决什么。
+
+Joseph闻到“有内容”的味道，立刻跟上。
+
+【25秒—1分30秒｜第一次打脸：房源美图】
+
+【场景二｜普通房门口／连续】
+
+【EP01-SC02-S01｜跟拍中景】
+James打开房门。
+
+Angeline拖着箱子来到门口。
+
+她刚准备进去，突然停住。
+
+房间里只有一张单人床、一张小桌子和一个衣柜。
+
+所剩空间极少。
+
+Angeline看看房间。
+
+又低头看看手机中的房源照片。
+
+再看看房间。
+
+沉默三秒。
+
+ANGELINE：我的房间呢？
+
 JAMES：就在你面前。
-ANGELINE：我问的是房间，不是储物间。
-JAMES：这是新加坡正常的普通房。
-ANGELINE（拿出手机）：照片里明明很大，还有一张桌子、一张床、一个衣柜。
-JAMES：都有。
-ANGELINE：它们怎么可能同时放进去？
-JAMES：摄影角度。
-JOSEPH：他做房地产的，角度是专业能力。
 
-【场景3｜客厅｜1:25–2:25】
-Angeline把手机里的房源照片放大，与现实房间反复对比。
+Angeline指着里面。
 
-ANGELINE：这个窗户在照片里有这么宽。
-JAMES：广角镜头。
-ANGELINE：这个走道看起来能放一张沙发。
-JAMES：广角镜头。
-ANGELINE：连天花板都高很多。
-JAMES：拍摄的人比较矮。
-JOSEPH（笑）：这个解释可以剪进广告教学。
-ANGELINE：我要退租。
-JAMES：可以。按照租约，提前退租，押金不退，还需要承担找到新租客前的租金。
-ANGELINE：多少钱？
-JAMES：两个月押金，加上可能的空置期。
-ANGELINE（沉默两秒）：其实小房间比较有安全感。
+ANGELINE：这个？
 
-【场景4｜客厅｜2:25–3:35】
-Joseph问她为什么家里有钱还要租房间。
+JAMES：对。
 
-JOSEPH：认真问，你这么有钱，为什么不直接租整套？
-ANGELINE：我要证明我可以独立生活。
-JAMES：所以你独立签了一份没有现场看房的一年租约。
-ANGELINE：我做决定很快。
-JAMES：这不是快，这是跳过检查。
-ANGELINE：我至少没有靠家里。
-此时Angeline手机响，来电显示“妈妈”。她立刻把手机扣在桌上。
-JOSEPH：不接？
-ANGELINE：她会问房子怎么样。
-JAMES：你可以说很温馨。
-JOSEPH：或者说步行三步可以到达房间任何位置。
+ANGELINE：这个不是房间。
 
-【场景5｜房间门口／客厅｜3:35–4:50】
-三个人尝试把八个行李箱塞进房间。第一只进去后，门已经无法完全打开。
+Joseph已经把手机举起来。
 
-JAMES：最多放两个。
-ANGELINE：剩下六个放客厅。
-JAMES：客厅是公共区域。
-JOSEPH：可以把箱子叠起来做背景墙，我拍视频用。
+JOSEPH：不要动。这个表情很好。
+
+Angeline转头。
+
+ANGELINE：你为什么一直拍我？
+
+JOSEPH：职业习惯。我做社交媒体营销的，看到有传播价值的画面，会有生理反应。
+
+ANGELINE：删掉。
+
+JOSEPH：我还没按录制。
+
+Joseph低头看手机。
+
+屏幕上明显已经在计时。
+
+【EP01-SC02-B01｜房间空镜｜高频复用B-roll】
+依次拍摄：
+• 床与房门距离；
+• 床与书桌之间的窄道；
+• 衣柜打开后的剩余空间；
+• 房门完全打开时与家具的位置；
+• 箱子与房间面积对比。
+
+【EP01-SC02-S02｜手机照片特写】
+Angeline打开房源页面，把照片递给James。
+
+ANGELINE：你自己看。照片里明明很大。
+
+James看了一眼。
+
+JAMES：是同一间。
+
+ANGELINE：不可能。照片里床和桌子中间，至少还能放一张沙发。
+
+James指着真实房间。
+
+JAMES：你现在放。
+
+Angeline瞪着他。
+
+Joseph进入房间，打开手机的0.5倍广角。
+
+【EP01-SC02-S03｜Joseph手机第一视角】
+手机屏幕中的房间立刻显得明亮宽敞。
+
+JOSEPH：零点五倍。小普通房，瞬间升级行政套房。
+
+Angeline看看手机画面，又看看真实房间。
+
+ANGELINE：所以照片就是拍大的。
+
+JAMES：照片没有改变房间。只是改变了你对房间的想象。
+
+ANGELINE：这不就是骗人吗？
+
+JAMES：所以我之前让你视频看房。
+
+ANGELINE：中介说再不签，就会被别人租走。
+
+JAMES：你就直接签了？
+
+ANGELINE：我做决定比较快。
+
+JOSEPH：不是快。是广告还没播完，你已经付款了。
+
+【EP01-SC02-S04｜卷尺实拍】
+James拿出卷尺，量床与书桌之间的距离。
+
+Angeline看着卷尺上的数字。
+
+再看手机照片。
+
+ANGELINE：照片里的路呢？
+
+James侧身从窄道挤过去。
+
+JAMES：这里。
+
+JOSEPH：单向通行。
+
+Angeline的表情第一次出现动摇。
+
+【1分30秒—2分30秒｜第二次打脸：钱不能让合同消失】
+
+【场景三｜客厅／连续】
+
+【EP01-SC03-S01｜沙发双人中景】
+Angeline坐下，打开手机搜索其他房源。
+
+ANGELINE：算了。我换一间。
+
+JAMES：屋里没有空房。
+
+Angeline指向Joseph的房间。
+
+ANGELINE：他的房间比我的大。
+
+Joseph马上挡在自己的门前。
+
+JOSEPH：看起来大。你刚刚的课白上了？
+
+ANGELINE：我可以加钱。
+
+Joseph开始认真考虑。
+
+JOSEPH：你准备加多——
+
 JAMES：不可以。
-ANGELINE：那我付客厅租金。
-JAMES：这不是钱的问题。
-ANGELINE：在我以前的经验里，大部分问题最后都是钱的问题。
-JAMES：欢迎来到新加坡。有些问题是规则问题。
 
-【场景6｜客厅｜4:50–5:45】
-Angeline最终决定只打开两个行李箱，其余寄存。Joseph仍在拍。
+JOSEPH：我只是想了解市场价格。
 
-ANGELINE：好，我住。但我要改造房间。
-JAMES：不能钉墙，不能换锁，不能拆家具。
-ANGELINE：那我能做什么？
-JAMES：住。
-JOSEPH：这句话适合当片尾。
-ANGELINE看向镜头：把刚才那段删掉。
-JOSEPH：已经自动上传云端了。
-ANGELINE追过去，James站在原地看着满客厅行李箱。
-JAMES（对自己）：我应该把押金收三个月。
+ANGELINE：那我直接退租。重新找一套。
 
-【片尾钩子】
-James拿出一张“房屋规则”清单。
-JAMES：入住前，还有二十条规则要讲。
-ANGELINE：二十条？
-切黑，出现：下一集《房东的二十条规则》。`;
+James没有阻止她。
+
+JAMES：可以。
+
+Angeline反而愣了一下。
+
+ANGELINE：这么容易？
+
+James把租约放到茶几上。
+
+JAMES：按照你签的合同处理。
+
+【EP01-SC03-B01｜租约特写｜干货B-roll】
+镜头仅拍虚构租约中的关键词：
+• 租赁期限；
+• 提前终止；
+• 押金；
+• 新租客接手前的相关责任。
+
+不要展示真实姓名、证件号码或地址。
+
+【EP01-SC03-S02｜三人近景对话】
+James翻到相关页面。
+
+JAMES：你签的是一年租约。现在提前退出，押金和后续费用按照这里的条款处理。在新租客接手之前，具体会产生多少损失，要看重新出租需要多久。
+
+Angeline拿过合同。
+
+ANGELINE：押金也可能拿不回来？
+
+JAMES：你签的条款是这样写的。
+
+ANGELINE：签的时候为什么没人特别提醒我？
+
+JAMES：合同发给你了。
+
+ANGELINE：这么多页，谁会一页一页看完？
+
+James看着她。
+
+JAMES：最后签字的人。
+
+Joseph抿住嘴。
+
+Angeline看向他。
+
+ANGELINE：你想笑就笑。
+
+JOSEPH：我没笑你。我只是替这份合同高兴。终于有人开始读它了。
+
+Angeline打开计算器。
+
+输入押金、搬家和新租金。
+
+ANGELINE：我不是付不起。
+
+JAMES：没人说你付不起。
+
+ANGELINE：我只是不喜欢白白损失。
+
+Joseph探头看计算器。
+
+JOSEPH：有钱和喜欢浪费钱，是两回事。
+
+Angeline关掉手机。
+
+ANGELINE：你终于说了一句有用的。
+
+她看向小房间。
+
+暂时没有再提退租。
+
+【法规备注】
+租赁条款应以双方实际签订的Tenancy Agreement为准。HDB官方模板允许双方在签署前协商具体条件，因此剧中不写成固定的“新加坡法定赔偿金额”。
+参考：HDB — Tenancy Matters for Renting a Flat or a Bedroom from Open Market。
+
+【2分30秒—3分30秒｜情绪软着陆：妈妈来电】
+
+【场景四｜客厅／连续】
+
+【EP01-SC04-S01｜手机来电特写】
+屏幕显示：妈妈　视频来电
+
+Angeline迅速坐直。
+
+她看看手机，再看看小房间。
+
+电话停下。
+
+下一秒，再次打来。
+
+JOSEPH：你妈妈很有毅力。
+
+ANGELINE：她会问我房间怎么样。
+
+JAMES：照实说。
+
+ANGELINE：不可能。
+
+JAMES：为什么？
+
+Angeline声音低下来。
+
+ANGELINE：因为她一开始就让我不要自己在网上找。她帮我安排了公寓。是我拒绝的。
+
+Joseph放下手机一点。
+
+JOSEPH：你为了证明自己能独立，自己找了这间？
+
+ANGELINE：我只是没想到照片和现实差这么多。
+
+电话第三次打来。
+
+Angeline接通，立即换成轻松的语气。
+
+ANGELINE：妈妈，我到了。很好啊。
+
+James和Joseph同时看向小房间。
+
+ANGELINE：房间也很好。很……
+
+她卡住。
+
+Joseph用口型提醒：温馨。
+
+ANGELINE：很温馨。
+
+妈妈似乎要看房间。
+
+Angeline把手机举高，只对准一面空白墙。
+
+ANGELINE：刚到，还有点乱。改天给你看。
+
+她不小心后退，撞到桌角，手机画面猛地扫过整个小房间。
+
+三个人同时安静。
+
+电话另一边似乎问：你是不是选错了？
+
+Angeline看着真实的房间。
+
+ANGELINE：是比照片小一点。
+
+停顿。
+
+ANGELINE：但是是我自己签的。我先住。住不了，我再自己解决。
+
+她结束通话。
+
+短暂安静。
+
+Joseph把手机彻底放下。
+
+Angeline看见。
+
+ANGELINE：刚才没拍？
+
+JOSEPH：没有。
+
+ANGELINE：为什么？
+
+JOSEPH：有些画面能带流量。有些不用。
+
+James看Joseph一眼，没有说话。
+
+【3分30秒—4分30秒｜第三次打脸：买得到，不代表放得下】
+
+【场景五｜普通房及客厅／连续】
+
+【EP01-SC05-S01｜房间内三人中景】
+Angeline重新恢复精神。
+
+她打开购物软件。
+
+ANGELINE：算了，小就小。床垫换掉。桌子换掉。衣柜不够就再买一个。日用品、衣服、鞋，全部重新买。
+
+Joseph看着她不断加入购物车。
+
+JOSEPH：她恢复得很快。
+
+JAMES：先别下单。
+
+ANGELINE：为什么？
+
+JAMES：因为放不下。
+
+ANGELINE：房间放不下，就先放客厅。
+
+James直接拿走她手中的卷尺。
+
+走到床边开始量。
+
+ANGELINE：我可以多付一点钱，当作占用费。
+
+James继续量，不理她。
+
+ANGELINE：James，我在跟你说话。
+
+James量完，报出尺寸。
+
+JAMES：床边剩四十多厘米。衣柜打开以后更少。你买之前先确认尺寸。
+
+他走向客厅。
+
+JAMES：客厅是所有住户共同使用的地方，不是你的私人仓库。
+
+ANGELINE：我付钱也不行？
+
+JAMES：不行。
+
+ANGELINE：为什么什么都不行？
+
+James指向屋内从房门通往大门的路线。
+
+JAMES：共同通道要保持畅通。而且其他人也要使用客厅。这不是价格问题。是大家住在一起的问题。
+
+Angeline看向Joseph。
+
+ANGELINE：你也反对？
+
+Joseph想了想。
+
+JOSEPH：如果堆得好看，我本来不反对。
+
+James看他。
+
+JOSEPH：现在反对。
+
+【EP01-SC05-B01｜通道与空间B-roll】
+拍摄：
+• 卷尺丈量床边距离；
+• 衣柜门打开后占用空间；
+• 大号行李箱放入房间后，门难以完全打开；
+• 客厅至大门的通行路线；
+• Angeline购物车不断增加商品的屏幕画面。
+
+【法规备注】
+单位外的HDB公共走廊和消防设备周边需要保持畅通；屋内客厅在剧中表述为所有住户共享的生活空间和逃生通道，不说成Town Council管理的“公共共管区域”。
+参考：SCDF — Fire Safety Guidelines for Residential Estate。
+
+【4分30秒—5分10秒｜喜剧缓冲：唯一的行李箱】
+
+【场景六｜普通房／连续】
+
+【EP01-SC06-S01｜行李箱俯拍特写】
+Angeline把唯一的行李箱放倒。
+
+James和Joseph站在旁边。
+
+JOSEPH：我很好奇。一个准备住一年的人，到底带了什么。
+
+Angeline打开箱子。
+
+里面只有：
+• 两套衣服；
+• 一台电脑；
+• 护肤品；
+• 一个小首饰盒；
+• 一只毛绒玩具；
+• 几包中国零食。
+
+James盯着箱子。
+
+JAMES：没有床单？
+
+ANGELINE：买。
+
+JOSEPH：没有毛巾？
+
+ANGELINE：买。
+
+JAMES：没有拖鞋？
+
+ANGELINE：买。
+
+Joseph拿起那只毛绒玩具。
+
+JOSEPH：这个为什么不买新的？
+
+Angeline马上夺回来。
+
+ANGELINE：这个不一样。
+
+Joseph看着她。
+
+JOSEPH：原来真的有钱买不到的东西。
+
+Angeline把毛绒玩具放到床头。
+
+ANGELINE：这个是情感价值。
+
+JAMES：至少不占地方。
+
+Angeline准备把大行李箱推到床下。
+
+卡住。
+
+她再推。
+
+还是卡住。
+
+Joseph立即举起手机。
+
+JOSEPH：这个可以拍吧？
+
+ANGELINE：不可以。
+
+James蹲下，用卷尺量床底高度。
+
+JAMES：差两厘米。
+
+ANGELINE：换一张床。
+
+JAMES：不可以随便换家具。
+
+Angeline抬头。
+
+ANGELINE：为什么又不可以？
+
+James站起来，把卷尺递给她。
+
+JAMES：入住规则。
+
+Angeline接过卷尺，一脸警觉。
+
+【5分10秒—5分30秒｜片尾强钩子】
+
+【场景七｜客厅／第二天早上】
+
+【EP01-SC07-S01｜规则纸全景｜必拍】
+一张超长纸从餐桌一路垂到地面。
+
+镜头沿着纸张向上移动。
+
+纸张顶部写着：
+HOUSE RULES
+入住规则
+
+Angeline顺着纸一路看下来。
+
+ANGELINE：这是什么？
+
+James坐在桌边喝咖啡。
+
+JAMES：入住规则。
+
+ANGELINE：为什么这么长？
+
+JAMES：一共二十条。
+
+Joseph已经在旁边架好手机。
+
+JOSEPH：我今天提前开机了。
+
+Angeline念出其中几条：
+
+ANGELINE：“购买家具前必须确认尺寸。”“不得占用公共生活空间。”“不得擅自更换门锁……”
+
+她抬头看James。
+
+ANGELINE：你昨天晚上专门针对我写的？
+
+JAMES：不是。
+
+停顿。
+
+JAMES：有三条是昨天晚上加的。
+
+Joseph忍不住笑。
+
+Angeline把纸拍到桌上。
+
+ANGELINE：我不同意。
+
+James指向纸张最下方。
+
+JAMES：第二十条。
+
+Angeline低头阅读。
+
+【规则特写】
+对规则有异议，必须先完整读完前十九条。
+
+Angeline抬头。
+
+James喝了一口咖啡。
+
+Joseph把镜头缓缓推近Angeline的表情。
+
+切黑。
+
+下一集：EP02《房东的二十条规则》
+
+【拍摄后台核心镜头清单】
+EP01-SC01-S01｜走廊里唯一一个超大号行李箱｜主镜头｜行李、入住篇
+EP01-SC01-B01｜行李箱轮子、拉杆、外观细节｜B-roll｜全局复用
+EP01-SC02-B01｜小普通房真实空间空镜｜B-roll｜房间、全局复用
+EP01-SC02-S03｜0.5倍广角前后对比｜主镜头｜租房美图
+EP01-SC02-B02｜房源照片与实景对照｜B-roll｜租房干货
+EP01-SC03-B01｜租约关键词特写｜B-roll｜合同、租房
+EP01-SC04-S01｜妈妈视频来电屏幕｜主镜头｜情绪素材
+EP01-SC05-B01｜卷尺测量家具及通道｜B-roll｜尺寸、全局复用
+EP01-SC06-S01｜唯一行李箱内部物品｜主镜头｜人物资产
+EP01-SC07-S01｜二十条超长规则纸落地｜主镜头｜EP02衔接
+
+【剪辑节奏】
+开头3秒不加解释字幕，只显示：她来新加坡住一年，只带了一个箱子。
+
+25秒进入房间时加第一次片名。
+
+租约部分控制在60秒内，不做长篇法规讲解；用合同特写和Angeline计算损失完成信息传递。
+
+妈妈通话段减少音乐，以环境声和停顿突出真实感。
+
+3分30秒以后重新加快剪辑速度。
+
+最后20秒保持固定机位，让超长规则纸和Angeline反应完成钩子。
+`;
 const EP01_DETAILED_EN=`EP01 “The Wealthy Student Rents the Smallest Room”
 
-Target duration: 5–6 minutes
-Main locations: James’s living room and bedroom doorway
-Characters: James, Angeline, Joseph
-Props: eight suitcases, phone, keys, tenancy agreement, measuring tape
+Locked Shooting Draft | Target runtime: 5:20–5:30
 
-[SCENE 1 — LIVING ROOM / DAY — 0:00–0:35]
-The doorbell rings repeatedly. James opens the door and sees one suitcase, then another, then six more.
+Episode premise: Angeline believes money can solve anything. On her first day in the flat, she discovers that money can buy things, but it cannot make a signed-for room larger, erase a tenancy agreement, or override the rules of shared living.
+
+Relationship progression:
+• Angeline accepts responsibility for an impulsive decision for the first time.
+• James realises that, beneath her stubbornness, she is not irresponsible.
+• Joseph initially treats everything as content, but puts his phone down when he sees Angeline speaking to her mother.
+
+Locations: HDB corridor, living room, common bedroom
+Characters: Angeline, James, Joseph
+Key props: one oversized suitcase, phones, keys, fictional tenancy agreement, measuring tape, extra-long house-rules sheet
+
+[0–3 SECONDS | COUNTER-INTUITIVE VISUAL HOOK]
+
+[EP01-SC01-S01 | HDB CORRIDOR WIDE SHOT | MUST SHOOT]
+A quiet HDB corridor.
+
+One oversized suitcase stands alone outside James’s front door.
+
+No one is visible.
+
+The door slowly opens.
+
+James looks at the suitcase, then down the empty corridor.
+
+Angeline suddenly rises from behind the suitcase.
 
 ANGELINE: Hi. I’m here to move in.
-JAMES: Are you moving in, or moving your entire home from China?
-JOSEPH (already filming): Don’t move. This opening is excellent.
-ANGELINE: Why are you filming me?
-JOSEPH: Documenting a wealthy student’s first independent life.
-ANGELINE: Who said I’m wealthy?
-JOSEPH: Normal students do not arrive with eight suitcases.
 
-[SCENE 2 — BEDROOM DOORWAY — 0:35–1:25]
-James hands her the key and points to a small door. Angeline opens it and freezes.
+Cut to James’s reaction.
+
+[3–25 SECONDS | CHARACTER INTRODUCTION AND CENTRAL CONFLICT]
+
+[EP01-SC01-S02 | THREE-SHOT AT THE DOOR]
+James looks behind Angeline.
+
+JAMES: Where is the rest of your luggage?
+
+Angeline glances behind herself.
+
+ANGELINE: That is all of it.
+
+JAMES: You are staying for a year.
+
+ANGELINE: Yes.
+
+Joseph hears them and walks out, immediately raising his phone when he sees the single suitcase.
+
+JOSEPH: Wait. You are moving to Singapore for a year with one suitcase?
+
+ANGELINE: Passport, computer, a few outfits. Enough.
+
+JAMES: Bedding?
+
+ANGELINE: I’ll buy it.
+
+JOSEPH: Toiletries?
+
+ANGELINE: Buy them.
+
+JAMES: The rest of your clothes?
+
+ANGELINE: I’ll buy whatever I need. Why would I move a pile of things from China?
+
+JOSEPH: She is not moving house. She is here to rescue Singapore’s retail sector.
+
+Angeline pulls the suitcase forward.
+
+ANGELINE: Do not waste time preparing for problems money can solve.
+
+James steps aside.
+
+JAMES: Look at the room first. Then decide what money can solve.
+
+Joseph senses content and follows them.
+
+[25 SECONDS–1:30 | FIRST REALITY CHECK: THE LISTING PHOTOS]
+
+[SCENE TWO | COMMON BEDROOM DOORWAY | CONTINUOUS]
+
+[EP01-SC02-S01 | TRACKING MEDIUM SHOT]
+James opens the bedroom door.
+
+Angeline wheels the suitcase over, then freezes.
+
+The room contains one single bed, a small desk and a wardrobe. Almost no floor space remains.
+
+She looks at the room, checks the listing photos on her phone, then looks back at the room.
+
+Three seconds of silence.
 
 ANGELINE: Where is my room?
+
 JAMES: Right in front of you.
-ANGELINE: I asked for the room, not the storeroom.
-JAMES: This is a normal common room in Singapore.
-ANGELINE (showing her phone): It looked huge in the photos.
-JAMES: Camera angle.
-JOSEPH: He works in property. Angles are a professional skill.
 
-[SCENE 3 — LIVING ROOM — 1:25–2:25]
-Angeline compares every listing photo with the real room.
+ANGELINE: This?
 
-ANGELINE: This window looked twice as wide.
-JAMES: Wide-angle lens.
-ANGELINE: The walkway looked large enough for a sofa.
-JAMES: Wide-angle lens.
-ANGELINE: Even the ceiling looked higher.
-JAMES: The photographer was shorter.
-ANGELINE: I want to cancel.
-JAMES: You can. You lose the deposit and remain liable until a replacement tenant is found.
-ANGELINE: How much?
-JAMES: Two months’ deposit, possibly more.
-ANGELINE (after a pause): Small rooms feel safer anyway.
+JAMES: Yes.
 
-[SCENE 4 — LIVING ROOM — 2:25–3:35]
-Joseph asks the obvious question.
+ANGELINE: This is not a room.
 
-JOSEPH: If your family has money, why not rent the whole unit?
-ANGELINE: I came here to prove I can live independently.
-JAMES: So you independently signed a one-year lease without viewing the room.
+Joseph raises his phone.
+
+JOSEPH: Do not move. That expression is excellent.
+
+ANGELINE: Why are you always filming me?
+
+JOSEPH: Occupational reflex. I work in social-media marketing. Images with viral potential trigger a physical response.
+
+ANGELINE: Delete it.
+
+JOSEPH: I have not started recording.
+
+He looks down. The recording timer is clearly running.
+
+[EP01-SC02-B01 | BEDROOM INSERTS | REUSABLE B-ROLL]
+Shoot:
+• distance between the bed and door;
+• narrow passage between bed and desk;
+• remaining space with the wardrobe open;
+• furniture position when the door is fully open;
+• scale comparison between suitcase and room.
+
+[EP01-SC02-S02 | LISTING PHOTO CLOSE-UP]
+Angeline shows James the listing.
+
+ANGELINE: Look. It was clearly much bigger.
+
+JAMES: It is the same room.
+
+ANGELINE: Impossible. There was enough space for a sofa between the bed and desk.
+
+JAMES: Put one there now.
+
+Joseph enters and switches his phone camera to 0.5x.
+
+[EP01-SC02-S03 | JOSEPH’S PHONE POV]
+On screen, the room suddenly looks bright and spacious.
+
+JOSEPH: Zero-point-five. A small common room becomes an executive suite.
+
+ANGELINE: So the photo was made to look bigger.
+
+JAMES: The photo did not change the room. It changed your idea of the room.
+
+ANGELINE: That is still misleading.
+
+JAMES: That is why I told you to view it by video.
+
+ANGELINE: The agent said someone else would take it if I did not sign immediately.
+
+JAMES: So you signed?
+
 ANGELINE: I make decisions quickly.
-JAMES: That is not speed. That is skipping checks.
-Her phone rings. Caller ID: “Mum.” She turns it face-down.
-JOSEPH: Not answering?
-ANGELINE: She will ask how the apartment is.
-JAMES: Tell her it is cosy.
-JOSEPH: Tell her every part of the room is within three steps.
 
-[SCENE 5 — BEDROOM DOORWAY / LIVING ROOM — 3:35–4:50]
-They try to fit the luggage into the room. After one suitcase goes in, the door barely opens.
+JOSEPH: Not quickly. You paid before the advertisement finished playing.
 
-JAMES: Two suitcases maximum.
-ANGELINE: The other six can stay in the living room.
-JAMES: The living room is a shared area.
-JOSEPH: We can stack them as a content backdrop.
+[EP01-SC02-S04 | MEASURING-TAPE INSERT]
+James measures the gap between the bed and desk.
+
+Angeline studies the number, then the photo.
+
+ANGELINE: Where is the walkway from the photo?
+
+James squeezes sideways through the gap.
+
+JAMES: Here.
+
+JOSEPH: One-way traffic.
+
+For the first time, Angeline looks uncertain.
+
+[1:30–2:30 | SECOND REALITY CHECK: MONEY CANNOT ERASE A CONTRACT]
+
+[SCENE THREE | LIVING ROOM | CONTINUOUS]
+
+[EP01-SC03-S01 | TWO-SHOT AT THE SOFA]
+Angeline searches for other listings.
+
+ANGELINE: Fine. I’ll change rooms.
+
+JAMES: There are no spare rooms here.
+
+She points at Joseph’s room.
+
+ANGELINE: His room is bigger.
+
+Joseph blocks his doorway.
+
+JOSEPH: It looks bigger. Did you learn nothing?
+
+ANGELINE: I can pay more.
+
+JOSEPH: How much more—
+
 JAMES: No.
-ANGELINE: I can pay extra for the living room.
-JAMES: This is not a money issue.
-ANGELINE: In my experience, most problems eventually become money issues.
-JAMES: Welcome to Singapore. Some problems are rule issues.
 
-[SCENE 6 — LIVING ROOM — 4:50–5:45]
-Angeline agrees to keep only two suitcases and store the rest elsewhere.
+JOSEPH: I was only researching market rates.
 
-ANGELINE: Fine. I will stay, but I am redesigning the room.
-JAMES: No drilling, no changing locks, no removing furniture.
-ANGELINE: Then what am I allowed to do?
-JAMES: Live in it.
-JOSEPH: That is the ending line.
-ANGELINE: Delete everything you filmed.
-JOSEPH: It has already synced to the cloud.
-Angeline chases him. James looks at the luggage filling his living room.
-JAMES (to himself): I should have charged three months’ deposit.
+ANGELINE: Then I will terminate the lease and find another place.
 
-[END TAG]
-James holds up a printed list.
-JAMES: Before you settle in, there are twenty house rules.
-ANGELINE: Twenty?
-CUT TO BLACK: Next episode — “The Landlord’s Twenty Rules.”`;
+JAMES: You can.
+
+ANGELINE: That easy?
+
+James places the tenancy agreement on the coffee table.
+
+JAMES: It will be handled according to the agreement you signed.
+
+[EP01-SC03-B01 | TENANCY AGREEMENT CLOSE-UPS | INFORMATIONAL B-ROLL]
+Show only fictional keywords:
+• tenancy term;
+• early termination;
+• security deposit;
+• responsibilities before a replacement tenant takes over.
+
+Do not show real names, identification numbers or addresses.
+
+[EP01-SC03-S02 | THREE-PERSON CLOSE CONVERSATION]
+James turns to the relevant page.
+
+JAMES: You signed a one-year tenancy. If you leave early, the deposit and any further costs are handled under these clauses. The actual loss depends on how long it takes to find a replacement tenant.
+
+ANGELINE: I might lose the deposit too?
+
+JAMES: That is what your agreement says.
+
+ANGELINE: Why did no one specifically warn me?
+
+JAMES: They sent you the contract.
+
+ANGELINE: Who reads every page of something this long?
+
+JAMES: The person who signs the last page.
+
+Angeline looks at Joseph.
+
+ANGELINE: Laugh if you want.
+
+JOSEPH: I am not laughing at you. I am happy for the contract. Someone has finally started reading it.
+
+Angeline calculates the deposit, moving costs and a new rent.
+
+ANGELINE: It is not that I cannot afford it.
+
+JAMES: No one said that.
+
+ANGELINE: I just do not like wasting money.
+
+JOSEPH: Having money and enjoying waste are different things.
+
+ANGELINE: You finally said something useful.
+
+She looks toward the small room and stops talking about leaving.
+
+[LEGAL PRODUCTION NOTE]
+The tenancy terms shown must be based on the fictional agreement signed by the characters. Do not state a fixed “Singapore statutory compensation amount.” HDB’s tenancy materials allow parties to agree on specific terms before signing.
+
+[2:30–3:30 | EMOTIONAL LANDING: MOTHER CALLS]
+
+[SCENE FOUR | LIVING ROOM | CONTINUOUS]
+
+[EP01-SC04-S01 | PHONE INCOMING-CALL CLOSE-UP]
+Screen: MUM — VIDEO CALL
+
+Angeline immediately sits upright and looks between the phone and the room.
+
+The call stops, then comes again.
+
+JOSEPH: Your mother is persistent.
+
+ANGELINE: She will ask what the room is like.
+
+JAMES: Tell her the truth.
+
+ANGELINE: Impossible.
+
+JAMES: Why?
+
+ANGELINE: She told me not to find a place online by myself. She arranged a condominium for me. I refused it.
+
+Joseph lowers his phone slightly.
+
+JOSEPH: You found this place yourself to prove you could be independent?
+
+ANGELINE: I did not expect the photos and reality to be this different.
+
+The phone rings a third time. Angeline answers in a cheerful voice.
+
+ANGELINE: Mum, I’m here. Everything is good.
+
+James and Joseph look at the tiny room.
+
+ANGELINE: The room is good too. Very…
+
+She stalls. Joseph mouths: “Cosy.”
+
+ANGELINE: Very cosy.
+
+Her mother apparently asks to see it. Angeline points the camera at a blank wall.
+
+ANGELINE: I just arrived. It is messy. I’ll show you another day.
+
+She steps backward, hits the desk, and the phone swings across the entire room.
+
+Silence.
+
+Her mother apparently asks whether she made a mistake.
+
+ANGELINE: It is a little smaller than the photos.
+
+Beat.
+
+ANGELINE: But I signed it myself. I’ll stay first. If I cannot manage, I’ll solve it myself.
+
+She ends the call.
+
+Joseph puts his phone away completely.
+
+ANGELINE: You did not film that?
+
+JOSEPH: No.
+
+ANGELINE: Why?
+
+JOSEPH: Some moments bring traffic. Some do not need to.
+
+James looks at Joseph without speaking.
+
+[3:30–4:30 | THIRD REALITY CHECK: BUYING IT DOES NOT MEAN IT WILL FIT]
+
+[SCENE FIVE | BEDROOM AND LIVING ROOM | CONTINUOUS]
+
+[EP01-SC05-S01 | THREE-SHOT IN THE ROOM]
+Angeline recovers and opens a shopping app.
+
+ANGELINE: Fine. Small is small. Replace the mattress. Replace the desk. Buy another wardrobe. I’ll buy all the toiletries, clothes and shoes again.
+
+JOSEPH: She recovers quickly.
+
+JAMES: Do not place the order yet.
+
+ANGELINE: Why?
+
+JAMES: It will not fit.
+
+ANGELINE: Then I’ll keep it in the living room.
+
+James takes the measuring tape and starts measuring.
+
+ANGELINE: I can pay an occupancy fee.
+
+James continues measuring.
+
+ANGELINE: James, I am speaking to you.
+
+JAMES: There are only forty-something centimetres beside the bed. Less when the wardrobe opens. Check the dimensions before buying anything.
+
+He walks toward the living room.
+
+JAMES: The living room is shared by everyone. It is not your private warehouse.
+
+ANGELINE: Not even if I pay?
+
+JAMES: No.
+
+ANGELINE: Why is everything “no”?
+
+James points along the route from the bedrooms to the front door.
+
+JAMES: Shared routes must stay clear, and everyone uses the living room. This is not about price. It is about people living together.
+
+ANGELINE: Joseph, you object too?
+
+JOSEPH: If the boxes looked good, I originally did not object.
+
+James looks at him.
+
+JOSEPH: I object now.
+
+[EP01-SC05-B01 | ROUTE AND SPACE B-ROLL]
+Shoot:
+• measuring the space beside the bed;
+• space taken when the wardrobe opens;
+• oversized suitcase preventing the door from opening fully;
+• route from living room to front door;
+• items accumulating in Angeline’s shopping cart.
+
+[SAFETY PRODUCTION NOTE]
+External HDB common corridors and areas around firefighting equipment must remain clear. Inside the unit, describe the living room as a shared living space and part of the route to the exit, not as a Town Council-managed common area.
+
+[4:30–5:10 | COMEDIC RELEASE: THE ONLY SUITCASE]
+
+[SCENE SIX | COMMON BEDROOM | CONTINUOUS]
+
+[EP01-SC06-S01 | TOP-DOWN SUITCASE CLOSE-UP]
+Angeline lays down and opens the only suitcase.
+
+Inside:
+• two outfits;
+• one computer;
+• skincare products;
+• a small jewellery box;
+• one stuffed toy;
+• several packets of Chinese snacks.
+
+JAMES: No bedsheets?
+
+ANGELINE: Buy them.
+
+JOSEPH: No towel?
+
+ANGELINE: Buy it.
+
+JAMES: No slippers?
+
+ANGELINE: Buy them.
+
+Joseph picks up the stuffed toy.
+
+JOSEPH: Why not buy a new one of these?
+
+Angeline immediately takes it back.
+
+ANGELINE: This one is different.
+
+JOSEPH: So there really are things money cannot buy.
+
+Angeline places it at the head of the bed.
+
+ANGELINE: It has emotional value.
+
+JAMES: At least it does not take much space.
+
+Angeline tries to push the oversized suitcase under the bed. It jams.
+
+She tries again. Still stuck.
+
+JOSEPH: Can I film this one?
+
+ANGELINE: No.
+
+James measures the bed clearance.
+
+JAMES: Two centimetres short.
+
+ANGELINE: Replace the bed.
+
+JAMES: You cannot replace the furniture without permission.
+
+ANGELINE: Why not again?
+
+James hands her the measuring tape.
+
+JAMES: House rules.
+
+Angeline takes it, suddenly wary.
+
+[5:10–5:30 | ENDING HOOK]
+
+[SCENE SEVEN | LIVING ROOM | THE NEXT MORNING]
+
+[EP01-SC07-S01 | EXTRA-LONG RULES SHEET WIDE SHOT | MUST SHOOT]
+An extra-long sheet of paper runs from the dining table to the floor.
+
+The camera tracks upward to the heading:
+HOUSE RULES
+入住规则
+
+Angeline reads down the page.
+
+ANGELINE: What is this?
+
+James drinks coffee at the table.
+
+JAMES: House rules.
+
+ANGELINE: Why is it so long?
+
+JAMES: Twenty rules.
+
+Joseph has already set up his phone.
+
+JOSEPH: I started recording early today.
+
+Angeline reads several rules aloud.
+
+ANGELINE: “Confirm measurements before buying furniture.” “Do not occupy shared living space.” “Do not replace door locks without permission…”
+
+She looks at James.
+
+ANGELINE: Did you write these specifically for me last night?
+
+JAMES: No.
+
+Beat.
+
+JAMES: Three of them were added last night.
+
+Joseph laughs. Angeline slaps the sheet onto the table.
+
+ANGELINE: I disagree.
+
+James points to the bottom.
+
+JAMES: Rule twenty.
+
+[INSERT — RULE TWENTY]
+Any objection to the rules may be raised only after all previous nineteen rules have been read in full.
+
+Angeline looks up.
+
+James takes another sip of coffee.
+
+Joseph slowly pushes the camera toward her expression.
+
+CUT TO BLACK.
+
+Next episode: EP02 “The Landlord’s Twenty Rules”
+
+[CORE SHOT LIST]
+EP01-SC01-S01 | One oversized suitcase in the corridor | Main shot | Luggage, move-in
+EP01-SC01-B01 | Wheels, handle and suitcase details | B-roll | Global reuse
+EP01-SC02-B01 | True room dimensions | B-roll | Room, global reuse
+EP01-SC02-S03 | 0.5x wide-angle comparison | Main shot | Listing photos
+EP01-SC02-B02 | Listing photo versus real room | B-roll | Rental information
+EP01-SC03-B01 | Fictional tenancy keywords | B-roll | Contract, rental
+EP01-SC04-S01 | Mother’s video call | Main shot | Emotional asset
+EP01-SC05-B01 | Measuring furniture and route | B-roll | Dimensions, global reuse
+EP01-SC06-S01 | Contents of the only suitcase | Main shot | Character asset
+EP01-SC07-S01 | Extra-long house-rules sheet | Main shot | EP02 link
+
+[EDITING RHYTHM]
+For the first three seconds, use no explanatory voice-over. Show only: “She came to Singapore for a year with one suitcase.”
+
+Reveal the episode title when she enters the room at around 25 seconds.
+
+Keep the tenancy-agreement section below 60 seconds. Communicate the information through contract inserts and Angeline calculating the loss rather than a legal lecture.
+
+Reduce music during the call with her mother. Use room tone and pauses for realism.
+
+Increase cutting pace again after 3:30.
+
+Hold a stable camera for the final 20 seconds so the long rules sheet and Angeline’s reaction create the hook.
+`;
 function normaliseEpisodes(source){
  const normal=(Array.isArray(source)?source:[]).map(x=>({...x,seasonNo:+x.seasonNo||1,isSpecial:+x.seasonNo===99||x.isSpecial===true}));
  const existingSpecialNos=new Set(normal.filter(isSpecialEpisode).map(x=>+x.episodeNo||0));
  SPECIAL_EPISODES.forEach(x=>{if(!existingSpecialNos.has(+x.episodeNo||0))normal.push({...x});});
  return normal;
 }
-function applyEpisodeOneUpgrade(){const ep1=items.find(x=>x.episodeNo===1);if(ep1&&(!ep1.scriptZh||ep1.scriptZh.includes('以人物正在做的事情直接建立异常状况'))){ep1.scriptZh=EP01_DETAILED_ZH;ep1.scriptEn=EP01_DETAILED_EN;ep1.version='v0.2';return ep1;}return null;}
+function applyEpisodeOneUpgrade(){const ep1=items.find(x=>x.episodeNo===1&&!isSpecialEpisode(x));if(ep1&&ep1.version!=='v1.0'){ep1.scriptZh=EP01_DETAILED_ZH;ep1.scriptEn=EP01_DETAILED_EN;ep1.summaryZh='Angeline相信钱能解决一切，入住第一天却发现，钱可以买东西，却不能让已经签下的房间变大，也不能让合同和共同生活规则自动消失。';ep1.summaryEn='Angeline believes money can solve anything, but on move-in day she learns that it cannot enlarge a signed-for room, erase a tenancy agreement, or override the rules of shared living.';ep1.culturePointZh='新加坡HDB租房实景、房源广角照片、租约责任、共享空间与消防通道意识。';ep1.culturePointEn='Singapore HDB room rentals, wide-angle listing photos, tenancy responsibilities, shared spaces and clear escape routes.';ep1.scriptStatus='final';ep1.productionStage='locked';ep1.progress=90;ep1.openIssues='确认超大行李箱、虚构租约、卷尺、超长入住规则纸及拍摄排期';ep1.openIssuesEn='Confirm the oversized suitcase, fictional tenancy agreement, measuring tape, extra-long house-rules sheet and shoot schedule.';ep1.version='v1.0';return ep1;}return null;}
 async function fetchEpisodesWithTimeout(timeoutMs=2500){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);try{const r=await fetch('/api/episodes',{cache:'no-store',signal:controller.signal});if(!r.ok)return [];const d=await r.json();return Array.isArray(d.episodes)?d.episodes:[];}catch(e){return [];}finally{clearTimeout(timer);}}
 function load({force=false}={}){
   // Reuse the in-memory episode dataset when navigating between episode-related pages.
