@@ -30,7 +30,7 @@ shoot_completed_at AS shootCompletedAt,assets_archived_at AS assetsArchivedAt,
 edit_completed_at AS editCompletedAt,published_at AS publishedAt,
 reviewed_at AS reviewedAt,updated_at AS updatedAt`;
 async function ensureSpecialEpisode(env){
- await env.DB.prepare(`INSERT OR IGNORE INTO episodes(id,season_no,episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,open_issues_en,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(61001,99,1,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).bind('留下来的理由','A Reason to Stay','国庆特别篇','National Day Special','James 提出的国庆特别篇初步想法，目前仍在选题与大纲阶段。',"James's initial National Day special idea. It is still at the idea and outline stage.",'idea','outline','James','high','','',0,'等待三人讨论并确认故事大纲','Awaiting team discussion and story-outline approval','v0.1','James 初步想法：留下来的理由。\n\n目前仅为创意方向与初步构想，尚未形成锁定剧本。',"James's initial idea: A Reason to Stay.\n\nThis is only an early concept and direction. The script has not been locked.",'新加坡国庆、归属感与留下来的理由。','Singapore National Day, belonging and reasons for staying.').run();
+ await env.DB.prepare(`INSERT OR IGNORE INTO episodes(id,season_no,episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,open_issues_en,version,script_zh,script_en,culture_point_zh,culture_point_en) VALUES(61001,99,1,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).bind('留下来的理由','A Reason to Stay','国庆特别篇','National Day Special','James 提出的国庆特别篇初步想法，目前仍在选题与大纲阶段。',"James's initial National Day special idea. It is still at the idea and outline stage.",'idea','outline','James','high','','',0,'等待三人讨论并确认故事大纲','Awaiting team discussion and story-outline approval','v0.1','James 初步想法：留下来的理由。\n\n目前仅为创意方向与初步构想，尚未形成锁定剧本。',"James's initial idea: A Reason to Stay.\n\nThis is only an early concept and direction. The script has not been locked.",'新加坡国庆、归属感与留下来的理由。','Singapore National Day, belonging and reasons for staying.').run();
  const marker=await env.DB.prepare("SELECT COUNT(*) AS c FROM audit_log WHERE entity_type='system' AND action='special-outline-v77'").first();
  if(Number(marker?.c||0)===0){
   await env.DB.prepare("UPDATE episodes SET script_status='idea',production_stage='outline',owner='James',progress=0,shoot_date='',publish_date='',open_issues='等待三人讨论并确认故事大纲',open_issues_en='Awaiting team discussion and story-outline approval',updated_at=CURRENT_TIMESTAMP WHERE id=61001").run();
@@ -172,11 +172,25 @@ const CORE_TO_LEGACY={
  ready_to_edit:'post',rough_cut:'post',revision:'post',final_cut:'post',
  ready_to_publish:'publish',published:'publish',reviewed:'publish'
 };
-const clean=(b={})=>{
- const legacyStage=String(b.productionStage||CORE_TO_LEGACY[b.currentSubstatus]||'outline');
+const clean=(b={},raw={})=>{
+ const stageWasChanged=Object.prototype.hasOwnProperty.call(raw,'productionStage');
+ const substatusWasChanged=Object.prototype.hasOwnProperty.call(raw,'currentSubstatus');
+ const legacyStage=String(
+  stageWasChanged
+   ? raw.productionStage
+   : (substatusWasChanged ? (CORE_TO_LEGACY[raw.currentSubstatus]||b.productionStage) : (b.productionStage||'outline'))
+ );
  const mapped=LEGACY_TO_CORE[legacyStage]||['development','story_development'];
- const currentStage=String(b.currentStage||mapped[0]);
- const currentSubstatus=String(b.currentSubstatus||mapped[1]);
+ const currentStage=String(
+  Object.prototype.hasOwnProperty.call(raw,'currentStage')
+   ? raw.currentStage
+   : (stageWasChanged ? mapped[0] : (b.currentStage||mapped[0]))
+ );
+ const currentSubstatus=String(
+  substatusWasChanged
+   ? raw.currentSubstatus
+   : (stageWasChanged ? mapped[1] : (b.currentSubstatus||mapped[1]))
+ );
  return {
   seasonNo:(+b.seasonNo===99?99:Math.max(1,+b.seasonNo||1)),
   titleZh:String(b.titleZh||''),titleEn:String(b.titleEn||''),
@@ -243,7 +257,7 @@ export async function onRequestPut({request,env}){
    ?await env.DB.prepare(`SELECT ${cols} FROM episodes WHERE id=?`).bind(id).first()
    :await env.DB.prepare(`SELECT ${cols} FROM episodes WHERE season_no=? AND episode_no=?`).bind(+raw.seasonNo||1,episodeNo).first();
   if(!existing)return json({error:'Episode record not found; no changes were saved.'},404);
-  const b=applyMilestones(clean({...existing,...raw}),existing);
+  const b=applyMilestones(clean({...existing,...raw},raw),existing);
   const values=[
    b.seasonNo,b.titleZh,b.titleEn,b.categoryZh,b.categoryEn,b.summaryZh,b.summaryEn,
    b.scriptStatus,b.productionStage,b.owner,b.priority,b.shootDate,b.publishDate,b.progress,
@@ -265,10 +279,14 @@ export async function onRequestPut({request,env}){
   const result=await env.DB.prepare(`UPDATE episodes SET ${setSql} WHERE id=?`).bind(...values,existing.id).run();
   if(Number(result?.meta?.changes||0)===0)return json({error:'No episode row was updated.'},409);
   const saved=await env.DB.prepare(`SELECT ${cols} FROM episodes WHERE id=?`).bind(existing.id).first();
-  await logAudit(env.DB,'episode',existing.id,'update',{
-   currentStage:b.currentStage,currentSubstatus:b.currentSubstatus,owner:b.owner,
-   nextAction:b.nextAction,blocker:b.blocker,updatedBy:b.updatedBy
-  });
+  try{
+   await logAudit(env.DB,'episode',existing.id,'update',{
+    currentStage:b.currentStage,currentSubstatus:b.currentSubstatus,owner:b.owner,
+    nextAction:b.nextAction,blocker:b.blocker,updatedBy:b.updatedBy
+   });
+  }catch(auditError){
+   console.warn('Episode audit log failed after successful update:',auditError);
+  }
   return json({episode:saved});
  }catch(e){return json({error:String(e?.message||e)},500)}
 }

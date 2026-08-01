@@ -1,16 +1,15 @@
-Upload this file:
+Upload this file only:
 
-- functions/api/episodes.js
+functions/api/episodes.js
 
-Optional documentation:
-- migrations/0005_reset_actual_project_stage.sql
-- P0-A-ARCHITECTURE.md
-- shared-episode-core.js
+Fixes:
+- Corrected the Special Episode INSERT from 24 values for 23 columns.
+- This was causing ensure() to fail before every stage update.
+- Stage dropdown changes now update both the legacy productionStage and the new lifecycle fields.
+- A later audit-log failure can no longer make a successful episode save appear unsuccessful.
 
-What this fixes:
-- Removes the false historical stages inherited from seeded/demo episode data.
-- Resets all 42 episodes to Development / Story Development.
-- Keeps outline completion as the only completed milestone.
-- Clears writing, locked, shooting, post-production and publishing milestones.
-- Runs only once through the app_migrations guard.
-- Does not delete episode titles, owners, summaries, scripts, schedules or other content.
+After deployment:
+1. Wait for Cloudflare Pages deployment to finish.
+2. Hard refresh the website.
+3. Change one episode from 选题与大纲 to 剧本编写.
+4. Refresh again to confirm the stage remains saved.
