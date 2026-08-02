@@ -1303,9 +1303,7 @@ function load({force=false}={}){
     if(!loaded||force){
       let local=[];try{local=JSON.parse(localStorage.getItem('uorEpisodes')||'[]');}catch(e){}
       items=normaliseEpisodes(local.length?local:DEFAULT_EPISODES.map(x=>({...x})));
-      const baselineKey='uorWorkflowBaselineV75';
-      const baselineNeeded=localStorage.getItem(baselineKey)!=='done';
-      if(baselineNeeded){items=items.map(x=>({...x,scriptStatus:'idea',productionStage:'outline',progress:0,shootDate:'',publishDate:'',openIssues:'等待大纲确认',openIssuesEn:'Awaiting outline approval'}));localStorage.setItem(baselineKey,'done');}
+      // Never reset saved workflow data in a new browser. D1 is authoritative after initial seeding.
       const upgraded=[applyEpisodeOneUpgrade(),applyEpisodeTwoUpgrade(),applyEpisodeThreeUpgrade(),applyEpisodeFourUpgrade(),applyEpisodeFiveUpgrade()].filter(Boolean);
       loaded=true;setLocal();renderCurrent();
 
@@ -1317,7 +1315,20 @@ function load({force=false}={}){
           if(remote.length){
             const next=applyPendingEpisodeUpdates(normaliseEpisodes(remote));
             const changed=JSON.stringify(next)!==JSON.stringify(items);
-            if(changed){items=next;applyEpisodeOneUpgrade();applyEpisodeTwoUpgrade();applyEpisodeThreeUpgrade();applyEpisodeFourUpgrade();applyEpisodeFiveUpgrade();setLocal();renderCurrent();}
+            if(changed){
+              items=next;
+              const remoteUpgrades=[applyEpisodeOneUpgrade(),applyEpisodeTwoUpgrade(),applyEpisodeThreeUpgrade(),applyEpisodeFourUpgrade(),applyEpisodeFiveUpgrade()].filter(Boolean);
+              setLocal();renderCurrent();
+              // One-time migration of the approved EP01–EP05 scripts into D1. Once version is v1.0,
+              // normal website edits remain authoritative and are never overwritten by bundled data.
+              for(const episode of remoteUpgrades){
+                try{
+                  const response=await fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(episode)});
+                  if(response.ok){const saved=await response.json();if(saved.episode)Object.assign(episode,saved.episode);}
+                }catch(e){}
+              }
+              if(remoteUpgrades.length){setLocal();renderCurrent();}
+            }
           }else if(!force){
             try{await fetch('/api/episodes',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({episodes:items})});}catch(e){}
           }
@@ -1575,7 +1586,8 @@ async function inlineUpdate(id,field,value,control){
    if(control){control.classList.remove('is-saving');control.classList.add('is-saved');setTimeout(()=>control.classList.remove('is-saved'),900);}
  }catch(e){
    setLocal();renderCurrent();
-   if(control){control.classList.remove('is-saving');control.classList.add('is-saved');setTimeout(()=>control.classList.remove('is-saved'),900);}
+   if(control){control.classList.remove('is-saving');control.classList.add('is-error');setTimeout(()=>control.classList.remove('is-error'),1800);}
+   alert(lang==='en'?'The change is saved only on this device because the database could not be reached. Please check the Cloudflare D1 binding.':'数据库暂时无法连接。这次修改目前只保存在这台设备上，请检查 Cloudflare D1 的 DB 绑定。');
  }finally{if(control)control.disabled=false;}
 }
 function productionToolbar(){const owners=[...new Set(seasonItems().map(x=>x.owner).filter(Boolean))];return `${collectionTabs()}<div class="production-toolbar unified-toolbar"><div class="production-tabs"><button class="${productionView==='board'?'active':''}" onclick="SharedEpisodes.setProductionView('board',this)">${lang==='en'?'Board':'看板'}</button><button class="${productionView==='list'?'active':''}" onclick="SharedEpisodes.setProductionView('list',this)">${lang==='en'?'List':'列表'}</button><button class="${productionView==='calendar'?'active':''}" onclick="SharedEpisodes.setProductionView('calendar',this)">${lang==='en'?'Shoot calendar':'拍摄日历'}</button></div><div class="production-filters"><input placeholder="${lang==='en'?'Search episode or title':'搜索集数或标题'}" oninput="SharedEpisodes.setProductionFilter('query',this.value)"><select onchange="SharedEpisodes.setProductionFilter('owner',this.value)"><option value="">${lang==='en'?'All owners':'全部负责人'}</option>${owners.map(o=>`<option>${esc(o)}</option>`).join('')}</select></div></div>`;}

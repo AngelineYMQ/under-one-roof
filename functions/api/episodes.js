@@ -84,35 +84,8 @@ async function ensure(env){
    migration_key TEXT PRIMARY KEY,
    applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
   )`).run();
-  const resetKey='2026-08-01-uor-reset-to-outline';
-  const alreadyReset=await env.DB.prepare(
-   'SELECT migration_key FROM app_migrations WHERE migration_key=?'
-  ).bind(resetKey).first();
-  if(!alreadyReset){
-   await env.DB.prepare(`UPDATE episodes SET
-    production_stage='outline',
-    script_status='idea',
-    current_stage='development',
-    current_substatus='story_development',
-    progress=0,
-    blocker='',
-    open_issues='',
-    open_issues_en='',
-    outline_completed_at=COALESCE(outline_completed_at,updated_at,CURRENT_TIMESTAMP),
-    writing_started_at=NULL,
-    script_locked_at=NULL,
-    shoot_started_at=NULL,
-    shoot_completed_at=NULL,
-    assets_archived_at=NULL,
-    edit_completed_at=NULL,
-    published_at=NULL,
-    reviewed_at=NULL,
-    updated_at=CURRENT_TIMESTAMP
-   `).run();
-   await env.DB.prepare(
-    'INSERT INTO app_migrations(migration_key) VALUES(?)'
-   ).bind(resetKey).run();
-  }
+  // Existing episode records are authoritative. Schema upgrades must never reset user data.
+
  }
 
  await env.DB.prepare('CREATE INDEX IF NOT EXISTS idx_episodes_stage ON episodes(season_no,production_stage)').run();
@@ -122,29 +95,8 @@ async function ensure(env){
 
  await ensureSpecialEpisode(env);
 
- // v75 one-time workflow baseline: all 30 regular episodes are currently at topic/outline stage.
- const baselineMarker=await env.DB.prepare("SELECT COUNT(*) AS c FROM audit_log WHERE entity_type='system' AND action='workflow-baseline-v75'").first();
- if(Number(baselineMarker?.c||0)===0){
-  await env.DB.prepare("UPDATE episodes SET script_status='idea',production_stage='outline',progress=0,shoot_date='',publish_date='',open_issues='等待大纲确认',open_issues_en='Awaiting outline approval',updated_at=CURRENT_TIMESTAMP WHERE season_no=1 AND episode_no BETWEEN 1 AND 30").run();
-  await logAudit(env.DB,'system','workflow','workflow-baseline-v75',{episodes:30,stage:'outline'});
- }
-
- // Approved Season 1 title plan (v62). Keep deployed D1 data aligned with the website defaults.
- const approvedTitles=[{"episodeNo":1,"titleZh":"富二代租了最小的房间","titleEn":"The Wealthy Student Rents the Smallest Room"},{"episodeNo":2,"titleZh":"房东的二十条规则","titleEn":"The Landlord’s Twenty Rules"},{"episodeNo":3,"titleZh":"她只带了一个登机箱","titleEn":"She Arrived with Just One Carry-On"},{"episodeNo":4,"titleZh":"客厅不是你的仓库","titleEn":"The Living Room Is Not Your Storage Room"},{"episodeNo":5,"titleZh":"这个房间配不上这张床","titleEn":"This Room Is Not Good Enough for This Bed"},{"episodeNo":6,"titleZh":"房东不准她换门锁","titleEn":"The Landlord Won’t Let Her Change the Lock"},{"episodeNo":7,"titleZh":"空调遥控器失踪了","titleEn":"The Air-Con Remote Has Gone Missing"},{"episodeNo":8,"titleZh":"一顿饭，三种算法","titleEn":"One Meal, Three Ways to Split the Bill"},{"episodeNo":9,"titleZh":"她请了人来打扫自己的房间","titleEn":"She Hired Someone to Clean Her Room"},{"episodeNo":10,"titleZh":"外卖员比房东更熟这个家","titleEn":"The Delivery Rider Knows the House Better Than the Landlord"},{"episodeNo":11,"titleZh":"谁拆了我的快递","titleEn":"Who Opened My Parcel?"},{"episodeNo":12,"titleZh":"Joseph把客厅变成了摄影棚","titleEn":"Joseph Turns the Living Room into a Studio"},{"episodeNo":13,"titleZh":"房东带客户回家看房","titleEn":"The Landlord Brings Clients Home for a Viewing"},{"episodeNo":14,"titleZh":"她成了房产广告里的租客","titleEn":"She Ends Up in a Property Advertisement"},{"episodeNo":15,"titleZh":"一张沙发退了三次","titleEn":"The Sofa Was Returned Three Times"},{"episodeNo":16,"titleZh":"楼下邻居上来投诉了","titleEn":"The Downstairs Neighbour Comes Up to Complain"},{"episodeNo":17,"titleZh":"她第一次被管理处警告","titleEn":"Her First Warning from Management"},{"episodeNo":18,"titleZh":"有钱也买不到这个时间段","titleEn":"Even Money Cannot Buy This Time Slot"},{"episodeNo":19,"titleZh":"Joseph发错了一条视频","titleEn":"Joseph Posts the Wrong Video"},{"episodeNo":20,"titleZh":"一个差评，三个人失眠","titleEn":"One Bad Review Keeps Three People Awake"},{"episodeNo":21,"titleZh":"晚上十一点的“在吗”","titleEn":"The 11 P.M. “Are You There?” Message"},{"episodeNo":22,"titleZh":"AI替谁做了这份工作","titleEn":"Whose Job Did AI Just Do?"},{"episodeNo":23,"titleZh":"便宜七成的报价单","titleEn":"A Quote That Is Seventy Percent Cheaper"},{"episodeNo":24,"titleZh":"钱到底什么时候到","titleEn":"When Is the Payment Actually Coming?"},{"episodeNo":25,"titleZh":"朋友，还是客户","titleEn":"Friend or Client?"},{"episodeNo":26,"titleZh":"她第一次认真算自己的学费","titleEn":"She Calculates Her Tuition Fees for the First Time"},{"episodeNo":27,"titleZh":"租金吃掉了一个好生意","titleEn":"Rent Killed a Good Business"},{"episodeNo":28,"titleZh":"不会用App的人怎么办","titleEn":"What Happens to People Who Cannot Use the App?"},{"episodeNo":29,"titleZh":"这间房突然不出租了","titleEn":"This Room Is Suddenly No Longer for Rent"},{"episodeNo":30,"titleZh":"同一个屋檐下","titleEn":"Under One Roof"}];
- for(const x of approvedTitles){
-  const current=await env.DB.prepare('SELECT title_zh AS titleZh,title_en AS titleEn,summary_zh AS summaryZh,summary_en AS summaryEn,script_zh AS scriptZh,script_en AS scriptEn,open_issues AS openIssues FROM episodes WHERE season_no=1 AND episode_no=?').bind(x.episodeNo).first();
-  if(!current)continue;
-  let summaryZh=current.summaryZh||'',summaryEn=current.summaryEn||'',scriptZh=current.scriptZh||'',scriptEn=current.scriptEn||'',openIssues=current.openIssues||'',openIssuesEn='';
-  if(x.episodeNo!==1){
-   summaryZh=`${x.titleZh}：围绕三人关系、新加坡文化与合租冲突展开的4–7分钟短剧。`;
-   summaryEn=`${x.titleEn}: a 4–7 minute short-drama episode built around the trio, Singapore culture and shared-living conflict.`;
-   scriptZh=scriptZh.replace(/^EP\d{2}《.*?》/,`EP${String(x.episodeNo).padStart(2,'0')}《${x.titleZh}》`);
-   scriptEn=scriptEn.replace(/^EP\d{2} [“"].*?[”"]/,`EP${String(x.episodeNo).padStart(2,'0')} “${x.titleEn}”`);
-   if(x.episodeNo===3&&openIssues==='行李箱数量待确认'){openIssues='剧情大纲待确认';openIssuesEn='Story outline pending';}
-  }
-  await env.DB.prepare("UPDATE episodes SET title_zh=?,title_en=?,summary_zh=?,summary_en=?,script_zh=?,script_en=?,open_issues=?,open_issues_en=CASE WHEN ? <> '' THEN ? ELSE open_issues_en END,updated_at=CURRENT_TIMESTAMP WHERE season_no=1 AND episode_no=?").bind(x.titleZh,x.titleEn,summaryZh,summaryEn,scriptZh,scriptEn,openIssues,openIssuesEn,openIssuesEn,x.episodeNo).run();
- }
-
+ // Do not rewrite episode status, dates, scripts or titles during reads.
+ // The database is the single source of truth after the initial seed.
  const issueMap={
   '道具未完成':'Props incomplete','等待大纲确认':'Awaiting outline approval','行李箱数量待确认':'Suitcase count to confirm','房屋规则清单待定':'House-rules list pending','押金条款需核实':'Deposit clause needs verification','洗衣场景待确认':'Laundry scene pending','进口食材道具':'Imported-food props','家务服务费用待核实':'Service price verification','清洁道具':'Cleaning props','配角未确认':'Supporting cast unconfirmed','家具改造方案':'Furniture plan pending','小贩中心外景许可':'Hawker-centre location permit','餐盘外景':'Tray-return exterior','Singlish台词校对':'Singlish line review','巴士外景':'Bus exterior','素材备份待确认':'Backup confirmation','补拍垃圾房镜头':'Pickup shot needed','罚款信息待核实':'Fine claim verification','粗剪中':'Rough cut in progress','等待字幕':'Waiting for subtitles','房间改造素材':'Room makeover footage','封面待确认':'Thumbnail pending','发布时间未定':'Release time unset','平台标题待定':'Platform title pending','父母视频道具':'Parent-video-call props','最终审核':'Final review'
  };
@@ -153,7 +105,7 @@ async function ensure(env){
  const stmt=env.DB.prepare(`INSERT OR IGNORE INTO episodes(season_no,episode_no,title_zh,title_en,category_zh,category_en,summary_zh,summary_en,script_status,production_stage,owner,priority,shoot_date,publish_date,progress,open_issues,open_issues_en,version,script_zh,script_en,culture_point_zh,culture_point_en,views,retention_30,retention_60,avg_watch_seconds,completion_rate,next_episode_rate,followers_gained,top_comment) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`);
  for(const x of DEFAULTS)await stmt.bind(1,x.episodeNo,x.titleZh,x.titleEn,x.categoryZh,x.categoryEn,x.summaryZh,x.summaryEn,x.scriptStatus,x.productionStage,x.owner,x.priority,x.shootDate,x.publishDate,x.progress,x.openIssues,x.openIssuesEn||'',x.version,x.scriptZh,x.scriptEn,x.culturePointZh,x.culturePointEn,x.views,x.retention30,x.retention60,x.avgWatchSeconds,x.completionRate,x.nextEpisodeRate,x.followersGained,x.topComment).run();
 }
-export async function onRequestGet({env}){if(!env.DB)return json({episodes:DEFAULTS,warning:'D1 binding unavailable; showing preserved defaults.'});try{await ensure(env);const {results}=await env.DB.prepare(`SELECT ${cols} FROM episodes ORDER BY season_no,episode_no`).all();return json({episodes:results?.length?results:DEFAULTS})}catch(e){return json({episodes:DEFAULTS,warning:String(e?.message||e)})}}
+export async function onRequestGet({env}){if(!env.DB)return json({error:'D1 binding DB is not configured.'},503);try{await ensure(env);const {results}=await env.DB.prepare(`SELECT ${cols} FROM episodes ORDER BY season_no,episode_no`).all();return json({episodes:results||[]})}catch(e){return json({error:String(e?.message||e)},500)}}
 export async function onRequestPost({request,env}){if(!env.DB)return json({ok:false},503);try{await ensure(env);return json({ok:true})}catch(e){return json({error:String(e?.message||e)},500)}}
 
 const LEGACY_TO_CORE={
