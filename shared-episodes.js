@@ -1346,7 +1346,26 @@ const episodeChannel=typeof BroadcastChannel!=='undefined'?new BroadcastChannel(
 function setLocal(){localStorage.setItem('uorEpisodes',JSON.stringify(items));window.dispatchEvent(new CustomEvent('uor:episodes-updated'));}
 function announceEpisodeUpdate(){episodeChannel?.postMessage({type:'updated'});}
 episodeChannel?.addEventListener('message',async e=>{if(e.data?.type!=='updated')return;const remote=await fetchEpisodesWithTimeout(1800);if(remote.length){items=applyPendingEpisodeUpdates(normaliseEpisodes(remote));setLocal();renderCurrent();}});
-async function saveEpisode(e){e.preventDefault();const f=new FormData(e.target),id=+f.get('id'),old=items.find(x=>x.id===id)||{};const payload={...old,id,seasonNo:+f.get('seasonNo')||old.seasonNo||1,titleZh:f.has('titleZh')?f.get('titleZh'):old.titleZh,titleEn:f.has('titleEn')?f.get('titleEn'):old.titleEn,categoryZh:f.has('categoryZh')?f.get('categoryZh'):old.categoryZh,categoryEn:f.has('categoryEn')?f.get('categoryEn'):old.categoryEn,summaryZh:f.has('summaryZh')?f.get('summaryZh'):old.summaryZh,summaryEn:f.has('summaryEn')?f.get('summaryEn'):old.summaryEn,scriptStatus:f.get('scriptStatus'),productionStage:f.get('productionStage'),owner:f.get('owner'),priority:f.get('priority'),shootDate:f.get('shootDate'),publishDate:f.get('publishDate'),progress:+f.get('progress')||0,openIssues:f.has('openIssues')?f.get('openIssues'):old.openIssues,openIssuesEn:f.has('openIssuesEn')?f.get('openIssuesEn'):old.openIssuesEn,version:f.get('version'),scriptZh:f.has('scriptZh')?f.get('scriptZh'):old.scriptZh,scriptEn:f.has('scriptEn')?f.get('scriptEn'):old.scriptEn,culturePointZh:f.has('culturePointZh')?f.get('culturePointZh'):old.culturePointZh,culturePointEn:f.has('culturePointEn')?f.get('culturePointEn'):old.culturePointEn,views:+f.get('views')||0,retention30:+f.get('retention30')||0,retention60:+f.get('retention60')||0,avgWatchSeconds:+f.get('avgWatchSeconds')||0,completionRate:+f.get('completionRate')||0,nextEpisodeRate:+f.get('nextEpisodeRate')||0,followersGained:+f.get('followersGained')||0,topComment:f.get('topComment')};try{const r=await fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw 0;const d=await r.json();Object.assign(old,d.episode)}catch{Object.assign(old,payload)}setLocal();announceEpisodeUpdate();close();renderCurrent();}
+async function saveEpisode(e){
+ e.preventDefault();
+ const f=new FormData(e.target),id=+f.get('id'),old=items.find(x=>x.id===id)||{};
+ const payload={...old,id,seasonNo:+f.get('seasonNo')||old.seasonNo||1,titleZh:f.has('titleZh')?f.get('titleZh'):old.titleZh,titleEn:f.has('titleEn')?f.get('titleEn'):old.titleEn,categoryZh:f.has('categoryZh')?f.get('categoryZh'):old.categoryZh,categoryEn:f.has('categoryEn')?f.get('categoryEn'):old.categoryEn,summaryZh:f.has('summaryZh')?f.get('summaryZh'):old.summaryZh,summaryEn:f.has('summaryEn')?f.get('summaryEn'):old.summaryEn,scriptStatus:f.get('scriptStatus'),productionStage:f.get('productionStage'),owner:f.get('owner'),priority:f.get('priority'),shootDate:f.get('shootDate')||'',publishDate:f.get('publishDate')||'',progress:+f.get('progress')||0,openIssues:f.has('openIssues')?f.get('openIssues'):old.openIssues,openIssuesEn:f.has('openIssuesEn')?f.get('openIssuesEn'):old.openIssuesEn,version:f.get('version'),scriptZh:f.has('scriptZh')?f.get('scriptZh'):old.scriptZh,scriptEn:f.has('scriptEn')?f.get('scriptEn'):old.scriptEn,culturePointZh:f.has('culturePointZh')?f.get('culturePointZh'):old.culturePointZh,culturePointEn:f.has('culturePointEn')?f.get('culturePointEn'):old.culturePointEn,views:+f.get('views')||0,retention30:+f.get('retention30')||0,retention60:+f.get('retention60')||0,avgWatchSeconds:+f.get('avgWatchSeconds')||0,completionRate:+f.get('completionRate')||0,nextEpisodeRate:+f.get('nextEpisodeRate')||0,followersGained:+f.get('followersGained')||0,topComment:f.get('topComment')};
+ const changedFields=Object.keys(payload).filter(field=>field!=='id'&&payload[field]!==old[field]);
+ changedFields.forEach(field=>rememberPendingEpisodeUpdate(id,field,payload[field]));
+ Object.assign(old,payload);setLocal();announceEpisodeUpdate();close();renderCurrent();
+ try{
+  const r=await fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
+  if(!r.ok)throw new Error(await r.text());
+  const d=await r.json(),remote=d.episode||{};
+  // Only clear a pending field when the API confirms the exact value that was submitted.
+  // This prevents an incomplete or stale API response from erasing dates after refresh.
+  changedFields.forEach(field=>{if(String(remote[field]??'')===String(payload[field]??''))clearPendingEpisodeUpdate(id,field);});
+  Object.assign(old,remote,payload);setLocal();announceEpisodeUpdate();
+ }catch(err){
+  // The local copy and pending update remain authoritative until a later successful sync.
+  Object.assign(old,payload);setLocal();
+ }
+}
 
 function isTemplateScript(x){
   const zh=String(x?.scriptZh||'');
@@ -1373,12 +1392,16 @@ async function saveAnalytics(e){
   followersGained:+f.get('followersGained')||0,
   topComment:f.get('topComment')||''
  };
+ const changedFields=Object.keys(payload).filter(field=>field!=='id'&&payload[field]!==old[field]);
+ changedFields.forEach(field=>rememberPendingEpisodeUpdate(id,field,payload[field]));
+ Object.assign(old,payload);setLocal();announceEpisodeUpdate();close();renderCurrent();
  try{
   const r=await fetch('/api/episodes',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
-  if(!r.ok)throw 0;
-  const d=await r.json();Object.assign(old,d.episode);
- }catch{Object.assign(old,payload)}
- setLocal();announceEpisodeUpdate();close();renderCurrent();
+  if(!r.ok)throw new Error(await r.text());
+  const d=await r.json(),remote=d.episode||{};
+  changedFields.forEach(field=>{if(String(remote[field]??'')===String(payload[field]??''))clearPendingEpisodeUpdate(id,field);});
+  Object.assign(old,remote,payload);setLocal();announceEpisodeUpdate();
+ }catch(err){Object.assign(old,payload);setLocal();}
 }
 function editAnalytics(id){
  const x=items.find(y=>y.id===id);if(!x)return;
